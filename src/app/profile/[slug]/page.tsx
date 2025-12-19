@@ -1,7 +1,9 @@
 import { api } from "@/entities/test-operation/api/apiService";
 import { AllTests } from "@/shared/types/test-type";
+import { Spinner } from "@/shared/ui/spinner/Spinner";
 import { TetsEditorPage } from "@/widgets/testEditor-page/TestEditorPaga";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 type Params = Promise<{ slug: string }>
 
@@ -26,6 +28,8 @@ export default async function TestEditorPage({ params }: { params: Params }) {
     const { slug } = await params;
     const singleTest = await api.getById(`tests/${slug}`);
     return (
-        <TetsEditorPage singleTest={singleTest} />
+        <Suspense fallback={<Spinner isFallback={true} />}>
+            <TetsEditorPage singleTest={singleTest} />
+        </Suspense>
     )
 }
