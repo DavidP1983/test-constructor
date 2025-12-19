@@ -1,5 +1,7 @@
+import { Spinner } from "@/shared/ui/spinner/Spinner";
 import { CreateTestPage } from "@/widgets/create-test/ui/CreateTestPage";
 import { Metadata } from "next";
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: "Create Test Page",
@@ -9,6 +11,8 @@ export const metadata: Metadata = {
 
 export default function CreateNewTest() {
     return (
-        <CreateTestPage />
+        <Suspense fallback={<Spinner isFallback={true} />}>
+            <CreateTestPage />
+        </Suspense>
     )
 }
