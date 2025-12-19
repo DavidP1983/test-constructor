@@ -14,7 +14,7 @@ export const renderActions = (mode: Mode) => {
                     <AddQuestionModal>
                         <AddQuestionForm />
                     </AddQuestionModal>
-                    <CreateOperation />
+                    <CreateOperation mode={mode} />
                 </>
             )
         default:
@@ -23,7 +23,7 @@ export const renderActions = (mode: Mode) => {
                     <AddQuestionModal>
                         <AddQuestionForm />
                     </AddQuestionModal>
-                    <CreateOperation />
+                    <CreateOperation mode={mode} />
                 </>
             )
     }

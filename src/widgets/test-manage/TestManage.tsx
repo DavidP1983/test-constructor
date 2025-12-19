@@ -32,7 +32,7 @@ export const TestManage = ({ title, singleTest }: Props) => {
     useEffect(() => {
         resetTest();
         if (mode === 'edit' && singleTest) {
-            setTests(singleTest, mode)
+            setTests(singleTest)
         }
     }, []);
 

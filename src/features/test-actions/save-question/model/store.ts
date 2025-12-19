@@ -23,7 +23,6 @@ interface ErrorType {
 interface TestStore {
     test: Test[];
     testMeta: TestMeta | null;
-    mode: string | null;
     error: string;
     editField: EditData;
     indicator: boolean;
@@ -34,14 +33,13 @@ interface TestStore {
     openEditor: (questionId: string, answerId: string, label: string) => void;
     editAnswer: (question: string, answer: boolean, testId: string) => ErrorType;
     deleteTest: (id: string) => void;
-    setTests: (data: AllTests, mode: string | null) => void;
+    setTests: (data: AllTests) => void;
     resetTest: () => void;
 }
 
 export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
     test: [],
     testMeta: {},
-    mode: null,
     editField: {},
     error: '',
     indicator: false,
@@ -132,7 +130,7 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
     },
 
     // Добавление в test данных, при динамических страницах
-    setTests: (data: AllTests, mode: string | null) => {
+    setTests: (data: AllTests) => {
         set({
             testMeta:
             {
@@ -143,7 +141,6 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
             }
         })
         set({ test: [...get().test, ...data.test] })
-        set({ mode })
     },
 
     // Очищение созданного теста после сохранения
@@ -151,7 +148,6 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
         set({ test: [] });
         set({ testMeta: null })
         set({ indicator: false });
-        set({ mode: null })
     },
 
 

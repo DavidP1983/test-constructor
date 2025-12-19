@@ -3,7 +3,7 @@
     {
       "id": "45b30631-e6cf-4522-b0c3-494402b9021d",
       "name": "CSS",
-      "date": "16.12.2025",
+      "date": "19.12.2025",
       "participantsCount": 0,
       "test": [
         {
@@ -19,8 +19,8 @@
             },
             {
               "id": "9f0af1b0",
-              "question": "7890",
-              "answer": false
+              "question": "New",
+              "answer": true
             }
           ]
         },

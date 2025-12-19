@@ -14,12 +14,11 @@ import clsx from 'clsx';
 import { useShallow } from 'zustand/shallow';
 
 
-export const CreateOperation = () => {
-    const { test, indicator, testMeta, mode } = useTest(useShallow((state) => ({
+export const CreateOperation = ({ mode }: { mode: string | null }) => {
+    const { test, indicator, testMeta } = useTest(useShallow((state) => ({
         test: state.test,
         indicator: state.indicator,
         testMeta: state.testMeta,
-        mode: state.mode
     })));
     const { handleSaveTest, handleDecline, isPending } = useCreateTest();
     const { handleSaveEditTest, isPendingEdit } = useEditTest(testMeta);
