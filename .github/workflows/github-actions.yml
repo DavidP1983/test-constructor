@@ -1,0 +1,29 @@
+name: Deploy NextJS test-constructor
+run-name: ${{ github.actor }} is testing out GitHub Actions
+on:
+    push:
+        branches:
+            - development
+    pull_request:
+        branches:
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: ['v22.11.0']
+        steps:
+            - uses: actions/checkout@v5
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install dependencies
+              run: npm ci
+            - name: Start json-server
+              run: npx json-server db.json --port 3001 &
+            - name: build
+              run: npm run build
+            - name: Lint
+              run: npm run lint
