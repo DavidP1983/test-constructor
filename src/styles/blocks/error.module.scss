@@ -1,0 +1,11 @@
+@use '../base/variables.scss' as *;
+.error {
+    margin-top: 20px;
+    text-align: center;
+
+    &__title {
+        color: var(--foreground); 
+        font-weight: normal;
+        font-size: 18px;
+    }
+}

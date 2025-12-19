@@ -1,0 +1,42 @@
+@use '../base/mixins.scss' as *;
+
+    .container {
+        @include container
+    }
+
+    .container input {
+       @include radio-input;
+    }
+
+    .checkmark {
+        @include checkmark;
+        border-radius: 50%;
+    }
+
+    .container:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    .container input:checked~.checkmark {
+        background-color: #2196F3;
+    }
+
+    .checkmark::after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .container input:checked~.checkmark::after {
+        display: block;
+    }
+
+    .container .checkmark::after {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+    }

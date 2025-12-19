@@ -1,0 +1,78 @@
+@use "../base/variables.scss";
+@use "../base/mixins.scss" as *;
+
+.create__question {
+    display: flex;
+    justify-content: center;
+    align-items: safe center;
+    gap: 10px;
+    opacity: 0;
+    max-height: 0px;
+    z-index: -1;
+    padding: 0;
+    transition: opacity .25s, padding .25s, max-height .25s;
+    
+    textarea {
+        resize: vertical;
+        width: 300px;
+        min-height: 36px;
+        max-height: 250px;
+        padding: 5px 10px 0 10px;
+        font-size: 16px;
+        overflow: hidden;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        border: 2px solid rgb(81, 203, 244);
+        outline: none;
+        border-radius: 10px;
+    }
+    &_select {
+        div {
+            input {
+                width: 100%;
+            }
+        }
+    }
+    &_save {
+        padding: 8px 20px;
+        width: 100px;
+        height: 36px;
+        border: none;
+        border-radius: 12px;
+        color: var(--foreground);
+        background-color: var(--bg--primary);
+        transition: background-color .5s;
+        @include disabled;
+    }
+}
+
+.create__question.active {
+    z-index: 1;
+    opacity: 1;
+    max-height: 500px;
+    padding: 10px 0;
+}
+
+.btn__group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn__group_add, .btn__group_delete {
+    z-index: 1;
+    display: block;
+    margin-top: 10px;
+    padding: 8px 20px;
+    width: 100px;
+    border: none;
+    border-radius: 12px;
+    color: var(--foreground);
+    background-color: var(--bg--primary);
+    transition: background-color .5s;
+    @include disabled;
+}
+.btn__group_delete {
+    @include disabled(#88100a);
+}
+
