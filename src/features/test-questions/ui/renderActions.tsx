@@ -1,18 +1,18 @@
 import { AddQuestionModal } from "@/entities/modal/ui/AddQuestionModal";
 import { BackButton } from "@/features/navigation/ui/BackButton";
-import { AddQuestionForm } from "@/features/test-actions/add-form/ui/AddQuestionForm";
+import { AddQuestionFormLazy } from "@/features/test-actions/add-form/ui/AddQuestionFormLazy";
 import { CreateOperation } from "@/features/test-actions/save-question/ui/CreateOperation";
 
 export type Mode = "create" | "preview" | "edit";
 export const renderActions = (mode: Mode) => {
     switch (mode) {
         case "preview":
-            return <BackButton />
+            return <BackButton>Back</BackButton>
         case "edit":
             return (
                 <>
                     <AddQuestionModal>
-                        <AddQuestionForm />
+                        <AddQuestionFormLazy />
                     </AddQuestionModal>
                     <CreateOperation mode={mode} />
                 </>
@@ -21,7 +21,7 @@ export const renderActions = (mode: Mode) => {
             return (
                 <>
                     <AddQuestionModal>
-                        <AddQuestionForm />
+                        <AddQuestionFormLazy />
                     </AddQuestionModal>
                     <CreateOperation mode={mode} />
                 </>

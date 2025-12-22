@@ -14,7 +14,7 @@ export const TableActions = ({ testId }: { testId: string }) => {
                 className="icon-pencil btn"
                 data-btn="Edit"
                 aria-label="edit-icon"
-                onClick={() => router.push(`profile/${testId}?mode=edit`)}></button>
+                onClick={() => router.push(`builder/${testId}?mode=edit`)}></button>
             <button
                 className="icon-trash-empty btn"
                 data-btn="Delete"

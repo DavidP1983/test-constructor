@@ -17,7 +17,7 @@ import { api } from "../api/apiService";
 export const useCompletedTests = () => {
     const { data, isLoading, isFetching, error } = useQuery({
         queryKey: ['completedTests'],
-        queryFn: async () => await api.get('tests'),
+        queryFn: async () => await api.get('builder'),
         initialDataUpdatedAt: 0,
         staleTime: 1 * 60 * 1000
     })

@@ -34,6 +34,7 @@ interface TestStore {
     editAnswer: (question: string, answer: boolean, testId: string) => ErrorType;
     deleteTest: (id: string) => void;
     setTests: (data: AllTests) => void;
+    reorder: (test: Test[]) => void;
     resetTest: () => void;
 }
 
@@ -143,6 +144,11 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
         set({ test: [...get().test, ...data.test] })
     },
 
+    // Drag & Drop  операции
+    reorder: (data: Test[]) => {
+        set({ test: data });
+        set({ indicator: true });
+    },
     // Очищение созданного теста после сохранения
     resetTest: () => {
         set({ test: [] });

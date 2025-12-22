@@ -13,6 +13,53 @@
         color: var(--text--color);
     }
 
+    .rules {
+        position: relative;
+        display: inline-block;
+        cursor: help;
+        color: rgb(160, 158, 158);
+    }
+
+    .tooltip_box {
+        display: block;
+        text-align: center;
+        position: absolute;
+        bottom: 125%;
+        left: 20%;
+        transform: translateX(-20%);
+        width: 160px;
+        background: #ffffff;
+        color: #202122;
+        font-size: 14px;
+        line-height: 1.5;
+        border: 1px solid #a2a9b1;
+        border-radius: 4px;
+        padding: 10px;
+        box-shadow: 0 2px 8px #00000026;
+        transition: opacity 0.2s ease;
+        z-index: 10;
+        visibility: hidden;
+        opacity: 0;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #ffffff transparent transparent transparent;
+
+        }
+
+    }
+    .rules:hover .tooltip_box {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
     .create__content {
         margin-top: 10px;
         padding: 20px 20px;
@@ -21,11 +68,13 @@
         display: flex;
         flex-direction: column;
         justify-content: safe center;
-        align-items: center;
+        align-items: stretch;
+        transition: background 0.3s;
     }
 
     .create__question_message,
     .create__question_answer {
+        text-align: center;
         margin-top: 10px;
         font-size: 20px;
         font-weight: 400;
@@ -38,7 +87,6 @@
 
     .create__question {
         width: 100%;
-        margin-top: 20px;
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -49,6 +97,7 @@
         box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.20), -8px -8px 16px rgba(255, 255, 255, 0.35);
         backdrop-filter: blur(10px);
         border-radius: 12px;
+        transition: background 0.3s;
 
         .create__question_content {
             display: flex;
