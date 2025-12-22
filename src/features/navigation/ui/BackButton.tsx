@@ -3,7 +3,6 @@
 import { useTest } from '@/features/test-actions/save-question/model/store';
 import { useRouter } from 'next/navigation';
 
-// import styles from '@/styles/blocks/create.module.scss';
 import styles from '@/styles/blocks/navigation.module.scss';
 
 
@@ -13,7 +12,6 @@ export const BackButton = ({ children }: { children: React.ReactNode }) => {
 
 
     return (
-        // <div className={styles.create__operation}>
         <button
             className={styles.btn__back}
             onClick={() => {
@@ -22,6 +20,5 @@ export const BackButton = ({ children }: { children: React.ReactNode }) => {
             }}>
             &#8592; {children}
         </button>
-        // </div>
     )
 }
