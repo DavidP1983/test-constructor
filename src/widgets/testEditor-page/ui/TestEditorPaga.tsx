@@ -1,6 +1,6 @@
 import { AllTests } from "@/shared/types/test-type";
-import Header from "../header/ui/Header";
-import { TestManage } from "../test-manage/TestManage";
+import Header from "../../header/ui/Header";
+import { TestManage } from "../../test-manage/TestManage";
 
 
 export const TetsEditorPage = ({ singleTest }: { singleTest: AllTests }) => {

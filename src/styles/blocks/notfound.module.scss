@@ -1,0 +1,19 @@
+.notfound {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: safe center;
+        gap: 10px;
+    }
+    h2, p {
+        font-weight: normal;
+        font-size: 20px;
+        color: var(--text--color);
+    }
+   
+}

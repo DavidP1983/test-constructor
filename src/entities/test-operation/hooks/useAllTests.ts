@@ -16,7 +16,7 @@ import { api } from "../api/apiService";
 export const useAllTests = () => {
     const { data, isLoading, isFetching, error } = useQuery({
         queryKey: ['allTests'],
-        queryFn: async () => await api.get('tests'),
+        queryFn: async () => await api.get('builder'),
         staleTime: 1 * 1000 * 60
     })
 

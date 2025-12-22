@@ -5,7 +5,7 @@ export const baseRow = (i: number, { id, date, participantsCount, name, result }
     return (
         <>
 
-            <td data-label="ID"><Link href={`profile/${id}?mode=preview`}>{i + 1}. {name}</Link></td>
+            <td data-label="ID"><Link href={`builder/${id}?mode=preview`}>{i + 1}. {name}</Link></td>
             <td data-label="Data">{date}</td>
             <td data-qnt="Qnt">
                 {

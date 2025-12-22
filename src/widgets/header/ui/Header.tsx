@@ -42,8 +42,8 @@ export default function Header() {
             </div>
             <div className={clsx(styles.menu, isOpenMenu && styles.active)}>
                 <ul role='list'>
-                    <li><Link href="/profile">My Tests</Link></li>
-                    <li><Link href="/profile/completed">Completed</Link></li>
+                    <li><Link href="/builder">My Tests</Link></li>
+                    <li><Link href="/builder/completed">Completed</Link></li>
                     <li><a href="">Profile</a></li>
                     <li><a href="">Log out</a></li>
                 </ul>

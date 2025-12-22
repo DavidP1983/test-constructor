@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 
-export default async function ProfileCompleted() {
+export default async function BuilderCompleted() {
     return (
         <>
             <Header />

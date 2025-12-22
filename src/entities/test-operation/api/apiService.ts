@@ -23,11 +23,16 @@ class ApiService {
 
         try {
             const response = await fetch(`${this.baseUrl}${endpoint}`, config)
+
+            if (response.status === 404) {
+                return null
+            }
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message)
+                throw new Error(errorData.message || `Request failed ${response.status}`)
             }
-            return await response.json();
+
+            return await response.json() ?? null;
         } catch (e) {
             if (e instanceof Error) {
                 console.error(e.message)
