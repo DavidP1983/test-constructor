@@ -20,7 +20,7 @@ export const useEditTest = (testMeta: TestMeta | null) => {
     const queryClient = useQueryClient();
 
     const updateMutation = useMutation({
-        mutationFn: async (data: AllTests) => await api.put(`tests/${testMeta?.id}`, data),
+        mutationFn: async (data: AllTests) => await api.put(`builder/${testMeta?.id}`, data),
 
         onMutate: async (updatedTest) => {
 
@@ -44,7 +44,7 @@ export const useEditTest = (testMeta: TestMeta | null) => {
         onSuccess: async (_, data) => {
             const successTitle = `Your test ${data.name} was updated successfully`;
             await notifyAfterSaveTest("success", successTitle);
-            router.push('/profile');
+            router.push('/builder');
             resetTest();
         },
 

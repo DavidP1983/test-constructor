@@ -50,7 +50,7 @@ export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) =>
                             <h2 className={styles.sidebar__item_heading}>general</h2>
                         </li>
                         <li className={styles.sidebar__item}>
-                            <Link className={styles.sidebar__link} href="/profile" data-tooltip="Tests">
+                            <Link className={styles.sidebar__link} href="/builder" data-tooltip="Tests">
                                 <div className={styles.icon}>
                                     <span className='icon-graduation-cap'></span>
                                 </div>
@@ -58,7 +58,7 @@ export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) =>
                             </Link>
                         </li>
                         <li className={styles.sidebar__item}>
-                            <Link className={styles.sidebar__link} href="/profile/completed" data-tooltip="Completed">
+                            <Link className={styles.sidebar__link} href="/builder/completed" data-tooltip="Completed">
                                 <div className={styles.icon}>
                                     <span className='icon-check icon'></span>
                                 </div>

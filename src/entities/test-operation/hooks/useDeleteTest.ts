@@ -22,7 +22,7 @@ export const useDeleteTest = () => {
     const queryClient = useQueryClient();
 
     const deleteTestMutation = useMutation({
-        mutationFn: (id: string) => api.delete(`tests/${id}`),
+        mutationFn: (id: string) => api.delete(`builder/${id}`),
 
         async onSuccess(_, deleteId) {
             queryClient.setQueryData<AllTests[]>(['allTests'], (old) => {

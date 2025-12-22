@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Profile's tests",
 };
 
-export default function Profile() {
+export default function Builder() {
 
     return (
         <>

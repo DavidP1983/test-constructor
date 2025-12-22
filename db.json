@@ -1,9 +1,9 @@
 {
-  "tests": [
+  "builder": [
     {
       "id": "45b30631-e6cf-4522-b0c3-494402b9021d",
       "name": "CSS",
-      "date": "19.12.2025",
+      "date": "22.12.2025",
       "participantsCount": 0,
       "test": [
         {
@@ -32,13 +32,21 @@
           "options": [
             {
               "id": "779f98f9",
-              "question": "5678",
-              "answer": true
-            },
-            {
-              "id": "123ada91",
-              "question": "1234",
+              "question": "Moved",
               "answer": false
+            }
+          ]
+        },
+        {
+          "id": "01bd2032-8a03-4311-b96d-ba13b8a31cba",
+          "type": "checkbox",
+          "title": "CSS",
+          "instructions": "Несколько вариантов",
+          "options": [
+            {
+              "id": "9358afb1",
+              "question": "New",
+              "answer": true
             }
           ]
         }

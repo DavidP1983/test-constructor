@@ -24,12 +24,12 @@ export const useCreateTest = () => {
     const queryClient = useQueryClient();
 
     const createMutation = useMutation({
-        mutationFn: async (data: AllTests) => await api.post("tests", data),
+        mutationFn: async (data: AllTests) => await api.post("builder", data),
 
         async onSuccess(_, data) {
             const successTitle = `Your test ${data.name} was added successfully`;
             await notifyAfterSaveTest("success", successTitle);
-            router.push('/profile');
+            router.push('/builder');
             resetTest();
         },
         async onSettled() {
@@ -77,7 +77,7 @@ export const useCreateTest = () => {
                 Swal.fire("Changes are not saved", "", "info").then((res) => {
                     resetTest();
                     if (res.isConfirmed) {
-                        router.push('/profile');
+                        router.push('/builder');
                     }
                 });
 
