@@ -9,15 +9,19 @@
  * Uses React Query for data fetching and caching.
  * Contains no mutation or business logic.
  */
-import { useQuery } from "@tanstack/react-query";
+
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 import { api } from "../api/apiService";
 
 
 export const useAllTests = () => {
-    const { data, isLoading, isFetching, error } = useQuery({
-        queryKey: ['allTests'],
-        queryFn: async () => await api.get('builder'),
-        staleTime: 1 * 1000 * 60
+    const params = useSearchParams().get('q');
+    const { data, isLoading, isFetching, error, isPlaceholderData } = useQuery({
+        queryKey: ['allTests', params],
+        queryFn: async () => await api.get(`builder?q=${params ?? ''}`),
+        staleTime: 1 * 1000 * 60,
+        placeholderData: keepPreviousData
     })
 
     const contentHeader = ["Name", "Date of creation", "Number of participants", "Actions"]
@@ -32,9 +36,12 @@ export const useAllTests = () => {
         statusForContent = 'success'
     }
 
+
     return {
         data,
         contentHeader,
-        statusForContent
+        statusForContent,
+        params,
+        isPlaceholderData
     }
 }
