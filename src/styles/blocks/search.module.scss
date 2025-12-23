@@ -1,0 +1,55 @@
+
+.search {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 12px;
+    background: #d7d7d7bf;
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: 
+        background 0.3s ease, 
+        border .35s ease, 
+        box-shadow .35s ease;
+
+    &__btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        opacity: 0.75;
+        transition: opacity .25s, transform .25s;
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.12);
+        }
+    }
+    &__input {
+        max-width: 0;
+        opacity: 0;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 16px;
+        padding: 4px 0;
+        transition: 
+            max-width .45s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+            opacity .25s ease;
+    }
+
+    &.active {
+        background: rgba(255, 255, 255, 0.95);
+        border-color: transparent;
+        font-size: 18px;
+        box-shadow: 
+        0 10px 35px rgba(0, 0, 0, 0.12),
+        0 0 0 2px rgba(0, 122, 255, 0.25);;
+    }
+    &.active &__input {
+        max-width: 240px;
+        opacity: 1;
+    }
+}
+
