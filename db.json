@@ -3,7 +3,7 @@
     {
       "id": "45b30631-e6cf-4522-b0c3-494402b9021d",
       "name": "CSS",
-      "date": "23.12.2025",
+      "date": "24.12.2025",
       "participantsCount": 0,
       "test": [
         {
@@ -25,19 +25,6 @@
           ]
         },
         {
-          "id": "0efd64bb-0685-4046-a3c8-bc2bc0893ee9",
-          "type": "radio",
-          "title": "CSS2",
-          "instructions": "Один вариант ответа",
-          "options": [
-            {
-              "id": "779f98f9",
-              "question": "Moved",
-              "answer": false
-            }
-          ]
-        },
-        {
           "id": "01bd2032-8a03-4311-b96d-ba13b8a31cba",
           "type": "checkbox",
           "title": "CSS",
@@ -47,6 +34,19 @@
               "id": "9358afb1",
               "question": "New",
               "answer": true
+            }
+          ]
+        },
+        {
+          "id": "0efd64bb-0685-4046-a3c8-bc2bc0893ee9",
+          "type": "radio",
+          "title": "CSS2",
+          "instructions": "Один вариант ответа",
+          "options": [
+            {
+              "id": "779f98f9",
+              "question": "Moved",
+              "answer": false
             }
           ]
         }
@@ -155,9 +155,27 @@
     {
       "id": "f93a2f67-6f62-4bc7-98d7-c78b17ae1fe7",
       "name": "JS",
-      "date": "14.12.2025",
+      "date": "24.12.2025",
       "participantsCount": 0,
       "test": [
+        {
+          "id": "0ca354ae-1c0b-4633-8ec3-fa30c86110db",
+          "type": "radio",
+          "title": "JS2",
+          "instructions": "Один вариант ответа",
+          "options": [
+            {
+              "id": "7f64a360",
+              "question": "11111",
+              "answer": true
+            },
+            {
+              "id": "c56cb9ee",
+              "question": "33333",
+              "answer": false
+            }
+          ]
+        },
         {
           "id": "77f322a8-d3ce-4ffb-a37b-3c59256fd2eb",
           "type": "checkbox",
@@ -170,26 +188,8 @@
               "answer": true
             },
             {
-              "id": "b8be01d7",
-              "question": "6789",
-              "answer": false
-            }
-          ]
-        },
-        {
-          "id": "cb36bf14-7eec-4f88-8c8f-87fd7200f6f5",
-          "type": "radio",
-          "title": "JS2",
-          "instructions": "Один вариант ответа",
-          "options": [
-            {
-              "id": "3e01347d",
-              "question": "5678",
-              "answer": true
-            },
-            {
-              "id": "8d875af4",
-              "question": "12344",
+              "id": "aa261bee",
+              "question": "564357",
               "answer": false
             }
           ]
@@ -197,99 +197,6 @@
       ],
       "result": {
         "totalQuestions": 2,
-        "answers": 0
-      }
-    },
-    {
-      "id": "76a024eb-9ad5-4e48-bdc3-df1f303e4eec",
-      "name": "HTML",
-      "date": "14.12.2025",
-      "participantsCount": 0,
-      "test": [
-        {
-          "id": "93f24895-8415-49aa-9a05-79707256bfe0",
-          "type": "checkbox",
-          "title": "HTML",
-          "instructions": "Несколько вариантов",
-          "options": [
-            {
-              "id": "8bc9b4f9",
-              "question": "4567",
-              "answer": false
-            }
-          ]
-        },
-        {
-          "id": "1ceafdb2-b770-4db7-a0f6-102ac21d7a7f",
-          "type": "radio",
-          "title": "HTML2",
-          "instructions": "Один вариант ответа",
-          "options": [
-            {
-              "id": "18180b6c",
-              "question": "9999",
-              "answer": false
-            },
-            {
-              "id": "4e49966c",
-              "question": "44444",
-              "answer": true
-            }
-          ]
-        }
-      ],
-      "result": {
-        "totalQuestions": 2,
-        "answers": 0
-      }
-    },
-    {
-      "id": "fd9c0df3-d3f9-4bbb-825f-d578141881b6",
-      "name": "Python",
-      "date": "14.12.2025",
-      "participantsCount": 0,
-      "test": [
-        {
-          "id": "6e3c46e4-69a4-4b91-b08f-a9b4eecb8dee",
-          "type": "checkbox",
-          "title": "Python",
-          "instructions": "Несколько вариантов",
-          "options": [
-            {
-              "id": "3d33e79c",
-              "question": "12344",
-              "answer": true
-            }
-          ]
-        }
-      ],
-      "result": {
-        "totalQuestions": 1,
-        "answers": 0
-      }
-    },
-    {
-      "id": "814b8a8e-b22d-4fc5-bab5-94294a54f326",
-      "name": "Go",
-      "date": "14.12.2025",
-      "participantsCount": 0,
-      "test": [
-        {
-          "id": "c8de5d1f-0b0b-44c7-b5e6-8a8c1d9615d4",
-          "type": "radio",
-          "title": "GO",
-          "instructions": "Один вариант ответа",
-          "options": [
-            {
-              "id": "48197b30",
-              "question": "89076",
-              "answer": true
-            }
-          ]
-        }
-      ],
-      "result": {
-        "totalQuestions": 1,
         "answers": 0
       }
     }

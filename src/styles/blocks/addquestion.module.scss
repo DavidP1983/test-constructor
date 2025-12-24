@@ -13,6 +13,8 @@
     transition: opacity .25s, padding .25s, max-height .25s;
     
     textarea {
+        background-color: #ffffff;
+        color: #242434ff;
         resize: vertical;
         width: 300px;
         min-height: 36px;
@@ -27,6 +29,7 @@
         border-radius: 10px;
     }
     &_select {
+        color: #242434ff;
         div {
             input {
                 width: 100%;
