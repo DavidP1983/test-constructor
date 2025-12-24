@@ -1,4 +1,4 @@
-
+@use '../base/variables.scss' as *;
 .search {
     display: flex;
     align-items: center;
@@ -19,6 +19,7 @@
         cursor: pointer;
         font-size: 18px;
         opacity: 0.75;
+        color: var(--foreground);
         transition: opacity .25s, transform .25s;
 
         &:hover {
@@ -31,6 +32,7 @@
         opacity: 0;
         border: none;
         outline: none;
+        color: var(--foreground);
         background: transparent;
         font-size: 16px;
         padding: 4px 0;
@@ -43,9 +45,8 @@
         background: rgba(255, 255, 255, 0.95);
         border-color: transparent;
         font-size: 18px;
-        box-shadow: 
-        0 10px 35px rgba(0, 0, 0, 0.12),
-        0 0 0 2px rgba(0, 122, 255, 0.25);;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25),
+                    0 4px 12px rgba(0, 0, 0, 0.35);
     }
     &.active &__input {
         max-width: 240px;

@@ -1,14 +1,16 @@
 'use client';
 import clsx from "clsx";
+import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import styles from '@/styles/blocks/header.module.scss';
-import Link from "next/link";
 
 
 export default function Header() {
     const [isOpenMenu, setIsOpenMenu] = useState(false);
+    const { setTheme } = useTheme();
     const myRef = useRef<HTMLDivElement | null>(null);
 
 
@@ -46,6 +48,21 @@ export default function Header() {
                     <li><Link href="/builder/completed">Completed</Link></li>
                     <li><a href="">Profile</a></li>
                     <li><a href="">Log out</a></li>
+                    <li>
+                        <button
+                            className="icon-sun"
+                            aria-label="icon sun"
+                            onClick={() => setTheme("light")}
+                        ><span>Light mode</span></button>
+
+                    </li>
+                    <li>
+                        <button
+                            className="icon-moon"
+                            aria-label="icon moon"
+                            onClick={() => setTheme("dark")}
+                        ><span>Dark mode</span></button>
+                    </li>
                 </ul>
             </div>
         </header>

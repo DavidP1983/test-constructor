@@ -1,11 +1,16 @@
 @use './variables.scss' as *;
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
-}
+
+// :root {
+//     --background: #ededed;
+//     --foreground: #0a0a0a;
+// }
+
+// html.dark {
+//     --background: #0a0a0a;
+//     --foreground: #ededed;
+// }
+
 
 html,
 body {
@@ -14,8 +19,8 @@ body {
 
 body {
     padding-right: 0 !important;
-    color: var(--foreground);
-    background: var(--background);
+    color: var(--text--color);
+    background-color: var(--background);
     font-family: "Rubik", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -23,6 +28,7 @@ body {
     overflow: auto !important;
     position: relative;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
