@@ -1,9 +1,9 @@
 'use client';
 
+import { useModal } from '@/entities/modal/model/store';
 import Select from 'react-select';
 import { useSaveQuestions } from '../../save-question/lib/hooks/useSaveQuestions';
 
-import { useModal } from '@/entities/modal/model/store';
 import styles from '@/styles/blocks/modal.module.scss';
 
 
@@ -32,6 +32,7 @@ export const AddQuestionForm = () => {
                         placeholder="type your question..." />
                 </div>
                 <Select
+                    className={styles.form__select}
                     key={isOpen ? "open" : "close"}
                     options={options}
                     instanceId={"create-test-select"}

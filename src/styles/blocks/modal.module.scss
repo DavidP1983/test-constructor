@@ -78,12 +78,17 @@
                 font-size: 14px;
                 color: #4B4B4B;
                 border-radius: 8px;
+                background-color: #ffffff;
             }
 
             input:focus {
                 outline: none;
                 border: 2px solid rgb(71, 208, 215);
             }
+
+        }
+        .form__select {
+            color: #242434ff;
         }
 
         .button {
@@ -163,7 +168,7 @@
     width: 30px;
     height: 30px;
     border-radius: 20px;
-    line-height: 30px;
+    line-height: 27px;
     color: rgb(123, 3, 3);
     font-size: 27px;
     font-weight: bold;

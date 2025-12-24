@@ -2,6 +2,8 @@ import Providers from "@/app/providers/query-client";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.scss";
+import { ThemeProvider } from "./providers/ThemeProvider";
+import { ThemeTransitionWrapper } from "./providers/ThemeTransitionWrapper";
 
 const rubikSans = Rubik({
   variable: "--font-rubik-sans",
@@ -20,10 +22,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${rubikSans.variable}`}>
         <Providers>
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
+            <ThemeTransitionWrapper>
+              {children}
+            </ThemeTransitionWrapper>
+          </ThemeProvider>
         </Providers>
       </body>
     </html>

@@ -1,4 +1,4 @@
-@use '../base/variables.scss';
+@use '../base/variables.scss' as *;
 
 
 .vertical__sidebar {
@@ -11,7 +11,7 @@
 }
 
 .nav {
-    background: var(--bg--primary);
+    background: var(--background);
     display: flex;
     flex-flow: column;
     min-width: 52px;
@@ -72,12 +72,12 @@
 
 .toggle__svg_icon {
     grid-area: svg;
-    fill: hsl(200, 10%, 50%);
+    fill: var(--text--color-sideBar);
     transition: fill 233ms ease-in;
 }
 
 .toggle__icons:hover .toggle__svg_icon {
-    fill: hsl(203, 13%, 14%);
+    fill: var(--text--color-sideBar);
 }
 
 .figure {
@@ -108,7 +108,7 @@
     font-size: 17px;
     font-weight: 500;
     margin-block-end: 4px;
-    color: hsl(200, 14%, 30%);
+    color: var(--text--color-sideBar);
 }
 
 .sidebar__wrapper {
@@ -162,7 +162,7 @@
 
 .text {
     pointer-events: none;
-    color: hsl(200, 14%, 30%);
+    color: var(--text--color-sideBar);
     font-size: 14px;
     font-weight: 500;
     transition: color 266ms ease-out;
@@ -211,7 +211,7 @@
 }
 
 .sidebar__list:has(.sidebar__link):hover .sidebar__item_heading {
-    color: hsl(200, 14%, 30%);
+    color: var(--text--color-sideBar);
 }
 
 
