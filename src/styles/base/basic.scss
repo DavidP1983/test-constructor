@@ -105,3 +105,9 @@ figure {
         color-scheme: dark;
     }
 }
+
+@media screen and (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+}

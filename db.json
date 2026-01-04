@@ -759,9 +759,27 @@
       "id": "0d9ae1ea-cc0e-4790-aaf2-3012ddfdec91",
       "authorId": "6d767c59-fd94-491c-b14e-f15cda863322",
       "name": "Reading",
-      "createdAt": "2026-01-03",
+      "createdAt": "2026-01-04",
       "participantsCount": 0,
       "test": [
+        {
+          "id": "c483da80-44a9-4cdb-9c10-28eeddc5a0c9",
+          "type": "radio",
+          "title": "Hello",
+          "instructions": "Один вариант ответа",
+          "options": [
+            {
+              "id": "ba3087e9",
+              "question": "123",
+              "answer": true
+            },
+            {
+              "id": "1faf1f21",
+              "question": "Hello",
+              "answer": false
+            }
+          ]
+        },
         {
           "id": "0608e70e-5b50-4fea-83c2-3b26abddb385",
           "type": "checkbox",
@@ -779,22 +797,53 @@
               "answer": true
             }
           ]
-        },
+        }
+      ],
+      "result": {
+        "totalQuestions": 2,
+        "answers": 0
+      }
+    },
+    {
+      "id": "cb574a2f-d5f0-4105-9367-57314818dfbd",
+      "authorId": "6d767c59-fd94-491c-b14e-f15cda863322",
+      "name": "History",
+      "createdAt": "2026-01-04",
+      "participantsCount": 0,
+      "test": [
         {
-          "id": "c483da80-44a9-4cdb-9c10-28eeddc5a0c9",
+          "id": "7c6730c9-f1c7-404c-8e0f-9b8bcb0d2287",
           "type": "radio",
-          "title": "Hello",
+          "title": "History",
           "instructions": "Один вариант ответа",
           "options": [
             {
-              "id": "ba3087e9",
-              "question": "123",
+              "id": "d9d3a49d",
+              "question": "Hello",
               "answer": true
             },
             {
-              "id": "1faf1f21",
+              "id": "a513f434",
               "question": "Hello",
               "answer": false
+            }
+          ]
+        },
+        {
+          "id": "085afd61-a6e7-48f6-938d-83be316f3362",
+          "type": "checkbox",
+          "title": "History",
+          "instructions": "Несколько вариантов",
+          "options": [
+            {
+              "id": "bf5c2a4f",
+              "question": "Hello",
+              "answer": true
+            },
+            {
+              "id": "b42128f4",
+              "question": "Hello",
+              "answer": true
             }
           ]
         }
@@ -814,7 +863,7 @@
       "role": "Admin",
       "joined": "2025-12-24",
       "notifications": true,
-      "lastActivity": "2025-12-30",
+      "lastActivity": "2026-01-04",
       "lastLogin": "2025-12-30"
     },
     {

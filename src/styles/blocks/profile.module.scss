@@ -23,8 +23,7 @@
     &__statistics,
     &__security {
         position: relative;
-        width: 50%;
-        margin-top: 20px;
+        width: 40%;
         padding: 20px;
         border: 2px dotted lightgray;
         z-index: 1;
@@ -72,8 +71,11 @@
 
     &__wrapper {
         display: flex;
-        flex-direction: column;
-        align-items: safe center;
+        flex-wrap: wrap;
+        justify-content: safe center;
+        align-items: stretch;
+        min-height: 200px;
+        margin-top: 20px;
         gap: 20px;
     }
 
@@ -219,4 +221,15 @@
         }
     }
 
+}
+
+@media screen and (max-width: 992px) {
+    .profile {
+        &__content,
+        &__settings,
+        &__statistics,
+        &__security {
+            width: 100%;
+        }
+    }
 }
