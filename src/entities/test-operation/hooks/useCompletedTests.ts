@@ -10,32 +10,43 @@
  * Contains no mutation or business logic.
  */
 
+import { useLoginForm } from "@/features/auth/login/model/store";
+import { AllTests } from "@/shared/types/test-type";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/apiService";
 
 
 export const useCompletedTests = () => {
+    const userData = useLoginForm(state => state.userData);
+    const id = userData?.id;
+    const role = userData?.role;
+
     const { data, isLoading, isFetching, error } = useQuery({
-        queryKey: ['completedTests'],
-        queryFn: async () => await api.get('builder'),
-        initialDataUpdatedAt: 0,
+        queryKey: ['completedTests', id, role],
+        queryFn: async () => {
+            if (!id) return []
+            if (role === "Admin") {
+                return await api.get<AllTests[]>('builder')
+            }
+            return await api.get<AllTests[]>(`builder?authorId=${id}`);
+        },
+        select: (data) => data?.toReversed(),
         staleTime: 1 * 60 * 1000
     })
 
-    const contentHeader = ["Name", "Date of creation", "Result", "Actions"];
-
-    let statusForContent: "pending" | "error" | "success";
+    let status: "loading" | "error" | "success";
     if (isLoading || isFetching) {
-        statusForContent = 'pending'
+        status = 'loading'
     } else if (error) {
-        statusForContent = 'error'
+        status = 'error'
     } else {
-        statusForContent = 'success'
+        status = 'success'
     }
 
     return {
-        data,
-        contentHeader,
-        statusForContent
+        data: data ?? [],
+        status,
+        contentHeader: ["Name", "Date of creation", "Result", "Actions"]
     }
 }
+

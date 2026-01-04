@@ -2,6 +2,7 @@
 import { AddQuestion } from '@/features/test-actions/add-question/ui/AddQuestion';
 import { AllTests } from '@/shared/types/test-type';
 import { DragDropContext, Draggable, DraggableStyle, Droppable } from '@hello-pangea/dnd';
+import clsx from 'clsx';
 import { CSSProperties } from 'react';
 import { useReorderQuestions } from '../model/useReorderQuestions';
 import { TestQuestionItem } from './TestQuestionItem';
@@ -15,7 +16,13 @@ interface Props {
 }
 
 export const TestQuestion = ({ singleTest }: Props) => {
-    const { data, mode, onDragEnd } = useReorderQuestions(singleTest);
+    const {
+        data,
+        mode,
+        onDragEnd,
+        appearingQuestionId,
+        disappearingQuestionId
+    } = useReorderQuestions(singleTest);
 
 
     const getListStyle = (isDraggingOver: boolean) => ({
@@ -61,7 +68,7 @@ export const TestQuestion = ({ singleTest }: Props) => {
                                     index={i}>
                                     {(provided, snapshot) => (
                                         <div
-                                            className={styles.create__question}
+                                            className={clsx(styles.create__question, appearingQuestionId === item.id && styles.isAppearing)}
                                             ref={provided.innerRef}
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}
@@ -77,12 +84,16 @@ export const TestQuestion = ({ singleTest }: Props) => {
                                                     options={item.options}
                                                     type={item.type}
                                                     id={item.id}
-                                                    mode={mode} />
+                                                    mode={mode}
+                                                    appearingQuestionId={appearingQuestionId}
+                                                    disappearingQuestionId={disappearingQuestionId} />
                                             </ul>
 
                                             <div className={styles.create__question_btn}>
-                                                {mode !== 'preview' ?
-                                                    <AddQuestion testId={item.id} /> :
+                                                {mode !== 'preview'
+                                                    ?
+                                                    <AddQuestion testId={item.id} />
+                                                    :
                                                     null
                                                 }
                                             </div>

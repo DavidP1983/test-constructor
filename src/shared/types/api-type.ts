@@ -1,15 +1,14 @@
-import { AllTests } from "./test-type";
 
-type HTTPRequestMethods = "GET" | "POST" | "PUT" | "DELETE";
+type HTTPRequestMethods = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 interface HTTPHeaders {
     [key: string]: string;
 }
 
-export interface RequestConfig {
+export interface RequestConfig<TData = unknown> {
     endpoint?: string;
-    data: AllTests | null;
+    data?: TData;
     method: HTTPRequestMethods;
-    headers: HTTPHeaders;
+    headers?: HTTPHeaders;
 }
 
 export interface Config {

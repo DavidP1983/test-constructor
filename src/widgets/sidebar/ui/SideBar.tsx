@@ -1,12 +1,27 @@
 'use client';
 
+import { useProfile } from '@/entities/profile-info/model/store';
+import { useLoginForm } from '@/features/auth/login/model/store';
+import { useTest } from '@/features/test-actions/save-question/model/store';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/blocks/sidebar.module.scss';
 
 
 export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) => void }>) {
+    const avatar = useProfile(state => state.avatar);
+    const logout = useLoginForm(state => state.logout);
+    const resetTotalCreatedTests = useTest(state => state.resetTotalCreatedTests);
+    const router = useRouter()
+
+    const handleLogout = () => {
+        logout();
+        resetTotalCreatedTests();
+        router.push("/");
+
+    }
 
     return (
         <aside className={styles.vertical__sidebar}>
@@ -34,7 +49,7 @@ export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) =>
                     <figure className={styles.figure}>
                         <Image
                             className={styles.logo}
-                            src="/assets/user-icon.webp"
+                            src={avatar ?? "/assets/user-icon.webp"}
                             alt='profile'
                             width={100}
                             height={100}
@@ -71,20 +86,23 @@ export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) =>
                             <h2 className={styles.sidebar__item_heading}>general</h2>
                         </li>
                         <li className={styles.sidebar__item}>
-                            <a className={styles.sidebar__link} href="#" data-tooltip="Profile">
+                            <Link className={styles.sidebar__link} href="/profile" data-tooltip="Profile">
                                 <div className={styles.icon}>
                                     <span className="icon-user"></span>
                                 </div>
                                 <p className={styles.text}>Profile</p>
-                            </a>
+                            </Link>
                         </li>
                         <li className={styles.sidebar__item}>
-                            <a className={styles.sidebar__link} href="#" data-tooltip="Logout">
+                            <button
+                                className={styles.sidebar__link}
+                                data-tooltip="Logout"
+                                onClick={handleLogout}>
                                 <div className={styles.icon}>
                                     <span className='icon-logout'></span>
                                 </div>
                                 <p className={styles.text}>Logout</p>
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </section>

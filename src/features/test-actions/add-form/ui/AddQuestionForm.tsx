@@ -13,7 +13,12 @@ const options = [
 ]
 
 export const AddQuestionForm = () => {
-    const { handleInputData, handleSelectData, handleSaveQuestion, fields, isReadyToSave } = useSaveQuestions();
+    const {
+        handleInputData,
+        handleSelectData,
+        handleSaveQuestion,
+        fields,
+        isReadyToSave } = useSaveQuestions();
     const isOpen = useModal(state => state.isOpen)
 
     return (

@@ -5,13 +5,13 @@
 'use client';
 
 import { useCreateTest } from '@/entities/test-operation/hooks/useCreateTest';
-import { SpinnerForBtn } from '@/shared/ui/spinner/SpinnerForBtn';
-import { useTest } from '../model/store';
-
 import { useEditTest } from '@/entities/test-operation/hooks/useEditTest';
-import styles from '@/styles/blocks/create.module.scss';
+import { SpinnerForBtn } from '@/shared/ui/spinner/SpinnerForBtn';
 import clsx from 'clsx';
 import { useShallow } from 'zustand/shallow';
+import { useTest } from '../model/store';
+
+import styles from '@/styles/blocks/create.module.scss';
 
 
 export const CreateOperation = ({ mode }: { mode: string | null }) => {
@@ -37,7 +37,7 @@ export const CreateOperation = ({ mode }: { mode: string | null }) => {
 
             <button
                 className={styles.create__save}
-                disabled={!test.length || isPending}
+                disabled={!test.length || isPending || isPendingEdit}
                 onClick={mode !== 'edit' ? handleSaveTest : handleSaveEditTest}>
                 Save{(isPending || isPendingEdit) && <SpinnerForBtn />}</button>
 
