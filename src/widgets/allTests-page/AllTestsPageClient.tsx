@@ -17,7 +17,7 @@ import styles from '@/styles/blocks/table.module.scss';
 
 export const AllTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-    const { data, contentHeader, statusForContent, params, isPlaceholderData } = useAllTests();
+    const { data, contentHeader, status, isPlaceholderData } = useAllTests();
 
     const classNames = clsx({
         [styles.main]: true,
@@ -36,9 +36,8 @@ export const AllTestsPageClient = () => {
                             <Link className={styles.test__create} href='/create'>Create</Link>
                         </div>
                         <StatusContent<AllTests>
-                            loading={statusForContent === 'pending' && !params}
                             data={data}
-                            status={statusForContent}
+                            status={status}
                             renderEmpty={() => (
                                 <div className={styles.test__empty}>Create your first test, click on the button <strong>Create</strong></div>
                             )}

@@ -1,10 +1,11 @@
 @font-face {
   font-family: 'fontello';
   src:
-    url('/fonts/fontello.woff2?77951270') format('woff2'),
-    url('/fonts/fontello.woff?77951270') format('woff');
+    url('/fonts/fontello.woff2?49878606') format('woff2'),
+    url('/fonts/fontello.woff?49878606') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
@@ -23,6 +24,7 @@
   font-style: normal;
   font-weight: normal;
   speak: never;
+  vertical-align: middle;
 
   display: inline-block;
   text-decoration: inherit;
@@ -52,6 +54,7 @@
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
+
 
 .icon-trash-empty:before {
   content: '\e800';
@@ -88,6 +91,41 @@
 }
 
 /* '' */
+.icon-cog:before {
+  content: '\e807';
+}
+
+/* '' */
+.icon-bell:before {
+  content: '\e808';
+}
+
+/* '' */
+.icon-search:before {
+  content: '\e809';
+}
+
+/* '' */
+.icon-lock:before {
+  content: '\e80a';
+}
+
+/* '' */
+.icon-warning-empty:before {
+  content: '\e80b';
+}
+
+/* '' */
+.icon-eye:before {
+  content: '\e80c';
+}
+
+/* '' */
+.icon-eye-off:before {
+  content: '\e80d';
+}
+
+/* '' */
 .icon-logout:before {
   content: '\f02d';
 }
@@ -98,6 +136,11 @@
 }
 
 /* '' */
+.icon-link-ext:before {
+  content: '\f08e';
+}
+
+/* '' */
 .icon-menu:before {
   content: '\f0c9';
 }
@@ -108,3 +151,8 @@
 }
 
 /* '' */
+.icon-chart-line:before {
+  content: '\f201';
+}
+
+/* '' */

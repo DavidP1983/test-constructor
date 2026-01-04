@@ -4,6 +4,7 @@
  * Pessimistic update
  */
 
+import { useLoginForm } from "@/features/auth/login/model/store";
 import { notifyAfterSaveTest } from "@/features/test-actions/save-question/lib/utils/notifyAfterSaveTest";
 import { notifyBeforeSaveTest } from "@/features/test-actions/save-question/lib/utils/notifyBeforeSaveTest";
 import { notifyDuringDecline } from "@/features/test-actions/save-question/lib/utils/notifyDuringDecline";
@@ -14,17 +15,23 @@ import { format } from "date-fns";
 import { useRouter } from 'next/navigation';
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from 'uuid';
+import { useShallow } from "zustand/shallow";
 import { api } from "../api/apiService";
 
 
 export const useCreateTest = () => {
-    const test = useTest(state => state.test);
-    const resetTest = useTest(state => state.resetTest);
+    const { test, resetTest, setTotalCreatedTests } = useTest(useShallow((state) => ({
+        test: state.test,
+        resetTest: state.resetTest,
+        setTotalCreatedTests: state.setTotalCreatedTests,
+    })));
+    const authorId = useLoginForm(state => state?.userData?.id);
+
     const router = useRouter();
     const queryClient = useQueryClient();
 
     const createMutation = useMutation({
-        mutationFn: async (data: AllTests) => await api.post("builder", data),
+        mutationFn: async (data: AllTests) => await api.post<AllTests[], AllTests>("builder", data),
 
         async onSuccess(_, data) {
             const successTitle = `Your test ${data.name} was added successfully`;
@@ -49,18 +56,20 @@ export const useCreateTest = () => {
             }
 
             const now = new Date();
-            const date = format(new Date(now), "dd.MM.yyy");
+            const createdAt = format(new Date(now), "yyyy-MM-dd");
             const data = {
                 id: uuidv4(),
+                authorId,
                 name: testName,
-                date,
+                createdAt,
                 participantsCount: 0,
                 test: test,
                 result: { totalQuestions: test.length, answers: 0 }
 
             }
 
-            await createMutation.mutateAsync(data)
+            await createMutation.mutateAsync(data);
+            setTotalCreatedTests(1);
         } catch (e) {
             if (e instanceof Error) {
                 const errorTitle = e.message ? e.message : "Opps... something went wrong, try again";

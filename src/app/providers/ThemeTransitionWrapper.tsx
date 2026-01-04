@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 interface Props {
     children: React.ReactNode
@@ -9,21 +9,14 @@ interface Props {
 
 export const ThemeTransitionWrapper = ({ children }: Props) => {
     const { theme } = useTheme()
-    const [mounted, setMounted] = useState(false)
-
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        setMounted(true);
-    }, [])
 
     useEffect(() => {
         const root = document.documentElement;
         root.style.setProperty("--background", theme === 'dark' ? '#242434ff' : '#e3dede42')
         root.style.setProperty("--text--color", theme === 'dark' ? '#ffffff' : '#242434ff')
         root.style.setProperty("--text--color-sideBar", theme === 'dark' ? '#ffffff' : 'hsl(200, 14%, 30%)')
+        root.style.setProperty("--shadow--color", theme === 'dark' ? '0 4px 48px rgb(109 247 234 / 38%)' : '0 10px 36px rgba(0, 0, 0, 0.16)')
     }, [theme])
-
-    if (!mounted) return null
 
     return (
         <>{children}</>

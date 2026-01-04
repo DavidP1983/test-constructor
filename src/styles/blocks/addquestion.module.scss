@@ -47,35 +47,39 @@
         transition: background-color .5s;
         @include disabled;
     }
+
+    &.active {
+        z-index: 1;
+        opacity: 1;
+        max-height: 500px;
+        padding: 10px 0;
+    }
 }
 
-.create__question.active {
-    z-index: 1;
-    opacity: 1;
-    max-height: 500px;
-    padding: 10px 0;
-}
 
 .btn__group {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &_add,
+    &_delete {
+        z-index: 1;
+        display: block;
+        margin-top: 10px;
+        padding: 8px 20px;
+        width: 100px;
+        border: none;
+        border-radius: 12px;
+        color: var(--foreground);
+        background-color: var(--bg--primary);
+        transition: background-color .5s;
+        @include disabled;
+    }
+    
+    &_delete {
+        @include disabled(#88100a);
+    }
 }
 
-.btn__group_add, .btn__group_delete {
-    z-index: 1;
-    display: block;
-    margin-top: 10px;
-    padding: 8px 20px;
-    width: 100px;
-    border: none;
-    border-radius: 12px;
-    color: var(--foreground);
-    background-color: var(--bg--primary);
-    transition: background-color .5s;
-    @include disabled;
-}
-.btn__group_delete {
-    @include disabled(#88100a);
-}
 
