@@ -9,8 +9,8 @@ import { Suspense } from "react";
 type Params = Promise<{ slug: string }>
 
 export async function generateStaticParams() {
-    const tests = await api.get<AllTests[]>('builder');
-    return tests?.map(item => ({
+    const tests = await api.get<AllTests[]>('builder') ?? [];
+    return tests.map(item => ({
         slug: item.id.toString()
     }));
 }
