@@ -1,6 +1,7 @@
 import { CheckboxButton } from '@/features/test-actions/question-actions/ui/CheckboxButton';
 import { RadioButton } from '@/features/test-actions/question-actions/ui/RadioButton';
 import { Options } from '@/shared/types/test-type';
+import clsx from 'clsx';
 import { Mode } from './renderActions';
 
 import styles from '@/styles/blocks/create.module.scss';
@@ -11,9 +12,11 @@ interface Props {
     type: string;
     id: string;
     mode: Mode;
+    appearingQuestionId: string | null;
+    disappearingQuestionId: string | null;
 }
 
-export const TestQuestionItem = ({ options, type, id, mode }: Props) => {
+export const TestQuestionItem = ({ options, type, id, mode, appearingQuestionId, disappearingQuestionId }: Props) => {
 
 
     if (!options?.length) {
@@ -23,7 +26,12 @@ export const TestQuestionItem = ({ options, type, id, mode }: Props) => {
         <>
             {
                 options.map(item => (
-                    <li key={item.id} className={styles.items}>
+                    <li key={item.id} className={
+                        clsx(
+                            styles.items,
+                            disappearingQuestionId === item.id && styles.isDisappearing,
+                            appearingQuestionId === item.id && styles.isAppearing,
+                        )}>
                         {
                             type === 'radio'
                                 ?

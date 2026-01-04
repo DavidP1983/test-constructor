@@ -19,8 +19,9 @@ interface Result {
 
 export interface AllTests {
     id: string;
+    authorId: string | undefined;
     name: string;
-    date: string | null;
+    createdAt: string | null;
     participantsCount: number;
     test: Test[];
     result: Result;
@@ -38,9 +39,4 @@ export interface ActionButtonProps {
     mode: string | null;
 }
 
-export interface TestMeta {
-    id: string;
-    name: string;
-    participantsCount: number;
-    result: Result;
-}
+export type TestMeta = Omit<AllTests, "test">

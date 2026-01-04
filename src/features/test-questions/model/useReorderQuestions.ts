@@ -10,11 +10,22 @@ import { Mode } from "../ui/renderActions";
 
 
 export const useReorderQuestions = (singleTest: AllTests | undefined) => {
-    const { test, setTests, resetTest, reorder } = useTest(useShallow((state) => ({
+    const {
+        test,
+        setTests,
+        resetTest,
+        reorder,
+        appearingQuestionId,
+        disappearingQuestionId,
+        clearAppearingQuestion
+    } = useTest(useShallow((state) => ({
         test: state.test,
         setTests: state.setTests,
         resetTest: state.resetTest,
-        reorder: state.reorder
+        reorder: state.reorder,
+        appearingQuestionId: state.appearingQuestionId,
+        disappearingQuestionId: state.disappearingQuestionId,
+        clearAppearingQuestion: state.clearAppearingQuestion
     })));
     const mode = useSearchParams().get('mode') as Mode;
     const data = mode === 'preview' ? singleTest?.test : test;
@@ -26,6 +37,14 @@ export const useReorderQuestions = (singleTest: AllTests | undefined) => {
             setTests(singleTest)
         }
     }, []);
+
+    // Effect для скрытия класса при анимации добавления элемента
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            clearAppearingQuestion();
+        }, 400);
+        return () => clearTimeout(timer)
+    }, [appearingQuestionId, clearAppearingQuestion])
 
 
     const reorderItems = (list: Test[], startIndex: number, endIndex: number) => {
@@ -51,5 +70,5 @@ export const useReorderQuestions = (singleTest: AllTests | undefined) => {
     }
 
 
-    return { data, mode, onDragEnd }
+    return { data, mode, onDragEnd, appearingQuestionId, disappearingQuestionId }
 }

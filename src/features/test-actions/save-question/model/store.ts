@@ -22,10 +22,13 @@ interface ErrorType {
 
 interface TestStore {
     test: Test[];
+    totalCreatedTests: number;
     testMeta: TestMeta | null;
     error: string;
     editField: EditData;
     indicator: boolean;
+    appearingQuestionId: string | null;
+    disappearingQuestionId: string | null;
     openField: () => void;
     addTest: (data: Test) => void;
     addAnswer: (answers: Options[], testId: string) => ErrorType;
@@ -34,12 +37,17 @@ interface TestStore {
     editAnswer: (question: string, answer: boolean, testId: string) => ErrorType;
     deleteTest: (id: string) => void;
     setTests: (data: AllTests) => void;
+    setTotalCreatedTests: (val: number) => void;
     reorder: (test: Test[]) => void;
     resetTest: () => void;
+    resetTotalCreatedTests: () => void;
+    setDisAppearingQuestionId: (id: string) => void;
+    clearAppearingQuestion: () => void;
 }
 
 export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
     test: [],
+    totalCreatedTests: 0,
     testMeta: {},
     editField: {},
     error: '',
@@ -48,15 +56,10 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
     // Создание Теста
     addTest: (data: Test) => {
         set({
-            test: [
-                ...get().test,
-                {
-                    ...data,
-                    id: uuidv4(),
-                    instructions: data.type === 'radio' ? 'Один вариант ответа' : 'Несколько вариантов'
-                }]
+            test: [...get().test, data],
+            appearingQuestionId: data.id,
+            indicator: true
         });
-        set({ indicator: true });
     },
 
     // Добавление Ответов к созданному тесту
@@ -75,22 +78,27 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
             test: get().test.map(item =>
                 item.id === testId
                     ? { ...item, options: [...item.options, ...answers] }
-                    : item
-            )
+                    :
+                    item
+            ),
+            appearingQuestionId: id,
+            indicator: true
         });
-        set({ indicator: true });
     },
 
     // Удаление Ответа
+    setDisAppearingQuestionId: (id: string) => {
+        set({ disappearingQuestionId: id })
+    },
     deleteAnswer: (testId: string, id: string) => {
         set({
             test: get().test.map(item =>
                 item.id === testId
                     ? { ...item, options: item.options.filter(item => item.id !== id) }
                     : item
-            )
+            ),
+            indicator: true,
         });
-        set({ indicator: true });
     },
 
     // Открытие полей
@@ -115,9 +123,9 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
                 item.id === testId
                     ? { ...item, options: item.options.map(item => item.id === editFiledId ? { ...item, question, answer } : item) }
                     : item
-            )
+            ),
+            indicator: true
         })
-        set({ indicator: true });
         set({ editField: { ...get().editField, opened: false } })
     },
 
@@ -125,18 +133,20 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
     // Удаление Теста
     deleteTest: (id: string) => {
         set({
-            test: get().test.filter(item => item.id !== id)
+            test: get().test.filter(item => item.id !== id),
+            indicator: true
         });
-        set({ indicator: true });
     },
 
-    // Добавление в test данных, при динамических страницах
+    // Добавление в test данных, при динамических страницах в useReorderQuestions
     setTests: (data: AllTests) => {
         set({
             testMeta:
             {
                 id: data.id,
+                authorId: data.authorId,
                 name: data.name,
+                createdAt: data.createdAt,
                 participantsCount: data.participantsCount,
                 result: data.result
             }
@@ -144,18 +154,30 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
         set({ test: [...get().test, ...data.test] })
     },
 
-    // Drag & Drop  операции
-    reorder: (data: Test[]) => {
-        set({ test: data });
-        set({ indicator: true });
-    },
-    // Очищение созданного теста после сохранения
-    resetTest: () => {
-        set({ test: [] });
-        set({ testMeta: null })
-        set({ indicator: false });
+    // Подсчитываем кол-во созданных тестов на протяжении сеанса useCreateTest
+    setTotalCreatedTests: (val: number) => {
+        set({ totalCreatedTests: get().totalCreatedTests + val })
     },
 
+    // Drag & Drop  операции
+    reorder: (data: Test[]) => {
+        set({ test: data, indicator: true });
+    },
+
+    // Очищение созданного теста после сохранения
+    resetTest: () => {
+        set({ test: [], testMeta: null, indicator: false });
+    },
+
+    // Очищение счетчика по подсчету созданных тестов при logout
+    resetTotalCreatedTests: () => {
+        set({ totalCreatedTests: 0 })
+    },
+
+    // Очистка анимации после добавления теста в useReorderQuestions
+    clearAppearingQuestion: () => {
+        set({ appearingQuestionId: null, disappearingQuestionId: null })
+    }
 
 }), { store: "tests", enabled: process.env.NODE_ENV === 'development' }), { name: 'useTest', version: 1 }))
 

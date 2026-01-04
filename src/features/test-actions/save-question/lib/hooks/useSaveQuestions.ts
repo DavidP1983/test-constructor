@@ -20,9 +20,10 @@
 
 import { useModal } from "@/entities/modal/model/store";
 import { Test, TestError } from "@/shared/types/test-type";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { type SingleValue } from "react-select";
 import Swal from 'sweetalert2';
+import { v4 as uuidv4 } from 'uuid';
 import { useShallow } from "zustand/shallow";
 import { useTest } from "../../model/store";
 
@@ -38,24 +39,39 @@ export const useSaveQuestions = (testId?: string) => {
             options: []
         }
     );
+    const timeOutRef = useRef<number | null>(null);
+
 
     // Store Test
-    const { addTest, addAnswer, deleteAnswer, editAnswer, editField, deleteTest } = useTest(useShallow((state) => ({
+    const { addTest, addAnswer, deleteAnswer, editAnswer, editField, deleteTest, setDisAppearingQuestionId, clearAppearingQuestion } = useTest(useShallow((state) => ({
         addTest: state.addTest,
         addAnswer: state.addAnswer,
         deleteAnswer: state.deleteAnswer,
         editAnswer: state.editAnswer,
         deleteTest: state.deleteTest,
         editField: state.editField,
+        setDisAppearingQuestionId: state.setDisAppearingQuestionId,
+        clearAppearingQuestion: state.clearAppearingQuestion
     })));
 
     // Store Modal
     const openModal = useModal(state => state.openModal);
 
 
+    // Effect для скрытия класса при анимации удаления элемента
+    useEffect(() => {
+        const timer = timeOutRef.current;
+        return () => {
+            if (timer) {
+                clearAppearingQuestion();
+                clearTimeout(timer);
+            }
+        }
+    }, [clearAppearingQuestion]);
+
+
     // Toggle поля при исправлении 
     const editFieldToggle = editField.questionId === testId && editField.opened;
-
 
     // Проверка на заполнение полей
     const checkFields = (option: SingleValue<{ value: string | boolean; label: string }> | string | null, key: 'input' | 'select') => {
@@ -102,7 +118,13 @@ export const useSaveQuestions = (testId?: string) => {
 
     // Сохранение вопроса
     const handleSaveQuestion = () => {
-        addTest(questions);
+        const id = uuidv4();
+        const data = {
+            ...questions,
+            id,
+            instructions: questions.type === 'radio' ? 'Один вариант ответа' : 'Несколько вариантов'
+        }
+        addTest(data);
         openModal(false);
         setFields({ input: '', select: null })
     }
@@ -123,10 +145,14 @@ export const useSaveQuestions = (testId?: string) => {
         }
     }
 
-    // Удаление конкретного ответа в карточке
+    // Удаление конкретного ответа в карточке questions-actions AnswerActions
     const handleDeleteAnswer = (answerId: string) => {
         if (testId) {
-            deleteAnswer(testId, answerId)
+            // Для анимации при удалении
+            setDisAppearingQuestionId(answerId);
+            timeOutRef.current = window.setTimeout(() => {
+                deleteAnswer(testId, answerId);
+            }, 400)
         }
     }
 
@@ -148,7 +174,7 @@ export const useSaveQuestions = (testId?: string) => {
         }
     }
 
-    // Удаление карточки с вопросами
+    // Удаление карточки с вопросами  Add-Question
     const handleDeleteQuestion = () => {
         Swal.fire({
             icon: "warning",

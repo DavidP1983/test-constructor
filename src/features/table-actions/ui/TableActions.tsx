@@ -9,7 +9,7 @@ export const TableActions = ({ testId }: { testId: string }) => {
 
     return (
         <>
-            <button className="icon-link btn" data-btn="Link" aria-label="link-icon"></button>
+            <button className="icon-link-ext btn" data-btn="Link" aria-label="link-icon"></button>
             <button
                 className="icon-pencil btn"
                 data-btn="Edit"

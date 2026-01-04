@@ -1,5 +1,4 @@
 import { Config, RequestConfig } from "../../../shared/types/api-type";
-import { AllTests } from "../../../shared/types/test-type";
 
 
 class ApiService {
@@ -10,13 +9,13 @@ class ApiService {
         this.defaultHeaders = defaultHeaders;
     }
 
-    async request({ endpoint, method = "GET", data = null, headers = {} }: RequestConfig) {
+    async request<TResponse = unknown, TData = unknown>({ endpoint, method = "GET", data, headers = {} }: RequestConfig<TData>): Promise<TResponse | null> {
 
         const config: Config = {
             method,
             headers: { ...this.defaultHeaders, ...headers }
         }
-        if (data) {
+        if (data !== undefined) {
             config.headers['Content-Type'] = 'application/json';
             config.body = JSON.stringify(data);
         }
@@ -24,42 +23,55 @@ class ApiService {
         try {
             const response = await fetch(`${this.baseUrl}${endpoint}`, config)
 
-            if (response.status === 404) {
-                return null
-            }
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || `Request failed ${response.status}`)
             }
 
-            return await response.json() ?? null;
+            return (await response.json()) as TResponse;
         } catch (e) {
             if (e instanceof Error) {
                 console.error(e.message)
                 throw e;
+            } else {
+                throw new Error('Unknown error');
             }
         }
     }
 
-    get(endpoint?: string, headers = {}) {
-        return this.request({ endpoint, method: "GET", data: null, headers })
+    get<TResponse>(endpoint?: string, headers = {}) {
+        return this.request<TResponse>({ endpoint, method: "GET", headers })
     }
-    getById(endpoint?: string, headers = {}) {
-        return this.request({ endpoint, method: "GET", data: null, headers })
+    getById<TResponse>(endpoint?: string, headers = {}) {
+        try {
+            return this.request<TResponse>({ endpoint, method: "GET", headers })
+
+        } catch (e) {
+            if (e instanceof Error && e.message.includes('404')) {
+                return null
+            }
+            throw e;
+        }
     }
-    post(endpoint: string, data: AllTests, headers = {}) {
-        return this.request({ endpoint, method: "POST", data, headers })
+    post<TResponse, TData>(endpoint: string, data: TData, headers = {}) {
+        return this.request<TResponse, TData>({ endpoint, method: "POST", data, headers })
     }
-    put(endpoint: string, data: AllTests, headers = {}) {
-        return this.request({ endpoint, method: "PUT", data, headers })
+    put<TResponse, TData>(endpoint: string, data: TData, headers = {}) {
+        return this.request<TResponse, TData>({ endpoint, method: "PUT", data, headers })
     }
-    delete(endpoint: string, headers = {}) {
-        return this.request({ endpoint, method: "DELETE", data: null, headers })
+    delete<TResponse>(endpoint: string, headers = {}) {
+        return this.request<TResponse>({ endpoint, method: "DELETE", headers })
+    }
+    registration<TResponse, TData>(endpoint: string, data: TData, headers = {}) {
+        return this.request<TResponse, TData>({ endpoint, method: "POST", data, headers })
+    }
+    login<TResponse, TData>(endpoint: string, data: TData, headers = {}) {
+        return this.request<TResponse, TData>({ endpoint, method: "PATCH", data, headers })
     }
 }
 
 
-const api = new ApiService("http://localhost:3001/");
+const api = new ApiService(process.env.NEXT_PUBLIC_API_URL!);
 
 export { api };
 

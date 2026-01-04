@@ -9,15 +9,15 @@ import { Suspense } from "react";
 type Params = Promise<{ slug: string }>
 
 export async function generateStaticParams() {
-    const tests: AllTests[] = await api.get('builder');
-    return tests.map(item => ({
+    const tests = await api.get<AllTests[]>('builder');
+    return tests?.map(item => ({
         slug: item.id.toString()
     }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
     const { slug } = await params;
-    const test: AllTests = await api.getById(`builder/${slug}`);
+    const test = await api.getById<AllTests>(`builder/${slug}`);
     return {
         title: test?.name,
         description: `${test?.name} page`,
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 export default async function TestEditorPage({ params }: { params: Params }) {
     const { slug } = await params;
 
-    const singleTest = await api.getById(`builder/${slug}`);
+    const singleTest = await api.getById<AllTests>(`builder/${slug}`);
 
     if (!singleTest) {
         return <NotFound />

@@ -99,26 +99,27 @@
         border-radius: 12px;
         transition: background 0.3s;
 
-        .create__question_content {
+        &_content {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 40px;
+        }  
 
-            .create__question_title {
-                font-size: 26px;
-                max-width: 434px;
-                color: var(--text--color);
-            }
-
-            .create__question_choice {
-                padding: 10px 10px;
-                border: 1px solid var(--foreground);
-                color: var(--text--color);
-            }
+        &_title {
+            font-size: 26px;
+            max-width: 434px;
+            color: var(--text--color);
         }
 
-        .create__question_field {
+        &_choice {
+            padding: 10px 10px;
+            border: 1px solid var(--foreground);
+            color: var(--text--color);
+        }
+        
+
+        &_field {
             display: flex;
             justify-content: safe center;
             flex-direction: column;
@@ -130,17 +131,35 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+
+                &.isAppearing {
+                    @include appear(0.2s);
+                }
+
+                &.isDisappearing {
+                    @include disAppear(0.2s);
+
+                    & ~ .items {
+                        translate: 0 calc((100% + 8px) * -1);
+                        transition-delay: 0.2s;
+                        transition-duration: 0.2s;
+                        pointer-events: none;
+                    }
+                }
             }
             div {
                 @include icons;
             }                       
         }
         
-        .create__question_btn {
+        &_btn {
             display: flex;
             flex-direction: column;
             justify-content: safe left;
             align-items: left;
+        }
+        &.isAppearing {
+            @include appear(0.2s);
         }
     }
 

@@ -15,14 +15,16 @@ import Table from "../table/Table";
 
 export const CompletedTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-    const { data, contentHeader, statusForContent } = useCompletedTests();
+    const { data, status, contentHeader } = useCompletedTests();
 
     const classNames = clsx({
         [styles.main]: true,
         [styles.active]: isSideBarOpen
     });
 
-
+    if (!data) {
+        return []
+    }
 
     return (
         <>
@@ -34,9 +36,8 @@ export const CompletedTestsPageClient = () => {
                             <h1 className="title">Completed Tests</h1>
                         </div>
                         <StatusContent<AllTests>
-                            loading={statusForContent === 'pending'}
                             data={data}
-                            status={statusForContent}
+                            status={status}
                             completed="completed"
                             renderEmpty={() => (
                                 <div className={styles.test__empty}>There are no test completed</div>
