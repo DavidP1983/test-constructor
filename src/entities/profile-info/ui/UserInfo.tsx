@@ -12,7 +12,7 @@ export const UserInfo = ({ actions }: { actions: React.ReactNode }) => {
 
 
     return (
-        <div className={styles.profile__content}>
+        <>
             <div className={styles.profile__info}>
                 <div className={styles.profile__info_image}>
                     <Image
@@ -33,6 +33,6 @@ export const UserInfo = ({ actions }: { actions: React.ReactNode }) => {
 
             </div>
             {actions}
-        </div>
+        </>
     )
 }
