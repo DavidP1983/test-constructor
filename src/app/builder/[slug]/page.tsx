@@ -8,19 +8,28 @@ import { Suspense } from "react";
 
 type Params = Promise<{ slug: string }>
 
-export async function generateStaticParams() {
-    const tests = await api.get<AllTests[]>('/test/get/public') ?? [];
-    return tests.map(item => ({
-        slug: item.id.toString()
-    }));
-}
+// Приводит к проблема на GitHub-Actions при CI
+// export async function generateStaticParams() {
+//     const tests = await api.get<AllTests[]>('/test/get/public') ?? [];
+//     return tests.map(item => ({
+//         slug: item.id.toString()
+//     }));
+// }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-    const { slug } = await params;
-    const test = await api.get<AllTests>(`/test/get/public/${slug}`);
-    return {
-        title: test?.name ?? 'Not Found',
-        description: `${test?.name ?? "Not Found"} page`,
+    try {
+        const { slug } = await params;
+        const test = await api.get<AllTests>(`/test/get/public/${slug}`);
+        return {
+            title: test?.name ?? 'Not Found',
+            description: `${test?.name ?? "Not Found"} page`,
+        }
+
+    } catch {
+        return {
+            title: 'Not Found',
+            description: "Not Found page",
+        }
     }
 }
 
