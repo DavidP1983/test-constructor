@@ -1,26 +1,43 @@
 'use client';
 
 import { useProfile } from '@/entities/profile-info/model/store';
+import { useAvatar } from '@/entities/profile-info/model/useAvatar';
 import { useLoginForm } from '@/features/auth/login/model/store';
 import { useTest } from '@/features/test-actions/save-question/model/store';
+import { notify } from '@/shared/utils/notify';
+import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useShallow } from 'zustand/shallow';
 
 import styles from '@/styles/blocks/sidebar.module.scss';
 
 
 export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) => void }>) {
-    const avatar = useProfile(state => state.avatar);
-    const logout = useLoginForm(state => state.logout);
+    const { logout } = useLoginForm(useShallow((state) => ({
+        logout: state.logout,
+        userData: state.userData,
+    })));
+    const avatar = useProfile(state => state.avatarUrl);
+
+
+    // Очистка при Logout
     const resetTotalCreatedTests = useTest(state => state.resetTotalCreatedTests);
-    const router = useRouter()
+    const router = useRouter();
+    const queryClient = useQueryClient();
+    const { clearAvatar } = useAvatar();
 
-    const handleLogout = () => {
-        logout();
+
+    const handleLogout = async () => {
+        await logout();
         resetTotalCreatedTests();
+        queryClient.cancelQueries();
+        queryClient.clear();
+        clearAvatar();
         router.push("/");
-
+        await new Promise((r) => setTimeout(r, 1000));
+        notify('success', 'You have successfully logged out.')
     }
 
     return (
@@ -48,9 +65,9 @@ export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) =>
                     </div>
                     <figure className={styles.figure}>
                         <Image
-                            className={styles.logo}
                             src={avatar ?? "/assets/user-icon.webp"}
-                            alt='profile'
+                            alt="user"
+                            loading="eager"
                             width={100}
                             height={100}
                         />

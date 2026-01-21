@@ -241,3 +241,11 @@
     }
 
 }
+
+@media screen and (max-width: 768px) {
+    .create {
+        &__operation {
+            flex-direction: column;
+        }
+    }
+}

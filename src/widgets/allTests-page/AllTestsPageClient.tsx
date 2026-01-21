@@ -16,11 +16,11 @@ import { tableVariants } from "./animations";
 
 import styles from '@/styles/blocks/table.module.scss';
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 export const AllTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-    const { data, contentHeader, status, isPlaceholderData } = useAllTests();
+    const { data, contentHeader, status, error, isPlaceholderData } = useAllTests();
 
     const classNames = clsx({
         [styles.main]: true,
@@ -62,6 +62,7 @@ export const AllTestsPageClient = () => {
                         <StatusContent<AllTests>
                             data={data}
                             status={status}
+                            error={error}
                             renderEmpty={() => (
                                 <div className={styles.test__empty}>Create your first test, click on the button <strong>Create</strong></div>
                             )}

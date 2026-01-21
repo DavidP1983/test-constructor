@@ -15,40 +15,29 @@ import { AllTests } from "@/shared/types/test-type";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useShallow } from "zustand/shallow";
 import { api } from "../api/apiService";
 
 
 export const useAllTests = () => {
     const params = useSearchParams().get('q');
-    const { setUserTestData, userData } = useLoginForm(useShallow((state) => ({
-        setUserTestData: state.setUserTestData,
-        userData: state.userData
-    })));
-    const id = userData?.id;
-    const role = userData?.role;
+    const setUserTestData = useLoginForm((state) => state.setUserTestData);
+    const id = useLoginForm(state => state.userData?.id);
 
     const { data, isLoading, isFetching, error, isPlaceholderData } = useQuery({
         queryKey: ['allTests', id, params],
-        queryFn: async () => {
-            if (!id) return []
-            if (role === 'Admin') {
-                return await api.get<AllTests[]>(`builder?q=${params ?? ''}`)
-            }
-            return await api.get<AllTests[]>(`builder?authorId=${id}&q=${params ?? ''}`)
+        queryFn: async ({ signal }) => {
+            return await api.get<AllTests[]>(`/test/get?q=${params ?? ''}`, signal)
         },
         staleTime: 1 * 1000 * 60,
         placeholderData: keepPreviousData,
         select: (data) => data?.toReversed(),
-        enabled: !!id
+        enabled: !!id,
     });
 
     useEffect(() => {
-        if (!data) {
-            return undefined
-        }
+        if (!data || isPlaceholderData) return;
         setUserTestData(data);
-    }, [data, setUserTestData]);
+    }, [data, isPlaceholderData, setUserTestData]);
 
 
     let status: "loading" | "error" | "success";
@@ -64,6 +53,7 @@ export const useAllTests = () => {
         data: data ?? [],
         contentHeader: ["Name", "Date of creation", "Number of participants", "Actions"],
         status,
+        error,
         isPlaceholderData
     }
 }

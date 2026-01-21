@@ -11,7 +11,6 @@ import { notifyDuringDecline } from "@/features/test-actions/save-question/lib/u
 import { useTest } from "@/features/test-actions/save-question/model/store";
 import { AllTests } from "@/shared/types/test-type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { format } from "date-fns";
 import { useRouter } from 'next/navigation';
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from 'uuid';
@@ -25,13 +24,14 @@ export const useCreateTest = () => {
         resetTest: state.resetTest,
         setTotalCreatedTests: state.setTotalCreatedTests,
     })));
-    const authorId = useLoginForm(state => state?.userData?.id);
+    const id = useLoginForm(state => state.userData?.id);
 
     const router = useRouter();
     const queryClient = useQueryClient();
 
+    type CreateType<T> = Omit<T, 'authorId' | 'createdAt'>;
     const createMutation = useMutation({
-        mutationFn: async (data: AllTests) => await api.post<AllTests[], AllTests>("builder", data),
+        mutationFn: async (data: CreateType<AllTests>) => await api.post<AllTests[], CreateType<AllTests>>(`/test/create`, data),
 
         async onSuccess(_, data) {
             const successTitle = `Your test ${data.name} was added successfully`;
@@ -41,7 +41,7 @@ export const useCreateTest = () => {
         },
         async onSettled() {
             await queryClient.invalidateQueries({
-                queryKey: ['allTests']
+                queryKey: ['allTests', id, null]
             });
         },
     });
@@ -55,13 +55,9 @@ export const useCreateTest = () => {
                 throw new Error(`Decline, name ${testName}`)
             }
 
-            const now = new Date();
-            const createdAt = format(new Date(now), "yyyy-MM-dd");
             const data = {
                 id: uuidv4(),
-                authorId,
                 name: testName,
-                createdAt,
                 participantsCount: 0,
                 test: test,
                 result: { totalQuestions: test.length, answers: 0 }

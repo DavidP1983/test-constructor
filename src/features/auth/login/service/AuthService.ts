@@ -3,42 +3,33 @@ import { User } from "@/shared/types/user-type";
 
 export class AuthService {
 
-    // Registration
+    // Registration Promise<User>
     static async registration(name: string, email: string, password: string): Promise<User> {
 
-        const data = {
-            name,
-            email,
-            password,
-        }
-
-        const response = await fetch('/api/auth/registration', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/registration`, {
             method: "POST",
+            credentials: "include",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify({ name, email, password })
         });
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || 'Request failed')
+            throw new Error(error.message || 'Registration failed')
         }
 
         return (await response.json()) as User
     }
 
 
-    // Login
+    // Login Promise<User>
     static async login(email: string, password: string): Promise<User> {
 
-        const data = {
-            email,
-            password
-        }
-
-        const response = await fetch('/api/auth/login', {
-            method: "PATCH",
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
+            method: "POST",
+            credentials: "include",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify({ email, password })
         });
 
         if (!response.ok) {
@@ -51,11 +42,16 @@ export class AuthService {
 
     // Logout
     static async logout() {
-
-        const response = await fetch('/api/auth/logout', { method: 'POST' })
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/logout`,
+            {
+                method: 'POST',
+                credentials: 'include',
+            }
+        );
 
         if (!response.ok) {
-            throw new Error('Logout failed')
+            const error = await response.json();
+            throw new Error(error.message || 'Logout failed')
         }
     }
 

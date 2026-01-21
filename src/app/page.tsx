@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: "Login form page",
 };
 
-
 export default function Home() {
+
   return (
     <>
       <Suspense fallback={<Spinner isFallback={true} />}>
