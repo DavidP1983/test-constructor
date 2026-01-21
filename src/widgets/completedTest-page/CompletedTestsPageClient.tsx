@@ -15,7 +15,7 @@ import Table from "../table/Table";
 
 export const CompletedTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-    const { data, status, contentHeader } = useCompletedTests();
+    const { data, status, error, contentHeader } = useCompletedTests();
 
     const classNames = clsx({
         [styles.main]: true,
@@ -38,6 +38,7 @@ export const CompletedTestsPageClient = () => {
                         <StatusContent<AllTests>
                             data={data}
                             status={status}
+                            error={error}
                             completed="completed"
                             renderEmpty={() => (
                                 <div className={styles.test__empty}>There are no test completed</div>

@@ -10,11 +10,13 @@
  * Uses render props to remain data-agnostic.
  */
 
+import { ApiError } from "@/shared/api/ApiError";
 import dynamic from "next/dynamic";
 interface Props<T> {
     data: T[];
     status: "loading" | "error" | "success";
     completed?: string;
+    error: unknown;
     renderEmpty: () => React.ReactNode;
     renderData: (data: T[], completed?: string) => React.ReactNode;
 }
@@ -30,11 +32,13 @@ export const StatusContent = <T,>(
     {
         data,
         status,
+        error,
         completed,
         renderEmpty,
         renderData }: Props<T>) => {
 
     if (status === 'loading') return <Spinner />
+    if (status === 'error' && error instanceof ApiError && error.status === 401) return <ErrorPage error="Not Authorization" />
     if (status === 'error') return <ErrorPage error="Opps... something went wrong, please reload the page" />
     if (!data.length) return renderEmpty();
 

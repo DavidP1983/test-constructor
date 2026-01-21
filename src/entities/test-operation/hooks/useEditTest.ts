@@ -9,20 +9,20 @@ import { notifyAfterSaveTest } from "@/features/test-actions/save-question/lib/u
 import { useTest } from "@/features/test-actions/save-question/model/store";
 import { AllTests, TestMeta } from "@/shared/types/test-type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { api } from "../api/apiService";
-
 
 export const useEditTest = (testMeta: TestMeta | null) => {
     const test = useTest(state => state.test);
     const resetTest = useTest(state => state.resetTest);
     const id = useLoginForm(state => state.userData?.id);
+
     const router = useRouter();
     const queryClient = useQueryClient();
 
+    type UpdateType<T> = Partial<T>;
     const updateMutation = useMutation({
-        mutationFn: async (data: AllTests) => await api.put<AllTests[], AllTests>(`builder/${testMeta?.id}`, data),
+        mutationFn: async (data: UpdateType<AllTests>) => await api.patch<AllTests[], UpdateType<AllTests>>(`/test/update`, data),
 
         onMutate: async (updatedTest) => {
 
@@ -30,7 +30,7 @@ export const useEditTest = (testMeta: TestMeta | null) => {
                 queryKey: ['allTests', id, null]
             });
 
-            const previousTest = queryClient.getQueryData(['allTests']);
+            const previousTest = queryClient.getQueryData(['allTests', id]);
 
             queryClient.setQueryData<AllTests[]>(['allTests', id, null], (old) => {
                 if (!old) return []
@@ -63,16 +63,10 @@ export const useEditTest = (testMeta: TestMeta | null) => {
         try {
 
             if (testMeta) {
-                const now = new Date();
-                const createdAt = format(new Date(now), "yyyy-MM-dd");
                 const data = {
                     id: testMeta.id,
-                    authorId: testMeta.authorId,
                     name: testMeta.name,
-                    createdAt,
-                    participantsCount: testMeta.participantsCount,
                     test: test,
-                    result: testMeta.result
                 }
 
                 await updateMutation.mutateAsync(data)

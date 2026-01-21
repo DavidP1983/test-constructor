@@ -10,25 +10,18 @@
  * Contains no mutation or business logic.
  */
 
-import { useLoginForm } from "@/features/auth/login/model/store";
 import { AllTests } from "@/shared/types/test-type";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/apiService";
 
 
 export const useCompletedTests = () => {
-    const userData = useLoginForm(state => state.userData);
-    const id = userData?.id;
-    const role = userData?.role;
 
     const { data, isLoading, isFetching, error } = useQuery({
-        queryKey: ['completedTests', id, role],
-        queryFn: async () => {
-            if (!id) return []
-            if (role === "Admin") {
-                return await api.get<AllTests[]>('builder')
-            }
-            return await api.get<AllTests[]>(`builder?authorId=${id}`);
+        queryKey: ['completedTests'],
+        queryFn: async ({ signal }) => {
+            return await api.get<AllTests[]>(`/test/get`, signal)
+
         },
         select: (data) => data?.toReversed(),
         staleTime: 1 * 60 * 1000
@@ -46,6 +39,7 @@ export const useCompletedTests = () => {
     return {
         data: data ?? [],
         status,
+        error,
         contentHeader: ["Name", "Date of creation", "Result", "Actions"]
     }
 }

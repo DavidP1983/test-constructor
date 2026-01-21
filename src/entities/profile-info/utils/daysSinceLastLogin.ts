@@ -1,7 +1,7 @@
-import { UserDTO } from "@/shared/types/user-type";
+import { User } from "@/shared/types/user-type";
 import { differenceInDays } from "date-fns";
 
-export const daysSinceLastLogin = (userInfo: UserDTO | null): number => {
+export const daysSinceLastLogin = (userInfo: User | null): number => {
     if (userInfo?.lastLogin) {
         const days = differenceInDays(
             new Date(),

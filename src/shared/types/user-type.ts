@@ -3,7 +3,7 @@ export interface User {
     id: string;
     name: string;
     email: string;
-    password: string;
+    hasAvatar: boolean;
     role: "Admin" | "User";
     joined: string;
     notifications: boolean;
@@ -17,4 +17,3 @@ export interface DataArgs {
     password: string;
 }
 
-export type UserDTO = Omit<User, "password">

@@ -16,8 +16,8 @@ export const ChangePasswordButton = () => {
         try {
             const { confirm, data } = await notifyForm(formFields, "change");
             setIsDisable(confirm);
-            if (data?.email && data.newPassword) {
-                await UserService.changePassword(data.email, data.newPassword);
+            if (data?.password && data.newPassword) {
+                await UserService.changePassword(data.password, data.newPassword);
                 notify('success', "Password was changed successfully")
             }
         } catch (e) {

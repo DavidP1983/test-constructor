@@ -10,6 +10,7 @@ on:
         types: [opened, synchronize, reopened]
 env:
     NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+    API_URL: ${{ secrets.API_URL }}
 
 jobs:
     build:
@@ -34,8 +35,6 @@ jobs:
                       ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
             - name: Install dependencies
               run: npm ci
-            - name: Start json-server
-              run: npx json-server db.json --port 3001 &
             - name: build
               run: npm run build
             - name: Lint

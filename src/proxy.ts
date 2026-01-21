@@ -8,15 +8,15 @@ const PRIVATE_PATHS = [
 ];
 
 export function proxy(req: NextRequest) {
-    const token = req.cookies.get('auth_token');
     const { pathname } = req.nextUrl;
-
     const isPrivate = PRIVATE_PATHS.some(
-        path => pathname === path && pathname.startsWith(path)
+        path => pathname.startsWith(path)
     );
 
-
-    if (isPrivate && !token) {
+    if (!isPrivate) return NextResponse.next();
+    const refreshToken = req.cookies.get('refreshToken')?.value;
+    console.log("PROXY", refreshToken);
+    if (!refreshToken) {
         const url = new URL('/', req.url);
         url.searchParams.set('auth', "required");
         return NextResponse.redirect(url);
