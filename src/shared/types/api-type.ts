@@ -6,6 +6,7 @@ interface HTTPHeaders {
 
 export interface RequestConfig<TData = unknown> {
     endpoint?: string;
+    signal?: AbortSignal
     data?: TData;
     method: HTTPRequestMethods;
     headers?: HTTPHeaders;
@@ -15,5 +16,6 @@ export interface Config {
     method: HTTPRequestMethods;
     headers: HTTPHeaders;
     body?: string;
+    signal?: AbortSignal;
 }
 

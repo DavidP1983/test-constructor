@@ -1,17 +1,18 @@
 'use client';
 
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
 interface ProfileStore {
-    avatar: string | null;
-    setAvatar: (val: string) => void;
+    avatarUrl: null | string;
+    setAvatar: (val: string | null) => void;
 }
 
-export const useProfile = create<ProfileStore>()(persist(devtools((set) => ({
-    avatar: null,
-    setAvatar: (val: string) => {
-        set({ avatar: val })
-    }
+export const useProfile = create<ProfileStore>()(persist((set) => ({
+    avatarUrl: null,
 
-}), { store: "profile", enabled: process.env.NODE_ENV === 'development' }), { name: 'useProfile', version: 2 }))
+    setAvatar: (val: string | null) => {
+        set({ avatarUrl: val });
+    },
+
+}), { name: 'useProfile', version: 5 }));

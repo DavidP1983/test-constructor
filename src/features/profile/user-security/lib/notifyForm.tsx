@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { Fields } from "./formFields";
 
 interface FormKey {
-    email: string;
+    password: string;
     newPassword: string;
     repeatPassword: string;
 }
@@ -37,7 +37,7 @@ export const notifyForm = async (formFields: Fields, mode: string): Promise<Resp
         showCancelButton: true,
         preConfirm: () => {
             const inputs = document.querySelectorAll<HTMLInputElement>('[data-attr]')
-            const data: FormKey = { email: '', newPassword: '', repeatPassword: '' };
+            const data: FormKey = { password: '', newPassword: '', repeatPassword: '' };
 
             inputs.forEach((input) => {
                 data[input.dataset.attr as keyof typeof data] = input.value.trim()
@@ -46,7 +46,7 @@ export const notifyForm = async (formFields: Fields, mode: string): Promise<Resp
             const isSameFieldEmpty =
                 mode === 'delete'
                     ?
-                    !data.email
+                    !data.password.trim()
                     :
                     Object.values(data).some(v => !v);
 

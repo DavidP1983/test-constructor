@@ -60,13 +60,13 @@ export const useLogin = () => {
                 if (field) {
                     errors[field as keyof typeof fieldErrors] = err.message
                 }
-                setFieldErrors(errors)
+                setFieldErrors(errors);
             });
         } else {
-            const success = await registration(formDataValidation.data)
+            const success = await registration(formDataValidation.data);
             if (success) {
-                router.push('/builder')
-                setFieldValue({ name: '', email: '', password: '' })
+                router.push('/builder');
+                setFieldValue({ name: '', email: '', password: '' });
             }
         }
 
@@ -86,10 +86,10 @@ export const useLogin = () => {
                 setFieldErrors(errors)
             });
         } else {
-            const success = await login(formDataValidation.data)
+            const success = await login(formDataValidation.data);
             if (success) {
-                router.push('/builder')
-                setFieldValue({ name: '', email: '', password: '' })
+                router.push('/builder');
+                setFieldValue({ name: '', email: '', password: '' });
             }
         }
     }

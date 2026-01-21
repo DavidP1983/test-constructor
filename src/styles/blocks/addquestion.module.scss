@@ -83,3 +83,35 @@
 }
 
 
+@media screen and (max-width: 992px) {
+    .create__question {
+        textarea {
+            width: 250px;
+        }
+        &_select {
+            font-size: 13px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .create__question {
+        flex-direction: column;
+        textarea {
+                width: 100%;
+        }
+        &_select {
+            font-size: 16px;
+            width: 100%;
+        }
+        &_save {
+            margin-top: 20px;
+        }
+    }
+    .btn__group {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
