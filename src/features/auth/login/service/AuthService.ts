@@ -13,12 +13,21 @@ export class AuthService {
             body: JSON.stringify({ name, email, password })
         });
 
+        const contentType = response.headers.get('content-type');
+        const data = contentType?.includes('application/json')
+            ? (await response.json()) as User
+            : null;
+
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.message || 'Registration failed')
         }
 
-        return (await response.json()) as User
+        if (!data) {
+            throw new Error('Empty response from server');
+        }
+        return data
+
     }
 
 
@@ -32,11 +41,21 @@ export class AuthService {
             body: JSON.stringify({ email, password })
         });
 
+        const contentType = response.headers.get('content-type');
+        const data = contentType?.includes('application/json')
+            ? (await response.json()) as User
+            : null;
+
+
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.message || 'Request failed')
         }
-        return (await response.json()) as User
+
+        if (!data) {
+            throw new Error('Empty response from server');
+        }
+        return data
     }
 
 
