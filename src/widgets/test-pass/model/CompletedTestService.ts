@@ -1,11 +1,11 @@
 import { CompletedTest } from "@/shared/types/completed-type";
 
-
+// ${ process.env.NEXT_PUBLIC_API_URL }
 export class CompletedTestService {
 
     static async crateAnswer(data: CompletedTest): Promise<{ success: boolean }> {
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/completed/create-completed-test`, {
+        const response = await fetch(`/completed/create-completed-test`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

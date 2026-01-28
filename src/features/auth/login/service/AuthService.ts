@@ -1,12 +1,12 @@
 import { User } from "@/shared/types/user-type";
 
-
+// ${ process.env.NEXT_PUBLIC_API_URL }
 export class AuthService {
 
     // Registration 
     static async registration(name: string, email: string, password: string): Promise<User> {
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/registration`, {
+        const response = await fetch(`/user/registration`, {
             method: "POST",
             credentials: "include",
             headers: { 'Content-Type': 'application/json' },
@@ -22,10 +22,10 @@ export class AuthService {
     }
 
 
-    // Login 
+    // Login ${process.env.NEXT_PUBLIC_API_URL}
     static async login(email: string, password: string): Promise<User> {
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
+        const response = await fetch(`/user/login`, {
             method: "POST",
             credentials: "include",
             headers: { 'Content-Type': 'application/json' },
@@ -40,9 +40,9 @@ export class AuthService {
     }
 
 
-    // Logout
+    // Logout ${process.env.NEXT_PUBLIC_API_URL}
     static async logout() {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/logout`,
+        const response = await fetch(`/user/logout`,
             {
                 method: 'POST',
                 credentials: 'include',
