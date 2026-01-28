@@ -1,10 +1,10 @@
 import { apiFetch } from "@/shared/api/apiFetch";
 
 export class UserService {
-
+    // ${process.env.NEXT_PUBLIC_API_URL}
     static async changePassword(oldPassword: string, newPassword: string): Promise<void> {
 
-        const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/user/update`,
+        const response = await apiFetch(`/user/update`,
             {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
@@ -18,9 +18,10 @@ export class UserService {
         }
     }
 
+    // ${ process.env.NEXT_PUBLIC_API_URL }
     static async deleteAccount(password: string) {
 
-        const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/user/delete`,
+        const response = await apiFetch(`/user/delete`,
             {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
@@ -34,10 +35,11 @@ export class UserService {
         }
     }
 
+    // ${ process.env.NEXT_PUBLIC_API_URL }
     static async uploadImage(file: File) {
         const data = new FormData();
         data.append('avatar', file);
-        const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/user/upload`,
+        const response = await apiFetch(`/user/upload`,
             {
                 method: 'POST',
                 body: data
@@ -50,8 +52,9 @@ export class UserService {
         }
     }
 
+    // ${ process.env.NEXT_PUBLIC_API_URL }
     static async getImage(id: string) {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/${id}/avatar`, { cache: 'no-store' });
+        const response = await fetch(`/user/${id}/avatar`, { cache: 'no-store' });
 
         if (response.status === 204) return null;
 
