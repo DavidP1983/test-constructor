@@ -9,6 +9,7 @@ on:
             - main
         types: [opened, synchronize, reopened]
 env:
+    NEXT_PUBLIC_API_PROXY_TARGET: ${{ secrets.NEXT_PUBLIC_API_PROXY_TARGET }}
     NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
     API_URL: ${{ secrets.API_URL }}
 
