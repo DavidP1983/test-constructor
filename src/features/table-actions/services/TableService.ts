@@ -9,10 +9,16 @@ export class TableService {
             headers: { 'Content-Type': 'application/json' }
         });
 
+        const contentType = response.headers.get('content-type');
+        const data = contentType?.includes('application/json')
+            ? (await response.json()) as { url: string } :
+            { url: '' };
+
+
         if (!response.ok) {
             throw new Error('Request failed')
         }
 
-        return (await response.json())
+        return data;
     }
 }

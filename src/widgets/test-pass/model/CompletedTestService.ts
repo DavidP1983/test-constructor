@@ -11,10 +11,15 @@ export class CompletedTestService {
             body: JSON.stringify(data)
         });
 
+        const contentType = response.headers.get('content-type');
+        const res = contentType?.includes('application/json')
+            ? (await response.json()) as { success: boolean } :
+            { success: false };
+
         if (!response.ok) {
             throw new Error('Failed to create completed test')
         }
 
-        return (await response.json())
+        return res
     }
 }
