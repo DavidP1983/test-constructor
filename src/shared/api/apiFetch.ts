@@ -18,9 +18,9 @@ export const apiFetch = async (input: RequestInfo, init: RequestInit = {}) => {
     if (res.status !== 401) return res;
 
 
-    // Если accessToken  умер
+    // Если accessToken  умер  ${process.env.NEXT_PUBLIC_API_URL}
     if (!refreshPromise) {
-        refreshPromise = fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/refresh`, {
+        refreshPromise = fetch(`/user/refresh`, {
             method: 'POST',
             credentials: 'include',
         })
