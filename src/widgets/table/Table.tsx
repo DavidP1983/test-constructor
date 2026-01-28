@@ -1,7 +1,6 @@
 import { TableProps } from '@/shared/types/table-type';
-import { AllTests } from '@/shared/types/test-type';
 
-export default function Table({ dataRow, dataHeader, renderHeader, renderRow, status }: Readonly<TableProps<AllTests>>) {
+export default function Table<T extends { _id?: string }>({ dataRow, dataHeader, renderHeader, renderRow, token }: Readonly<TableProps<T>>) {
     return (
         <table>
             <thead>
@@ -11,7 +10,7 @@ export default function Table({ dataRow, dataHeader, renderHeader, renderRow, st
             </thead>
             <tbody>
                 {dataRow.map((elem, i) => (
-                    <tr key={elem.id}>{renderRow(i, elem, status)}</tr>
+                    <tr key={elem._id}>{renderRow(i, elem, token)}</tr>
                 ))}
             </tbody>
         </table>

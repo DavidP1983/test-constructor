@@ -1,4 +1,4 @@
-
+// Используется в StatusContent передаваемая ошибка из useAllTests
 export class ApiError extends Error {
     status: number;
 

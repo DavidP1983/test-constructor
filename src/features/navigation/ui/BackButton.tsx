@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import styles from '@/styles/blocks/navigation.module.scss';
 
 
-export const BackButton = ({ children }: { children: React.ReactNode }) => {
+export const BackButton = ({ children, to }: { children: React.ReactNode, to: string }) => {
     const router = useRouter();
     const resetTest = useTest(state => state.resetTest);
 
@@ -16,7 +16,7 @@ export const BackButton = ({ children }: { children: React.ReactNode }) => {
             className={styles.btn__back}
             onClick={() => {
                 resetTest()
-                router.push('/builder')
+                router.push(to)
             }}>
             &#8592; {children}
         </button>

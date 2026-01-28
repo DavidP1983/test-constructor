@@ -22,6 +22,7 @@ export const AllTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
     const { data, contentHeader, status, error, isPlaceholderData } = useAllTests();
 
+
     const classNames = clsx({
         [styles.main]: true,
         [styles.active]: isSideBarOpen
@@ -73,7 +74,7 @@ export const AllTestsPageClient = () => {
                                     initial="initial"
                                     animate={isPlaceholderData ? 'placeholder' : 'ready'}
                                 >
-                                    <Table
+                                    <Table<AllTests>
                                         dataRow={data}
                                         dataHeader={contentHeader}
                                         renderHeader={baseHeader}

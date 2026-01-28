@@ -1,14 +1,17 @@
-import { baseRow } from "@/entities/table/ui/table-row/baseRow";
+import { completedTestRow } from "@/entities/table/ui/table-row/completedTestRow";
 import { TableCompletedActions } from "@/features/table-actions/ui/TableCompletedActions";
-import { AllTests } from "@/shared/types/test-type";
+import { CompletedTest } from "@/shared/types/completed-type";
 
 
-export const renderRowCompleted = (i: number, item: AllTests, status?: string) => {
+export const renderRowCompleted = (i: number, item: CompletedTest, token: string[] | undefined) => {
+
+    const isNew = token?.includes(item.accessToken)
+
     return (
         <>
-            {baseRow(i, item, status)}
+            {completedTestRow<CompletedTest>(i, item, isNew)}
             <td data-icon="Icon">
-                <TableCompletedActions />
+                <TableCompletedActions testId={item._id} />
             </td>
         </>
     )
