@@ -1,5 +1,6 @@
 @use '../base/variables.scss';
 @use '../base/mixins.scss' as *;
+@use '../base/checkbox-radio-result.scss' as cb;
 
 .main {
     min-height: 100vh;
@@ -146,6 +147,13 @@
                         pointer-events: none;
                     }
                 }
+
+                & .isInCorrect {
+                    color: red;
+                }
+                & .isCorrect {
+                    color: rgb(41, 157, 41);
+                }
             }
             div {
                 @include icons;
@@ -237,15 +245,64 @@
             opacity: 1;
             visibility: visible;
         }
-
     }
 
+    .candidate__input {
+        display: block;
+        margin-top: 20px;
+        input {
+            margin-left: 20px;
+            border: none;
+            border-bottom: 1px solid blue;
+            background-color: inherit;
+
+            &:focus {
+                border: none;
+                outline: none;
+                border-bottom: 1px dashed blue;
+            }
+        }
+    }
+
+    .send__answers {
+        @include btn;
+        @include disabled(#e9ebec);
+    }
+
+    .checkboxContainer {
+        @include cb.checkbox-container;
+        @include cb.checkbox-container-input;
+        @include cb.checkbox-checkmark;
+        @include cb.checkbox-checked;
+        @include cb.checkbox-checkmark-after;
+    }
+    .radioContainer {
+        @include cb.radio-container;
+        @include cb.radio-container-input;
+        @include cb.radio-checkmark;
+        @include cb.radio-checked;
+        @include cb.radio-checkmark-after;
+    }
 }
 
 @media screen and (max-width: 768px) {
     .create {
         &__operation {
             flex-direction: column;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .create {
+        .create__content {
+            .create__question {
+                .create__question_content {
+                    flex-direction: column;
+                        gap: 20px;
+                }
+                
+            }
         }
     }
 }

@@ -33,7 +33,6 @@ export const StatusContent = <T,>(
         data,
         status,
         error,
-        completed,
         renderEmpty,
         renderData }: Props<T>) => {
 
@@ -42,5 +41,5 @@ export const StatusContent = <T,>(
     if (status === 'error') return <ErrorPage error="Opps... something went wrong, please reload the page" />
     if (!data.length) return renderEmpty();
 
-    return renderData(data, completed)
+    return renderData(data)
 }

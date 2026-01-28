@@ -10,22 +10,32 @@
  * Contains no mutation or business logic.
  */
 
-import { AllTests } from "@/shared/types/test-type";
+import { CompletedTest } from "@/shared/types/completed-type";
+import { useCompletedTestsStore } from "@/widgets/test-pass/model/store";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { api } from "../api/apiService";
 
 
 export const useCompletedTests = () => {
+    const id = useSearchParams().get('id');
+    const resetCompletedTestsCount = useCompletedTestsStore(state => state.resetCompletedTestsCount);
 
     const { data, isLoading, isFetching, error } = useQuery({
         queryKey: ['completedTests'],
         queryFn: async ({ signal }) => {
-            return await api.get<AllTests[]>(`/test/get`, signal)
+            return await api.get<CompletedTest[]>(`/completed/get-completed-test/${id}`, signal)
 
         },
-        select: (data) => data?.toReversed(),
         staleTime: 1 * 60 * 1000
-    })
+    });
+
+    useEffect(() => {
+        resetCompletedTestsCount();
+    }, [data, resetCompletedTestsCount]);
+
+
 
     let status: "loading" | "error" | "success";
     if (isLoading || isFetching) {
@@ -36,11 +46,12 @@ export const useCompletedTests = () => {
         status = 'success'
     }
 
+
     return {
         data: data ?? [],
         status,
         error,
-        contentHeader: ["Name", "Date of creation", "Result", "Actions"]
+        contentHeader: ["Name", "Date of creation", "Result", "Candidate", "Status", "Actions"]
     }
 }
 

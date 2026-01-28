@@ -15,7 +15,7 @@ import styles from '@/styles/blocks/sidebar.module.scss';
 
 
 export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) => void }>) {
-    const { logout } = useLoginForm(useShallow((state) => ({
+    const { logout, userData } = useLoginForm(useShallow((state) => ({
         logout: state.logout,
         userData: state.userData,
     })));
@@ -90,7 +90,7 @@ export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) =>
                             </Link>
                         </li>
                         <li className={styles.sidebar__item}>
-                            <Link className={styles.sidebar__link} href="/builder/completed" data-tooltip="Completed">
+                            <Link className={styles.sidebar__link} href={`/builder/completed?id=${userData?.id}`} data-tooltip="Completed">
                                 <div className={styles.icon}>
                                     <span className='icon-check icon'></span>
                                 </div>

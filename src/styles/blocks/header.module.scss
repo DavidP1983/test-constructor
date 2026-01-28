@@ -43,6 +43,31 @@
             object-fit: cover;
         }
     }
+
+    &__bell {
+        position: relative;
+        padding: 0 10px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        &.isNewTest {
+            color: rgb(179, 11, 11);
+            & a::before {
+                    color: currentColor;
+                }
+            span {
+                color: currentColor;
+            }
+        }
+    }
 }
 
 .menu {

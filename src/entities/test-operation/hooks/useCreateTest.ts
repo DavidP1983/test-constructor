@@ -29,7 +29,7 @@ export const useCreateTest = () => {
     const router = useRouter();
     const queryClient = useQueryClient();
 
-    type CreateType<T> = Omit<T, 'authorId' | 'createdAt'>;
+    type CreateType<T> = Omit<T, 'authorId' | 'createdAt' | '_id'>;
     const createMutation = useMutation({
         mutationFn: async (data: CreateType<AllTests>) => await api.post<AllTests[], CreateType<AllTests>>(`/test/create`, data),
 
@@ -46,38 +46,35 @@ export const useCreateTest = () => {
         },
     });
 
+
     const handleSaveTest = async () => {
 
         try {
-            const testName = await notifyBeforeSaveTest();
-
-            if (!testName) {
-                throw new Error(`Decline, name ${testName}`)
+            const { name, creator } = await notifyBeforeSaveTest() ?? { name: '', creator: '' };
+            if (!name || !creator) {
+                throw new Error(`Operation was decline`)
             }
 
             const data = {
                 id: uuidv4(),
-                name: testName,
+                name,
+                creator,
                 participantsCount: 0,
                 test: test,
-                result: { totalQuestions: test.length, answers: 0 }
-
             }
-
             await createMutation.mutateAsync(data);
             setTotalCreatedTests(1);
         } catch (e) {
             if (e instanceof Error) {
                 const errorTitle = e.message ? e.message : "Opps... something went wrong, try again";
-                console.error(errorTitle)
                 notifyAfterSaveTest('error', errorTitle)
-
             }
         }
     }
 
     const handleDecline = async () => {
-        await notifyDuringDecline().then((result) => {
+        const title = 'Your changes will not be saved if you leave the page ?';
+        await notifyDuringDecline(title).then((result) => {
             if (result.isDenied) {
                 Swal.fire("Changes are not saved", "", "info").then((res) => {
                     resetTest();

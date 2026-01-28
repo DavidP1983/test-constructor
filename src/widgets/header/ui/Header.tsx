@@ -1,6 +1,7 @@
 'use client';
 
 import { useProfile } from "@/entities/profile-info/model/store";
+import { useCompletedTestsStore } from "@/widgets/test-pass/model/store";
 import clsx from "clsx";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -9,6 +10,8 @@ import { menuItems } from "../model/menuItems";
 import { useHeader } from "../model/useHeader";
 
 import styles from '@/styles/blocks/header.module.scss';
+import { useEffect } from "react";
+import { useShallow } from "zustand/shallow";
 
 export default function Header() {
 
@@ -22,6 +25,29 @@ export default function Header() {
         toggleSwitch
     } = useHeader();
     const avatar = useProfile(state => state.avatarUrl);
+
+    const { calculateCompletedTests, registerCompletedTest, totalCompletedTests } = useCompletedTestsStore(useShallow((state) => ({
+        calculateCompletedTests: state.calculateCompletedTests,
+        totalCompletedTests: state.totalCompletedTests,
+        registerCompletedTest: state.registerCompletedTest
+    })));
+
+    // Обновление bell уведомления о кол-ве пройденных тестов, а так же сбор id пройденных тестов. Реализованно в useTestPassPage
+    useEffect(() => {
+        const channel = new BroadcastChannel('completed-tests');
+        channel.onmessage = (event) => {
+            if (event.data.type === 'TEST_COMPLETED') {
+                console.log('TEST_COMPLETED received in Header');
+                calculateCompletedTests();            // кол-во пройденных тестов
+                const token = event.data.token;
+                if (token) {
+                    registerCompletedTest(token)      // сбор id пройденных тестов
+                }
+            }
+        }
+
+        return () => channel.close();
+    }, [calculateCompletedTests, registerCompletedTest]);
 
 
     return (
@@ -39,6 +65,10 @@ export default function Header() {
                     />
                 </div>
             </div>
+            <div className={clsx(styles.header__bell, totalCompletedTests && styles.isNewTest)}>
+                <Link href={`/builder/completed?id=${userData?.id}`} className='icon-bell'></Link>
+                <span>{totalCompletedTests}</span>
+            </div>
             <div className={clsx(styles.menu, isOpenMenu && styles.active)}>
                 <ul role='list' >
                     {
@@ -47,7 +77,8 @@ export default function Header() {
                                 key={items.id}
                                 onClick={handleClick}>
                                 <i className={items.className}></i>
-                                <Link href={items.href}>{items.text}</Link>
+                                <Link
+                                    href={items.text === 'Completed' ? `${items.href}?id=${userData?.id}` : items.href}>{items.text}</Link>
                             </li>
                         ))
                     }

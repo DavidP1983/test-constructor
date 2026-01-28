@@ -3,7 +3,7 @@ import { User } from "@/shared/types/user-type";
 
 export class AuthService {
 
-    // Registration Promise<User>
+    // Registration 
     static async registration(name: string, email: string, password: string): Promise<User> {
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/registration`, {
@@ -22,7 +22,7 @@ export class AuthService {
     }
 
 
-    // Login Promise<User>
+    // Login 
     static async login(email: string, password: string): Promise<User> {
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {

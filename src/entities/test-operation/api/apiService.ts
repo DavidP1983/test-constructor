@@ -30,14 +30,17 @@ class ApiService {
             }
 
             if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || `Request failed ${response.status}`)
+                const errorData = await response.json();
+                const error = new Error(errorData.message || `Request failed ${response.status}`);
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (error as any).status = response.status;
+                throw error;
             }
 
             return (await response.json()) as TResponse;
         } catch (e) {
-            if (e instanceof Error && e.name === 'AbortError') {
-                console.error("ApiService ->", e.message)
+            if (e instanceof Error) {
+                if (e.name === 'AbortError') console.error("ApiService ->", e.message);
                 console.log("Query Canceled ->", e.name, endpoint)
                 throw e;
             } else {
