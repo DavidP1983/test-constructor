@@ -71,7 +71,7 @@ export const useSaveQuestions = (testId?: string) => {
 
 
     // Toggle поля при исправлении 
-    const editFieldToggle = editField.questionId === testId && editField.opened;
+    const editFieldToggle = editField?.questionId === testId && editField?.opened;
 
     // Проверка на заполнение полей
     const checkFields = (option: SingleValue<{ value: string | boolean; label: string }> | string | null, key: 'input' | 'select') => {

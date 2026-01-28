@@ -11,13 +11,13 @@ interface Props {
     options: Options[];
     type: string;
     id: string;
-    mode: Mode;
-    appearingQuestionId: string | null;
-    disappearingQuestionId: string | null;
+    mode?: Mode;
+    appearingQuestionId?: string | null;
+    disappearingQuestionId?: string | null;
+    handleAnswerChange?: (answerId: string, questionId: string, type: 'radio' | 'checkbox') => void;
 }
 
-export const TestQuestionItem = ({ options, type, id, mode, appearingQuestionId, disappearingQuestionId }: Props) => {
-
+export const TestQuestionItem = ({ options, type, id, mode, appearingQuestionId, disappearingQuestionId, handleAnswerChange }: Props) => {
 
     if (!options?.length) {
         return <div className={styles.create__question_answer}>Please create answers</div>
@@ -39,13 +39,17 @@ export const TestQuestionItem = ({ options, type, id, mode, appearingQuestionId,
                                     label={item.question}
                                     answerId={item.id}
                                     questionId={id}
-                                    mode={mode} />
+                                    mode={mode}
+                                    onChange={mode === 'pass' ? handleAnswerChange : undefined} />
                                 :
                                 <CheckboxButton
                                     label={item.question}
                                     answerId={item.id}
                                     questionId={id}
-                                    mode={mode} />}
+                                    mode={mode}
+                                    onChange={mode === 'pass' ? handleAnswerChange : undefined} />
+
+                        }
                     </li>
                 ))
             }

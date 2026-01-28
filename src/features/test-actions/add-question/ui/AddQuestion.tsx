@@ -48,7 +48,7 @@ export const AddQuestion = ({ testId }: { testId: string }) => {
     useEffect(() => {
         if (editFieldToggle) {
             setFields({
-                input: editField.label,
+                input: editField?.label,
                 select: null
             });
         }

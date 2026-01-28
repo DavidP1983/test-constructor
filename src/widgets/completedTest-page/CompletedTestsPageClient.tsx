@@ -1,30 +1,29 @@
 "use client";
 
-import clsx from "clsx";
-import { useState } from "react";
-
 import { baseHeader } from "@/entities/table/ui/table-header/baseHeader";
 import { useCompletedTests } from "@/entities/test-operation/hooks/useCompletedTests";
-import { AllTests } from "@/shared/types/test-type";
+import { CompletedTest } from "@/shared/types/completed-type";
 import { StatusContent } from "@/shared/ui/status-content/StatusContent";
-import styles from '@/styles/blocks/table.module.scss';
+import clsx from "clsx";
+import { useState } from "react";
 import SideBar from "../sidebar/ui/SideBar";
 import { renderRowCompleted } from "../table-row/ui/renderRowCompleted";
 import Table from "../table/Table";
+
+import styles from '@/styles/blocks/table.module.scss';
+import { useCompletedTestsStore } from "../test-pass/model/store";
 
 
 export const CompletedTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
     const { data, status, error, contentHeader } = useCompletedTests();
+    const completedTestsToken = useCompletedTestsStore(state => state.completedTestsToken);
 
     const classNames = clsx({
         [styles.main]: true,
         [styles.active]: isSideBarOpen
     });
 
-    if (!data) {
-        return []
-    }
 
     return (
         <>
@@ -35,22 +34,21 @@ export const CompletedTestsPageClient = () => {
                         <div className={styles.test__header}>
                             <h1 className="title">Completed Tests</h1>
                         </div>
-                        <StatusContent<AllTests>
+                        <StatusContent<CompletedTest>
                             data={data}
                             status={status}
                             error={error}
-                            completed="completed"
                             renderEmpty={() => (
                                 <div className={styles.test__empty}>There are no test completed</div>
                             )}
-                            renderData={(data, completed) => (
+                            renderData={(data) => (
                                 <div className={styles.test__table}>
-                                    <Table
+                                    <Table<CompletedTest>
                                         dataRow={data}
                                         dataHeader={contentHeader}
                                         renderHeader={baseHeader}
                                         renderRow={renderRowCompleted}
-                                        status={completed} />
+                                        token={completedTestsToken} />
                                 </div>
                             )}
                         />

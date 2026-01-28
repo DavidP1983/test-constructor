@@ -51,7 +51,7 @@ export const useAllTests = () => {
 
     return {
         data: data ?? [],
-        contentHeader: ["Name", "Date of creation", "Number of participants", "Actions"],
+        contentHeader: ["Test name", "Created", "Participants", "Creator", "Actions"],
         status,
         error,
         isPlaceholderData

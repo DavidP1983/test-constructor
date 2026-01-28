@@ -1,9 +1,9 @@
 import Swal from 'sweetalert2';
 
 
-export const notifyDuringDecline = () => {
+export const notifyDuringDecline = (title: string) => {
     return Swal.fire({
-        title: "Your changes will not be saved if you leave the page ?",
+        title,
         showConfirmButton: false,
         showDenyButton: true,
         showCancelButton: true,

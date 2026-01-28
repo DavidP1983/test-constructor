@@ -1,0 +1,95 @@
+@use '../base/variables.scss' as *;
+@use '../base/mixins.scss' as *;
+
+
+// --- CHECKBOX --- //
+
+@mixin checkbox-container {
+    color: var(--text--color);
+    @include container;
+}
+
+@mixin checkbox-container-input {
+    input {
+            @include radio-input;
+            height: 0;
+            width: 0;
+        }
+}
+
+@mixin checkbox-checkmark {
+    .checkmark {
+        @include checkmark;
+    }
+}
+
+@mixin checkbox-checked {
+    input:checked~.checkmark {
+        background-color: #2196F3;
+    }
+}
+
+@mixin checkbox-checkmark-after {
+    .checkmark::after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+    input:checked~.checkmark::after {
+        display: block;
+        width: 8px;
+        height: 17px;
+        top: 2px;
+        left: 9px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
+
+
+
+// --- RADIO --- //
+
+@mixin radio-container {
+    @include container;
+}
+
+@mixin radio-container-input {
+    input {
+        @include radio-input;
+    }
+}
+
+@mixin radio-checkmark {
+    .checkmark {
+        @include checkmark;
+        border-radius: 50%;
+    }
+}
+
+@mixin radio-checked {
+    input:checked~.checkmark {
+        background-color: #2196F3;
+    }
+}
+
+@mixin radio-checkmark-after {
+    .checkmark::after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+    input:checked~.checkmark::after {
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+    }
+}

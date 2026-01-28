@@ -25,7 +25,7 @@ interface TestStore {
     totalCreatedTests: number;
     testMeta: TestMeta | null;
     error: string;
-    editField: EditData;
+    editField: EditData | null;
     indicator: boolean;
     appearingQuestionId: string | null;
     disappearingQuestionId: string | null;
@@ -103,12 +103,12 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
 
     // Открытие полей
     openEditor: (questionId: string, answerId: string, label: string) => {
-        set({ editField: { questionId, answerId, opened: !get().editField.opened, label } })
+        set({ editField: { questionId, answerId, opened: !get()?.editField?.opened, label } })
     },
 
     // Модификация Ответа
     editAnswer: (question: string, answer: boolean, testId: string) => {
-        const editFiledId = get().editField.answerId;
+        const editFiledId = get()?.editField?.answerId;
 
         const test = get().test.find(item => item.id === testId);
         if (test?.type === 'radio') {
@@ -126,7 +126,7 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
             ),
             indicator: true
         })
-        set({ editField: { ...get().editField, opened: false } })
+        set({ editField: { questionId: '', answerId: '', opened: false, label: '' } })
     },
 
 
@@ -143,12 +143,13 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
         set({
             testMeta:
             {
+                _id: data._id,
                 id: data.id,
                 authorId: data.authorId,
                 name: data.name,
+                creator: data.creator,
                 createdAt: data.createdAt,
                 participantsCount: data.participantsCount,
-                result: data.result
             }
         })
         set({ test: [...get().test, ...data.test] })
@@ -169,9 +170,11 @@ export const useTest = create<TestStore>()(persist(devtools((set, get) => ({
         set({ test: [], testMeta: null, indicator: false });
     },
 
-    // Очищение счетчика по подсчету созданных тестов при logout
+    // Очистка данных при logout
     resetTotalCreatedTests: () => {
-        set({ totalCreatedTests: 0 })
+        set({ totalCreatedTests: 0 });
+        set({ editField: { questionId: '', answerId: '', opened: false, label: '' } });
+
     },
 
     // Очистка анимации после добавления теста в useReorderQuestions
