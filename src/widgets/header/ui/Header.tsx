@@ -6,12 +6,13 @@ import clsx from "clsx";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useShallow } from "zustand/shallow";
 import { menuItems } from "../model/menuItems";
 import { useHeader } from "../model/useHeader";
 
 import styles from '@/styles/blocks/header.module.scss';
-import { useEffect } from "react";
-import { useShallow } from "zustand/shallow";
+
 
 export default function Header() {
 
