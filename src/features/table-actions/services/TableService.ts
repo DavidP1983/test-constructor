@@ -1,3 +1,4 @@
+import { handleResponse } from "@/shared/api/handleResponse";
 
 export class TableService {
 
@@ -8,14 +9,10 @@ export class TableService {
             headers: { 'Content-Type': 'application/json' }
         });
 
-        const contentType = response.headers.get('content-type');
-        const data = contentType?.includes('application/json')
-            ? (await response.json()) as { url: string } :
-            { url: '' };
+        const data = await handleResponse<{ url: string }>(response, 'Failed to create link');
 
-
-        if (!response.ok) {
-            throw new Error('Request failed')
+        if (!data) {
+            throw new Error('Empty response from server');
         }
 
         return data;

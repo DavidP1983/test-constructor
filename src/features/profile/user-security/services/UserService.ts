@@ -1,8 +1,9 @@
 import { apiFetch } from "@/shared/api/apiFetch";
+import { handleResponse } from "@/shared/api/handleResponse";
 
 export class UserService {
 
-    static async changePassword(oldPassword: string, newPassword: string): Promise<void> {
+    static async changePassword(oldPassword: string, newPassword: string) {
 
         const response = await apiFetch(`/user/update`,
             {
@@ -12,10 +13,8 @@ export class UserService {
             }
         )
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Password update failed')
-        }
+        await handleResponse<void>(response, 'Password update failed');
+
     }
 
 
@@ -29,10 +28,8 @@ export class UserService {
             }
         );
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Request failed');
-        }
+        await handleResponse<void>(response, 'Account deletion failed')
+
     }
 
 
@@ -46,10 +43,8 @@ export class UserService {
             }
         );
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'File upload failed');
-        }
+        await handleResponse<void>(response, 'File upload failed');
+
     }
 
 
