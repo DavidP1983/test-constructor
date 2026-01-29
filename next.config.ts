@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 // Config
-const API_PREFIXES = ['user', 'test', 'link', 'completed'];
+const API_PREFIXES = ['builder', 'create', 'profile', 'completed', 'pass'];
 const API_TARGET = process.env.NEXT_PUBLIC_API_PROXY_TARGET;
 
 const nextConfig: NextConfig = {
