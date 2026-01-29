@@ -29,7 +29,7 @@ export const useCompletedTests = () => {
 
         },
         staleTime: 1 * 60 * 1000,
-        refetchOnMount: true
+        refetchOnMount: 'always'
     });
 
     useEffect(() => {

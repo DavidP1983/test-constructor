@@ -30,7 +30,6 @@ export const useAllTests = () => {
         },
         staleTime: 1 * 1000 * 60,
         placeholderData: keepPreviousData,
-        select: (data) => data?.toReversed(),
         enabled: !!id,
     });
 
