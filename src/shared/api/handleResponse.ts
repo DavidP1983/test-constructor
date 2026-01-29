@@ -5,7 +5,6 @@
  * - выбрасывает ошибку с сообщением, если response.ok === false
  */
 
-import { User } from "../types/user-type";
 
 export interface ApiErrorResponse {
     message?: string;
@@ -15,7 +14,7 @@ export async function handleResponse<T = unknown>(response: Response, defaultErr
 
     const contentType = response.headers.get('content-type');
     const data = contentType?.includes('application/json')
-        ? (await response.json()) as User
+        ? (await response.json()) as T
         : null;
 
     if (!response.ok) {
