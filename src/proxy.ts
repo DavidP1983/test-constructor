@@ -15,7 +15,9 @@ export function proxy(req: NextRequest) {
 
     if (!isPrivate) return NextResponse.next();
     const refreshToken = req.cookies.get('refreshToken')?.value;
-    console.log("PROXY", refreshToken);
+
+    console.log("PROXY");
+
     if (!refreshToken) {
         const url = new URL('/', req.url);
         url.searchParams.set('auth', "required");
