@@ -1,3 +1,4 @@
+import { handleResponse } from "@/shared/api/handleResponse";
 import { CompletedTest } from "@/shared/types/completed-type";
 
 export class CompletedTestService {
@@ -10,13 +11,10 @@ export class CompletedTestService {
             body: JSON.stringify(data)
         });
 
-        const contentType = response.headers.get('content-type');
-        const res = contentType?.includes('application/json')
-            ? (await response.json()) as { success: boolean } :
-            { success: false };
+        const res = await handleResponse<{ success: boolean }>(response, 'Failed to create completed test');
 
-        if (!response.ok) {
-            throw new Error('Failed to create completed test')
+        if (!res) {
+            throw new Error('Empty response from server');
         }
 
         return res

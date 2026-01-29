@@ -1,3 +1,4 @@
+import { handleResponse } from "@/shared/api/handleResponse";
 import { User } from "@/shared/types/user-type";
 
 export class AuthService {
@@ -12,15 +13,8 @@ export class AuthService {
             body: JSON.stringify({ name, email, password })
         });
 
-        const contentType = response.headers.get('content-type');
-        const data = contentType?.includes('application/json')
-            ? (await response.json()) as User
-            : null;
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Registration failed')
-        }
+        const data = await handleResponse<User>(response, 'Registration failed');
 
         if (!data) {
             throw new Error('Empty response from server');
@@ -40,16 +34,8 @@ export class AuthService {
             body: JSON.stringify({ email, password })
         });
 
-        const contentType = response.headers.get('content-type');
-        const data = contentType?.includes('application/json')
-            ? (await response.json()) as User
-            : null;
+        const data = await handleResponse<User>(response, 'Login failed');
 
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Request failed')
-        }
 
         if (!data) {
             throw new Error('Empty response from server');
@@ -67,10 +53,7 @@ export class AuthService {
             }
         );
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Logout failed')
-        }
+        await handleResponse<void>(response, 'Logout failed');
     }
 
 }
