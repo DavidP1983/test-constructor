@@ -23,12 +23,13 @@ export const useCompletedTests = () => {
     const resetCompletedTestsCount = useCompletedTestsStore(state => state.resetCompletedTestsCount);
 
     const { data, isLoading, isFetching, error } = useQuery({
-        queryKey: ['completedTests'],
+        queryKey: ['completedTests', id],
         queryFn: async ({ signal }) => {
             return await api.get<CompletedTest[]>(`/completed/get-completed-test/${id}`, signal)
 
         },
-        staleTime: 1 * 60 * 1000
+        staleTime: 1 * 60 * 1000,
+        refetchOnMount: true
     });
 
     useEffect(() => {

@@ -17,7 +17,7 @@ export const useDeleteCompletedTest = () => {
         mutationFn: async (id: string) => await api.delete<CompletedTest>(`/completed/delete-completed-test/${id}`),
 
         async onSuccess(_, deletedId) {
-            queryClient.setQueriesData<CompletedTest[]>({ queryKey: ['completedTests'] }, (old) => {
+            queryClient.setQueriesData<CompletedTest[]>({ queryKey: ['completedTests', deletedId] }, (old) => {
                 if (!old) return []
                 const data = old.filter(item => item?._id !== deletedId);
                 return data;
