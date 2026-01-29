@@ -62,7 +62,8 @@ export const useHeader = () => {
 
     useEffect(() => {
         setTheme(isOn ? "dark" : "light");
-    }, [isOn, setTheme]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOn]);
 
 
     return {
