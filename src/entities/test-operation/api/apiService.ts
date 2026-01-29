@@ -63,7 +63,6 @@ class ApiService {
     }
 }
 
-// process.env.NEXT_PUBLIC_API_URL!
 export const isServer = typeof window === 'undefined';  // определяем среду server or client
 const baseURL = isServer ? process.env.API_URL! : '';
 const api = new ApiService(baseURL);

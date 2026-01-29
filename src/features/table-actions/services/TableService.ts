@@ -1,5 +1,4 @@
 
-// ${process.env.NEXT_PUBLIC_API_URL}
 export class TableService {
 
     static async createLink(id: string): Promise<{ url: string }> {

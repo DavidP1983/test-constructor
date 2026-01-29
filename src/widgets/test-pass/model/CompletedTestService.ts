@@ -1,6 +1,5 @@
 import { CompletedTest } from "@/shared/types/completed-type";
 
-// ${ process.env.NEXT_PUBLIC_API_URL }
 export class CompletedTestService {
 
     static async crateAnswer(data: CompletedTest): Promise<{ success: boolean }> {

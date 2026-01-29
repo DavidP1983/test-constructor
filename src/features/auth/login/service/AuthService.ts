@@ -1,6 +1,5 @@
 import { User } from "@/shared/types/user-type";
 
-// ${ process.env.NEXT_PUBLIC_API_URL }
 export class AuthService {
 
     // Registration 
@@ -31,7 +30,7 @@ export class AuthService {
     }
 
 
-    // Login ${process.env.NEXT_PUBLIC_API_URL}
+    // Login 
     static async login(email: string, password: string): Promise<User> {
 
         const response = await fetch(`/user/login`, {
@@ -59,7 +58,7 @@ export class AuthService {
     }
 
 
-    // Logout ${process.env.NEXT_PUBLIC_API_URL}
+    // Logout 
     static async logout() {
         const response = await fetch(`/user/logout`,
             {

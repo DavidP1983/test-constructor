@@ -1,7 +1,7 @@
 import { apiFetch } from "@/shared/api/apiFetch";
 
 export class UserService {
-    // ${process.env.NEXT_PUBLIC_API_URL}
+
     static async changePassword(oldPassword: string, newPassword: string): Promise<void> {
 
         const response = await apiFetch(`/user/update`,
@@ -18,7 +18,7 @@ export class UserService {
         }
     }
 
-    // ${ process.env.NEXT_PUBLIC_API_URL }
+
     static async deleteAccount(password: string) {
 
         const response = await apiFetch(`/user/delete`,
@@ -35,7 +35,7 @@ export class UserService {
         }
     }
 
-    // ${ process.env.NEXT_PUBLIC_API_URL }
+
     static async uploadImage(file: File) {
         const data = new FormData();
         data.append('avatar', file);
@@ -52,7 +52,7 @@ export class UserService {
         }
     }
 
-    // ${ process.env.NEXT_PUBLIC_API_URL }
+
     static async getImage(id: string) {
         const response = await fetch(`/user/${id}/avatar`, { cache: 'no-store' });
 
