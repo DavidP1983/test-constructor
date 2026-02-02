@@ -10,7 +10,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:unit": "jest --ci",
-    "test:changed": "jest --ci --changedSince=origin/main"
+    "test:changed": "jest --ci --onlyChanged"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
