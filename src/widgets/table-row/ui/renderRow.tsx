@@ -6,13 +6,13 @@ import styles from '@/styles/blocks/table.module.scss';
 
 export const renderRow = (i: number, item: AllTests) => {
     return (
-        <>
+        <tr key={item._id}>
             {draftTestRow<AllTests>(i, item)}
             <td data-icon="Icon">
                 <div className={styles.table__icons}>
                     <TableActions testId={item.id} />
                 </div>
             </td>
-        </>
+        </tr>
     )
 }

@@ -40,3 +40,9 @@ jobs:
               run: npm run build
             - name: Lint
               run: npm run lint
+            - name: Unit-test (full)
+              if: github.event_name == 'push'
+              run: npm run test:unit
+            - name: Unit-test (changed)
+              if: github.event_name == 'pull_request'
+              run: npm run test:changed

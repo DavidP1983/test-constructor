@@ -2,7 +2,7 @@ import { TableProps } from '@/shared/types/table-type';
 
 export default function Table<T extends { _id?: string }>({ dataRow, dataHeader, renderHeader, renderRow, token }: Readonly<TableProps<T>>) {
     return (
-        <table>
+        <table data-testid="table">
             <thead>
                 <tr>
                     {renderHeader(dataHeader)}
@@ -10,7 +10,7 @@ export default function Table<T extends { _id?: string }>({ dataRow, dataHeader,
             </thead>
             <tbody>
                 {dataRow.map((elem, i) => (
-                    <tr key={elem._id}>{renderRow(i, elem, token)}</tr>
+                    renderRow(i, elem, token)
                 ))}
             </tbody>
         </table>
