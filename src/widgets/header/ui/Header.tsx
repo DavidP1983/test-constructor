@@ -25,6 +25,7 @@ export default function Header() {
         isOn,
         toggleSwitch
     } = useHeader();
+
     const avatar = useProfile(state => state.avatarUrl);
 
     const { calculateCompletedTests, registerCompletedTest, totalCompletedTests } = useCompletedTestsStore(useShallow((state) => ({
@@ -68,7 +69,7 @@ export default function Header() {
             </div>
             <div className={clsx(styles.header__bell, totalCompletedTests && styles.isNewTest)}>
                 <Link href={`/builder/completed?id=${userData?.id}`} className='icon-bell'></Link>
-                <span>{totalCompletedTests}</span>
+                <span role="status">{totalCompletedTests}</span>
             </div>
             <div className={clsx(styles.menu, isOpenMenu && styles.active)}>
                 <ul role='list' >
@@ -90,6 +91,8 @@ export default function Header() {
                     <li>
                         <button
                             className={clsx(styles.toggle__container, isOn ? styles.on : styles.off)}
+                            aria-label="them button"
+                            data-testid='theme'
                             onClick={toggleSwitch}
                         >
                             <motion.div

@@ -10,7 +10,7 @@ interface ErrorProps {
 
 export const ErrorPage = ({ error, actions }: ErrorProps) => {
     return (
-        <div className={styles.error}>
+        <div className={styles.error} data-testid='error'>
             <Image
                 src="/assets/error.webp"
                 alt="Error"

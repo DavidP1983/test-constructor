@@ -41,11 +41,12 @@ export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) =>
     }
 
     return (
-        <aside className={styles.vertical__sidebar}>
+        <aside className={styles.vertical__sidebar} data-testid="sidebar">
             <input
                 type="checkbox"
                 role="switch"
                 id="checkbox-input"
+                data-testid="sidebar-toggle"
                 className="checkbox-input"
                 onChange={(e) => toggle(e.target.checked)}
             />
