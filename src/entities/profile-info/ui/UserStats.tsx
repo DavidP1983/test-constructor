@@ -16,9 +16,9 @@ export const UserStats = () => {
         <>
             <h2 className={styles.profile__subtitle}><i className="icon-chart-line"></i> Statistics</h2>
             <div className={styles.profile__statistics_desc}>
-                <div className="desc">Tests - {userTestData?.length} total</div>
-                <div className="desc">Today - {totalCreatedTests} created</div>
-                <div className="desc">Last Activity  - {lastActivity ? `${lastActivity} days` : "Today"} </div>
+                <div className="desc" data-testid="desc">Tests - {userTestData?.length} total</div>
+                <div className="desc" data-testid="desc">Today - {totalCreatedTests} created</div>
+                <div className="desc" data-testid="desc">Last Activity  - {lastActivity ? `${lastActivity} days` : "Today"} </div>
             </div>
         </>
     )
