@@ -27,6 +27,10 @@ jest.mock('@/shared/utils/notify', () => ({
     notify: jest.fn()
 }));
 
+jest.mock('@/shared/utils/notifyDuringOperation', () => ({
+    notifyDuringOperation: jest.fn()
+}));
+
 // Mock uuid
 jest.mock('uuid', () => ({
     __esModule: true,
@@ -47,6 +51,13 @@ jest.mock('@/entities/test-operation/hooks/useDeleteTest', () => ({
     }),
 }));
 
+// Mock Hook useDeleteCompletedTest 
+export const mockDeleteCompleted = jest.fn();
+jest.mock('@/entities/test-operation/hooks/useDeleteCompletedTest', () => ({
+    useDeleteCompletedTest: () => ({
+        handleDeleteCompletedTest: mockDeleteCompleted
+    })
+}));
 
 // Mock Hook useHeader
 export const handleClickMock = jest.fn();
@@ -71,6 +82,16 @@ jest.mock('@/widgets/header/model/useHeader', () => ({
 // Mock function renderRow
 jest.mock('@/widgets/table-row/ui/renderRow', () => ({
     renderRow: jest.fn(),
+}));
+
+
+jest.mock('@/widgets/table-row/ui/renderRowCompleted', () => ({
+    renderRowCompleted: jest.fn()
+}));
+
+
+jest.mock('@/entities/table/ui/table-row/completedTestRow', () => ({
+    completedTestRow: jest.fn()
 }));
 
 
@@ -99,18 +120,27 @@ jest.mock('@/features/auth/login/model/store', () => ({
 }));
 
 
+
 // Mock useCompletedTestsStore store
 export const calculateCompletedTestsMock = jest.fn();
 export const registerCompletedTestMock = jest.fn();
+export const resetCompletedTestsCountMock = jest.fn();
+
+export const defaultState = {
+    calculateCompletedTests: calculateCompletedTestsMock,
+    registerCompletedTest: registerCompletedTestMock,
+    resetCompletedTestsCount: resetCompletedTestsCountMock,
+    viewedTests: ['1'],
+    totalCompletedTests: "1",
+    completedTestsToken: ['1']
+};
+
 jest.mock('@/widgets/test-pass/model/store', () => ({
-    useCompletedTestsStore: (selector?: any) => {
-        const state = {
-            calculateCompletedTests: calculateCompletedTestsMock,
-            registerCompletedTest: registerCompletedTestMock,
-            totalCompletedTests: "1",
-        }
-        return selector ? selector(state) : state
-    }
+    // Делаем mock данного store jest.fn((selector?: any)
+    useCompletedTestsStore: jest.fn((selector?: any) => {
+
+        return selector ? selector(defaultState) : defaultState
+    })
 }));
 
 
