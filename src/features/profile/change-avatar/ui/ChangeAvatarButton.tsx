@@ -12,6 +12,7 @@ export const ChangeAvatarButton = () => {
             <label htmlFor="file" className={styles.profile__info_upload}>{isUploading ? "Uploading..." : 'Change avatar'}</label>
             <input
                 type="file"
+                data-testid="avatar-input"
                 disabled={isUploading}
                 className="profile__avatar"
                 id="file"

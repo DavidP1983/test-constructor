@@ -1,7 +1,9 @@
 
 export const SpinnerForBtn = () => {
     return (
-        <svg width="25"
+        <svg
+            data-testid="spinner"
+            width="25"
             height="25"
             fill="hsl(228, 97%, 42%)"
             viewBox="0 0 24 24"
