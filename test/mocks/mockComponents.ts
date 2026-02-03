@@ -31,6 +31,10 @@ jest.mock('@/shared/utils/notifyDuringOperation', () => ({
     notifyDuringOperation: jest.fn()
 }));
 
+jest.mock('@/features/profile/user-security/lib/notifyForm', () => ({
+    notifyForm: jest.fn()
+}));
+
 // Mock uuid
 jest.mock('uuid', () => ({
     __esModule: true,
@@ -77,6 +81,19 @@ jest.mock('@/widgets/header/model/useHeader', () => ({
 }));
 
 
+// Mock Hook useAvatar
+export const handleChangeMock = jest.fn();
+export const clearAvatarMock = jest.fn();
+jest.mock('@/entities/profile-info/model/useAvatar', () => ({
+    useAvatar: jest.fn(() => ({
+        handleChange: handleChangeMock,
+        clearAvatar: clearAvatarMock,
+        isUploading: false
+    }))
+}));
+
+
+
 // --- FUNCTIONS --- //
 
 // Mock function renderRow
@@ -98,12 +115,16 @@ jest.mock('@/entities/table/ui/table-row/completedTestRow', () => ({
 
 //  --- STORE --- // 
 
-
 // Mock useTest store
+export const defaultUseTestState = {
+    totalCreatedTests: 1,
+    resetTotalCreatedTests: jest.fn()
+}
+
 jest.mock('@/features/test-actions/save-question/model/store', () => ({
-    useTest: () => ({
-        resetTotalCreatedTests: jest.fn(),
-    }),
+    useTest: jest.fn((selector?: any) => {
+        return selector ? selector(defaultUseTestState) : defaultUseTestState
+    })
 }));
 
 
@@ -113,7 +134,17 @@ jest.mock('@/features/auth/login/model/store', () => ({
     useLoginForm: (selector?: any) => {
         const state = {
             setUserTestData,
-            userData: { id: 'mock-id', name: 'Tony' }
+            userTestData: [
+                { _id: '1', name: 'CSS' } as any,
+                { _id: '2', name: 'HTML' } as any,
+            ],
+            userData: {
+                id: 'mock-id',
+                name: 'Tony',
+                email: 'tony@gmail.com',
+                role: 'User',
+                joined: '2026-02-03'
+            }
         }
         return selector ? selector(state) : state
     }
@@ -144,6 +175,17 @@ jest.mock('@/widgets/test-pass/model/store', () => ({
 }));
 
 
+// Mock userProfile store
+export const defaultUserProfileStore = {
+    avatarUrl: 'some url',
+    setAvatar: jest.fn()
+}
+jest.mock('@/entities/profile-info/model/store', () => ({
+    useProfile: jest.fn((selector?: any) => {
+
+        return selector ? selector(defaultUserProfileStore) : defaultUserProfileStore
+    })
+}));
 
 //  --- NEXT FEATURES --- //
 
@@ -155,6 +197,15 @@ jest.mock('next/link', () => ({
         React.createElement('a', { href }, children),
 }));
 
+
+// Mock next-themes
+export const setThemeMock = jest.fn();
+jest.mock('next-themes', () => ({
+    __esModule: true,
+    useTheme: () => ({
+        setTheme: setThemeMock
+    })
+}));
 
 // Mock next/image
 jest.mock('next/image', () => ({
