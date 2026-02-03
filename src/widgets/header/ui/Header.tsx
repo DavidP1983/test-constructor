@@ -39,7 +39,6 @@ export default function Header() {
         const channel = new BroadcastChannel('completed-tests');
         channel.onmessage = (event) => {
             if (event.data.type === 'TEST_COMPLETED') {
-                console.log('TEST_COMPLETED received in Header');
                 calculateCompletedTests();            // кол-во пройденных тестов
                 const token = event.data.token;
                 if (token) {
