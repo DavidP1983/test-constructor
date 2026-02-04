@@ -12,6 +12,7 @@ export interface CompletedTest {
     authorId?: string;
     testName: string;
     candidateName: string;
+    candidateEmail: string;
     totalQuestions: number;
     correctAnswers: number;
     completedAt?: string;

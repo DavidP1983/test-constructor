@@ -1,0 +1,14 @@
+@use '../base/variables.scss' as *;
+
+.progress {
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    background-color: #ffffff;
+
+    // .rc-steps-item-finish 
+    // .rc-steps-item-process, 
+    .rc-steps-item-title::after {
+        background-color: #108ee9 !important;
+    }
+}

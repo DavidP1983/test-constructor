@@ -8,6 +8,7 @@ export const TestSummary = ({ completedTest }: Omit<TestPassResultProps, "origin
 
     const {
         candidateName,
+        candidateEmail,
         testName,
         status,
         score,
@@ -19,10 +20,12 @@ export const TestSummary = ({ completedTest }: Omit<TestPassResultProps, "origin
 
 
     const formatDuration = (seconds: number | null | undefined): string => {
-        if (!seconds || seconds < 0) return "00:00";
-        const mins = Math.floor(seconds / 60);
+        if (!seconds || seconds < 0) return "00:00:00";
+
+        const hrs = Math.floor(seconds / 3600);
+        const mins = Math.floor((seconds % 3600) / 60);
         const secs = seconds % 60;
-        return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     }
 
     const incorrectAnswers = completedTest.answers.length - correctAnswers;
@@ -35,6 +38,7 @@ export const TestSummary = ({ completedTest }: Omit<TestPassResultProps, "origin
                         <h2 className={clsx('title', styles.summary__title)}>Test Summary</h2>
                         <ul className={styles.summary__desc}>
                             <li><strong>Candidate: </strong><span>{candidateName}</span></li>
+                            <li><strong>Candidate Email: </strong><span>{candidateEmail}</span></li>
                             <li><strong>Test: </strong><span>{testName}</span></li>
                             <li><strong>Status:</strong><span>{status === 'passed' ? 'PASSED ✅ ' : 'FAILED ❌'}</span></li>
                             <li><strong>Score: </strong><span>{score}%</span></li>
