@@ -48,8 +48,3 @@ export const TestProgress = ({ total, current }: { total: Test[], current: numbe
         </div>
     )
 }
-// [
-//     { title: 'Step1' },
-//     { title: 'Step2' },
-//     { title: 'Step3' }
-// ]
