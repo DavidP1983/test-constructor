@@ -8,11 +8,11 @@ export const renderRowCompleted = (i: number, item: CompletedTest, token: string
     const isNew = token?.includes(item.accessToken)
 
     return (
-        <tr key={item._id}>
+        <>
             {completedTestRow<CompletedTest>(i, item, isNew)}
             <td data-icon="Icon">
                 <TableCompletedActions testId={item._id} />
             </td>
-        </tr>
+        </>
     )
 }

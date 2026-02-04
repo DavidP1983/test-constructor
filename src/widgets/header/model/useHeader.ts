@@ -9,8 +9,9 @@ import { useEffect, useRef, useState } from "react";
 import { useShallow } from "zustand/shallow";
 
 export const useHeader = () => {
+    const { setTheme, theme } = useTheme();
     const [isOpenMenu, setIsOpenMenu] = useState(false);
-    const [isOn, setIsOn] = useState(false);
+    const [isOn, setIsOn] = useState(theme === 'dark');
 
     const { logout, userData } = useLoginForm(useShallow((state) => ({
         logout: state.logout,
@@ -24,7 +25,6 @@ export const useHeader = () => {
 
 
     const myRef = useRef<HTMLDivElement | null>(null);
-    const { setTheme } = useTheme();
 
     // Скрытие меню при клике на body
     useEffect(() => {
@@ -57,13 +57,12 @@ export const useHeader = () => {
     }
 
     const toggleSwitch = () => {
-        setIsOn(prev => !prev);
+        setIsOn(prev => {
+            const next = !prev;
+            setTheme(next ? "dark" : "light")
+            return next
+        });
     };
-
-    useEffect(() => {
-        setTheme(isOn ? "dark" : "light");
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOn]);
 
 
     return {

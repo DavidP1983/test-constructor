@@ -10,7 +10,7 @@ export default function Table<T extends { _id?: string }>({ dataRow, dataHeader,
             </thead>
             <tbody>
                 {dataRow.map((elem, i) => (
-                    renderRow(i, elem, token)
+                    <tr key={elem._id}>{renderRow(i, elem, token)}</tr>
                 ))}
             </tbody>
         </table>
