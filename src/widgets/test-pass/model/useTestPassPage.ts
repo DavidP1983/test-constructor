@@ -6,10 +6,12 @@ import { useState } from "react";
 import { CompletedTestService } from "./CompletedTestService";
 import { useCompletedTestsStore } from "./store";
 
+
+
 export const useTestPassPage = (data: AllTests, linkId: string) => {
 
     const [answers, setAnswers] = useState<AnswerItem[]>([]);
-    const [candidateName, setCandidateName] = useState('');
+    const [candidateData, setCandidateData] = useState({ name: '', email: '' });
     const [isLoading, setIsLoading] = useState(false);
     const calculateCompletedTests = useCompletedTestsStore(state => state.calculateCompletedTests);
 
@@ -57,6 +59,15 @@ export const useTestPassPage = (data: AllTests, linkId: string) => {
         })
     }
 
+
+    // Сбор Данных кандитата
+    const handleCandidateData = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        const name = e.target.name;
+        setCandidateData({ ...candidateData, [name]: value })
+    }
+
+
     // Отправка данных 
     const handleSaveAnswers = async () => {
 
@@ -78,7 +89,8 @@ export const useTestPassPage = (data: AllTests, linkId: string) => {
             accessToken: linkId,
             id: data.id,
             testName: data.name,
-            candidateName,
+            candidateName: candidateData.name,
+            candidateEmail: candidateData.email,
             totalQuestions: data.test.length,
             correctAnswers,
             score,
@@ -86,7 +98,7 @@ export const useTestPassPage = (data: AllTests, linkId: string) => {
             answers
         }
 
-        if (!candidateName) {
+        if (!candidateData.name || !candidateData.email) {
             notify('error', 'Please provide your name')
             return
         }
@@ -107,9 +119,10 @@ export const useTestPassPage = (data: AllTests, linkId: string) => {
     }
 
     return {
-        setCandidateName,
+        handleCandidateData,
         isLoading,
         handleChange,
-        handleSaveAnswers
+        handleSaveAnswers,
+        answers
     }
 }

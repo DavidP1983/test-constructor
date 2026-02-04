@@ -10,6 +10,7 @@
     padding: 50px 20px;
 
     .title_centre {
+        margin-top: 20px;
         text-align: center;
         color: var(--text--color);
     }
@@ -247,6 +248,11 @@
         }
     }
 
+    .candidate__data {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     .candidate__input {
         display: block;
         margin-top: 20px;

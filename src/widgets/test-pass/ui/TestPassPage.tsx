@@ -5,32 +5,54 @@ import { SpinnerForBtn } from '@/shared/ui/spinner/SpinnerForBtn';
 import clsx from 'clsx';
 import { useId } from 'react';
 import { useTestPassPage } from '../model/useTestPassPage';
+import { TestProgress } from './TestProgress';
 
 
 import styles from '@/styles/blocks/create.module.scss';
 
 
+
 export const TestPassPage = ({ data, linkId }: { data: AllTests, linkId: string }) => {
     const ids = useId();
     const {
-        setCandidateName,
+        handleCandidateData,
         isLoading,
         handleChange,
-        handleSaveAnswers
+        handleSaveAnswers,
+        answers
     } = useTestPassPage(data, linkId)
+
 
     return (
         <main className={styles.main}>
             <section aria-labelledby="pass test section" className={styles.create}>
                 <div className="container">
+
+                    <TestProgress
+                        total={data.test}
+                        current={answers.length - 1}
+                    />
+
                     <h1 className={clsx("title", styles.title_centre)}>{data.name}</h1>
-                    <label htmlFor={ids} className={styles.candidate__input}>Candidate name
-                        <input
-                            type="text"
-                            id={ids}
-                            name="name"
-                            onChange={(e) => setCandidateName(e.target.value)} />
-                    </label>
+                    <div className={styles.candidate__data}>
+                        <label htmlFor={ids} className={styles.candidate__input}>Candidate name
+                            <input
+                                type="text"
+                                id={ids}
+                                name="name"
+                                required
+                                onChange={handleCandidateData} />
+                        </label>
+                        <label htmlFor={ids} className={styles.candidate__input}>Candidate Email
+                            <input
+                                type="email"
+                                id={ids}
+                                name="email"
+                                required
+                                onChange={handleCandidateData} />
+                        </label>
+                    </div>
+
                     <div
                         className={styles.create__content}
                         style={{ background: 'white', padding: '20px', marginTop: '20px' }}>
