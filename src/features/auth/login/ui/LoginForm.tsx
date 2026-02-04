@@ -68,7 +68,6 @@ export const LoginForm = () => {
                                     onChange={handleFieldValue} />
                                 <label htmlFor="password">Password</label>
                                 <div className={clsx(styles.form__errorFields, fieldErrors.password && styles.active)}>{fieldErrors.password}</div>
-
                                 <button
                                     className={styles.eye}
                                     type="button"
@@ -76,15 +75,17 @@ export const LoginForm = () => {
                                     <i className={type === 'password' ? "icon-eye" : 'icon-eye-off'}></i>
                                 </button>
                             </div>
-
                         </fieldset>
                         <div className={clsx(styles.form__error, errorMessage && styles.active)}>{errorMessage ?? ''}</div>
-                        <button type="submit" className={styles.form__registration} disabled={isLoading}>Registration {isLoading && <SpinnerForBtn />}</button>
+                        <button
+                            type="submit"
+                            className={styles.form__registration}
+                            disabled={isLoading || isLoginLoading}>Registration {isLoading && <SpinnerForBtn />}</button>
                     </form>
                     <div className={styles.form__alternative}>or</div>
                     <button
                         className={styles.form__login}
-                        disabled={isLoginLoading}
+                        disabled={isLoginLoading || isLoading}
                         onClick={handleLogin}>Login {isLoginLoading && <SpinnerForBtn />}</button>
                 </div>
             </div>
