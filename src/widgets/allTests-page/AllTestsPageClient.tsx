@@ -15,6 +15,7 @@ import { renderRow } from "../table-row/ui/renderRow";
 import Table from "../table/Table";
 import { tableVariants } from "./animations";
 
+import { GoTopButton } from "@/shared/ui/goTopButton/goTopButton";
 import styles from '@/styles/blocks/table.module.scss';
 
 const MotionLink = motion.create(Link);
@@ -22,7 +23,7 @@ const MotionLink = motion.create(Link);
 export const AllTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
     const { data, contentHeader, status, error, isPlaceholderData } = useAllTests();
-    const { parentRef, virtualizer } = useTableVirtualizer(data.length, 287, 57);
+    const { parentRef, virtualizer, element } = useTableVirtualizer(data.length, 287, 57);
 
     const classNames = clsx({
         [styles.main]: true,
@@ -85,6 +86,7 @@ export const AllTestsPageClient = () => {
                                 </motion.div>
                             )}
                         />
+                        <GoTopButton ref={element} />
                     </div>
                 </section>
             </main>
