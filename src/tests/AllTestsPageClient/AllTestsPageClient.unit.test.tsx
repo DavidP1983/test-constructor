@@ -6,11 +6,14 @@ import * as renderRowVal from '@/widgets/table-row/ui/renderRow';
 import Table from '@/widgets/table/Table';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createMockVirtualizer } from '../../../test/mocks/mockComponents';
 import { renderWithClient } from '../../../test/utils/renderWithClient';
-
+// import { useTableVirtualizer } from '@/shared/hooks/useTableVirtualizer';
 
 // Переопределение глобального useAllTests,renderRow mock
 const realRenderRow = jest.requireActual('@/widgets/table-row/ui/renderRow').renderRow;
+const mockVirtualizer = createMockVirtualizer(2)
+
 
 // Mock Hook useAllTests
 jest.mock("@/entities/test-operation/hooks/useAllTests", () => ({
@@ -24,6 +27,25 @@ jest.mock("@/entities/test-operation/hooks/useAllTests", () => ({
         error: null,
         isPlaceholderData: false,
     }),
+}));
+
+
+// Mock Hook useTableVirtualizer
+jest.mock('@/shared/hooks/useTableVirtualizer', () => ({
+    useTableVirtualizer: (dataLength: number) => ({
+        parentRef: { current: null },
+        virtualizer: {
+            getVirtualItems: () => Array.from({ length: dataLength }).map((_, index) => ({
+                index,
+                key: index,
+                size: 60,
+                start: index * 60
+            })),
+            getTotalSize: () => dataLength * 60,
+            measure: jest.fn(),
+        } as any,
+        isMobile: false,
+    })
 }));
 
 
@@ -119,7 +141,8 @@ describe('AllTestsPageClient test', () => {
                 dataRow={data}
                 dataHeader={[]}
                 renderHeader={() => null}
-                renderRow={renderRowVal.renderRow} />
+                renderRow={renderRowVal.renderRow}
+                virtualizer={mockVirtualizer} />
         );
 
         expect(renderRowVal.renderRow).toHaveBeenCalledTimes(2);
