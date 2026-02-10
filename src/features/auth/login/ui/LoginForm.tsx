@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 import { SpinnerForBtn } from '@/shared/ui/spinner/SpinnerForBtn';
 import clsx from 'clsx';
@@ -5,8 +6,10 @@ import { useLogin } from '../model/useLogin';
 
 
 import styles from '@/styles/blocks/form.module.scss';
+import { useEffect, useState } from 'react';
 
 export const LoginForm = () => {
+    const [mounted, setMounted] = useState(false);
     const {
         handleToggle,
         handleFieldValue,
@@ -19,6 +22,11 @@ export const LoginForm = () => {
         isLoginLoading,
         errorMessage
     } = useLogin();
+
+    // To avoid hydration mismatch
+    useEffect(() => setMounted(true), [])
+
+    if (!mounted) return null;
 
     return (
         <main className={styles.auth} >
