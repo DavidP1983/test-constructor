@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Virtualizer } from "@tanstack/react-virtual";
 import React from "react";
 
 
@@ -42,6 +43,20 @@ jest.mock('uuid', () => ({
 }));
 
 
+// Mock Virtualizer
+export const createMockVirtualizer = (length: number) =>
+({
+    getVirtualItems: () =>
+        Array.from({ length }).map((_, index) => ({
+            index,
+            key: index,
+            size: 60,
+            start: index * 60,
+        })),
+    getTotalSize: () => length * 60,
+    measure: jest.fn(),
+} as unknown as Virtualizer<HTMLDivElement, HTMLTableRowElement>);
+
 
 // --- HOOKS --- //
 
@@ -64,6 +79,7 @@ jest.mock('@/entities/test-operation/hooks/useDeleteCompletedTest', () => ({
 }));
 
 // Mock Hook useHeader
+// useHeader: jest.fn(() => ({}), jest.fn прописал для того, чтобы отслеживать сколько раз вызовется hook
 export const handleClickMock = jest.fn();
 export const handleLogoutMock = jest.fn();
 export const toggleSwitchMock = jest.fn();

@@ -3,6 +3,7 @@
 import { baseHeader } from "@/entities/table/ui/table-header/baseHeader";
 import { useAllTests } from "@/entities/test-operation/hooks/useAllTests";
 import { SearchTest } from "@/features/search-test/ui/SearchTest";
+import { useTableVirtualizer } from "@/shared/hooks/useTableVirtualizer";
 import { AllTests } from "@/shared/types/test-type";
 import { StatusContent } from "@/shared/ui/status-content/StatusContent";
 import clsx from "clsx";
@@ -21,7 +22,7 @@ const MotionLink = motion.create(Link);
 export const AllTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
     const { data, contentHeader, status, error, isPlaceholderData } = useAllTests();
-
+    const { parentRef, virtualizer } = useTableVirtualizer(data.length, 287, 57);
 
     const classNames = clsx({
         [styles.main]: true,
@@ -72,13 +73,15 @@ export const AllTestsPageClient = () => {
                                     className={styles.test__table}
                                     variants={tableVariants}
                                     initial="initial"
+                                    ref={parentRef}
                                     animate={isPlaceholderData ? 'placeholder' : 'ready'}
                                 >
                                     <Table<AllTests>
                                         dataRow={data}
                                         dataHeader={contentHeader}
                                         renderHeader={baseHeader}
-                                        renderRow={renderRow} />
+                                        renderRow={renderRow}
+                                        virtualizer={virtualizer} />
                                 </motion.div>
                             )}
                         />

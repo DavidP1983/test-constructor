@@ -5,11 +5,13 @@ import { CompletedTestsPageClient } from '@/widgets/completedTest-page/Completed
 import * as renderRowCompletedVal from '@/widgets/table-row/ui/renderRowCompleted';
 import Table from '@/widgets/table/Table';
 import { render, screen } from '@testing-library/react';
+import { createMockVirtualizer } from '../../../test/mocks/mockComponents';
 import { renderWithClient } from '../../../test/utils/renderWithClient';
 
 // Real function
 const realRenderRowCompleted = jest.requireActual('@/widgets/table-row/ui/renderRowCompleted').renderRowCompleted;
 const realCompletedTestRow = jest.requireActual('@/entities/table/ui/table-row/completedTestRow').completedTestRow;
+const mockVirtualizer = createMockVirtualizer(2)
 
 // Mock Hook useAllTests
 jest.mock("@/entities/test-operation/hooks/useCompletedTests", () => ({
@@ -22,6 +24,25 @@ jest.mock("@/entities/test-operation/hooks/useCompletedTests", () => ({
         status: "success",
         error: null,
     }),
+}));
+
+
+// Mock Hook useTableVirtualizer
+jest.mock('@/shared/hooks/useTableVirtualizer', () => ({
+    useTableVirtualizer: (dataLength: number) => ({
+        parentRef: { current: null },
+        virtualizer: {
+            getVirtualItems: () => Array.from({ length: dataLength }).map((_, index) => ({
+                index,
+                key: index,
+                size: 60,
+                start: index * 60
+            })),
+            getTotalSize: () => dataLength * 60,
+            measure: jest.fn(),
+        } as any,
+        isMobile: false,
+    })
 }));
 
 
@@ -99,6 +120,8 @@ describe('Test CompletedTestsPageClient', () => {
             { _id: '2', id: '2', testName: 'HTML', accessToken: '' } as any,
         ]
 
+
+
         renderWithClient(
             <Table
                 dataRow={data}
@@ -106,6 +129,7 @@ describe('Test CompletedTestsPageClient', () => {
                 renderHeader={() => null}
                 renderRow={renderRowCompletedVal.renderRowCompleted}
                 token={['1']}
+                virtualizer={mockVirtualizer}
             />
         );
         const newElem = await screen.findByRole('status');
