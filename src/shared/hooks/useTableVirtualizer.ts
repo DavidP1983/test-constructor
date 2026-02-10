@@ -1,15 +1,18 @@
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useTableVirtualizer = (dataLength: number, mobileRowHeight: number, desktopRowHeight: number) => {
-    const parentRef = useRef<HTMLDivElement | null>(null);
+    const [element, setElement] = useState<HTMLDivElement | null>(null);
     const isMobile = useMediaQuery(992);
+
+    // Используем callBack ref чтобы сохранить элемент между mount/unmount
+    const parentRef = useCallback((node: HTMLDivElement | null) => setElement(node), []);
 
     // eslint-disable-next-line react-hooks/incompatible-library
     const virtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
         count: dataLength,
-        getScrollElement: () => parentRef.current,
+        getScrollElement: () => element,
         estimateSize: () => (isMobile ? mobileRowHeight : desktopRowHeight),
         overscan: 2,
     });
@@ -30,5 +33,5 @@ export const useTableVirtualizer = (dataLength: number, mobileRowHeight: number,
         return () => window.removeEventListener('resize', handleResize);
     }, [virtualizer, dataLength]);
 
-    return { parentRef, virtualizer, isMobile }
+    return { parentRef, virtualizer, isMobile, element }
 }
