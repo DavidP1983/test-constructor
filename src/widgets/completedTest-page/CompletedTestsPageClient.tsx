@@ -12,6 +12,7 @@ import { renderRowCompleted } from "../table-row/ui/renderRowCompleted";
 import Table from "../table/Table";
 import { useCompletedTestsStore } from "../test-pass/model/store";
 
+import { GoTopButton } from "@/shared/ui/goTopButton/goTopButton";
 import styles from '@/styles/blocks/table.module.scss';
 
 
@@ -19,7 +20,7 @@ export const CompletedTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
     const { data, status, error, contentHeader } = useCompletedTests();
     const completedTestsToken = useCompletedTestsStore(state => state.completedTestsToken);
-    const { parentRef, virtualizer } = useTableVirtualizer(data.length, 344, 60);
+    const { parentRef, virtualizer, element } = useTableVirtualizer(data.length, 344, 60);
 
     const classNames = clsx({
         [styles.main]: true,
@@ -57,6 +58,7 @@ export const CompletedTestsPageClient = () => {
                                 </div>
                             )}
                         />
+                        <GoTopButton ref={element} />
                     </div>
                 </section>
             </main >
