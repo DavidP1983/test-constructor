@@ -35,7 +35,7 @@ export default async function PassTestPage({ params }: { params: Params }) {
 
     const response = await fetch(`${process.env.API_URL}/completed/get-completed-result-test/${slug}`);
 
-    if (response.status === 404) {
+    if (response.status === 404 || !response.ok) {
         notFound()
     }
     const { completedTest, originTest } = (await response.json()) as CompletedResultTestType;

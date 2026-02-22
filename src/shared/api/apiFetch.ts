@@ -5,7 +5,6 @@ import { ApiError } from "./ApiError";
 let refreshPromise: Promise<void> | null = null;
 
 export const apiFetch = async (input: RequestInfo, init: RequestInit = {}) => {
-    console.log("API FETCH", input)
     const res = await fetch(input, {
         ...init,
         credentials: 'include',

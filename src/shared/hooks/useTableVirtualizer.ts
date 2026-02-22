@@ -6,6 +6,8 @@ export const useTableVirtualizer = (dataLength: number, mobileRowHeight: number,
     const [element, setElement] = useState<HTMLDivElement | null>(null);
     const isMobile = useMediaQuery(992);
 
+    const rowHeight = isMobile ? mobileRowHeight : desktopRowHeight;
+
     // Используем callBack ref чтобы сохранить элемент между mount/unmount
     const parentRef = useCallback((node: HTMLDivElement | null) => setElement(node), []);
 
@@ -13,25 +15,13 @@ export const useTableVirtualizer = (dataLength: number, mobileRowHeight: number,
     const virtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
         count: dataLength,
         getScrollElement: () => element,
-        estimateSize: () => (isMobile ? mobileRowHeight : desktopRowHeight),
+        estimateSize: () => rowHeight,
         overscan: 2,
     });
 
     useEffect(() => {
-        let throttle = false;
-        const handleResize = () => {
-            if (!throttle) {
-                requestAnimationFrame(() => {
-                    virtualizer.measure();
-                    throttle = false;
-                });
-                throttle = true;
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [virtualizer, dataLength]);
+        virtualizer.measure();
+    }, [virtualizer, dataLength, rowHeight]);
 
     return { parentRef, virtualizer, isMobile, element }
 }
