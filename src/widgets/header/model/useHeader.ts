@@ -9,9 +9,9 @@ import { useEffect, useRef, useState } from "react";
 import { useShallow } from "zustand/shallow";
 
 export const useHeader = () => {
-    const { setTheme, theme } = useTheme();
     const [isOpenMenu, setIsOpenMenu] = useState(false);
-    const [isOn, setIsOn] = useState(theme === 'dark');
+    const { setTheme, theme } = useTheme();
+    const isOn = theme === 'dark';
 
     const { logout, userData } = useLoginForm(useShallow((state) => ({
         logout: state.logout,
@@ -57,11 +57,7 @@ export const useHeader = () => {
     }
 
     const toggleSwitch = () => {
-        setIsOn(prev => {
-            const next = !prev;
-            setTheme(next ? "dark" : "light")
-            return next
-        });
+        setTheme(isOn ? 'light' : 'dark')
     };
 
 

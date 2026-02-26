@@ -126,7 +126,7 @@
             }
 
             tr:hover {
-                background-color: #c0dded;
+                background-color: #91b4c8;
             }
 
             td:has(span) {
@@ -178,10 +178,32 @@
             }
         }
         .passed {
-            color: green;
+            color: rgb(12, 158, 12);
         }
         .failed {
             color: red;
+        }
+    }
+
+    .test__filter {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &#placeholder {
+            text-align: center;
+        }
+        
+
+        &_desc {
+            font-size: 14px;
+            color: var(--text--color);
+        }
+        &_select {
+            width: 200px;
+            margin-top: 10px;
+            color: rgb(36, 36, 122);
         }
     }
 }

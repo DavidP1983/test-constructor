@@ -1,15 +1,20 @@
-
+/* eslint-disable react/display-name */
 import { useScrollToTop } from '@/shared/hooks/useScrollToTop';
-import styles from '@/styles/blocks/gotop.module.scss';
 import clsx from 'clsx';
+import { memo } from 'react';
 
-export const GoTopButton = ({ ref }: { ref: HTMLDivElement | null }) => {
+import styles from '@/styles/blocks/gotop.module.scss';
+
+
+export const GoTopButton = memo(({ ref }: { ref: HTMLDivElement | null }) => {
     const { showGoTop, handleScrollUp } = useScrollToTop(ref);
 
     const classNames = clsx({
         [styles.gotop]: true,
         [styles.active]: showGoTop
-    })
+    });
+
+
     return (
         <div
             aria-label="to top button"
@@ -20,4 +25,6 @@ export const GoTopButton = ({ ref }: { ref: HTMLDivElement | null }) => {
             <span></span>
         </div>
     )
-}
+});
+
+

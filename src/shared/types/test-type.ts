@@ -23,7 +23,7 @@ export interface AllTests {
     test: Test[];
 }
 
-export interface TestError {
+export interface TestAnswerFormValues {
     input?: string;
     select?: { value: string | boolean; label: string } | null;
 }
