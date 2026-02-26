@@ -57,6 +57,7 @@ describe('Test CompletedTestsPageClient', () => {
         jest.clearAllMocks();
     });
 
+
     test('Render CompletedTestsPageClient', () => {
 
         renderWithClient(<CompletedTestsPageClient />);
@@ -64,6 +65,7 @@ describe('Test CompletedTestsPageClient', () => {
         const title = screen.getByRole('heading', { level: 1, name: 'Completed Tests' });
         expect(title).toBeInTheDocument();
     });
+
 
     test('check StatusContent render loading', async () => {
         const data = [] as any;
