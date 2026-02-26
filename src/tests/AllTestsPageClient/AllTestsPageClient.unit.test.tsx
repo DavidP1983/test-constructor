@@ -8,7 +8,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMockVirtualizer } from '../../../test/mocks/mockComponents';
 import { renderWithClient } from '../../../test/utils/renderWithClient';
-// import { useTableVirtualizer } from '@/shared/hooks/useTableVirtualizer';
 
 // Переопределение глобального useAllTests,renderRow mock
 const realRenderRow = jest.requireActual('@/widgets/table-row/ui/renderRow').renderRow;
