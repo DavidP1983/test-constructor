@@ -5,17 +5,17 @@ import { useAllTests } from "@/entities/test-operation/hooks/useAllTests";
 import { SearchTest } from "@/features/search-test/ui/SearchTest";
 import { useTableVirtualizer } from "@/shared/hooks/useTableVirtualizer";
 import { AllTests } from "@/shared/types/test-type";
+import { GoTopButton } from "@/shared/ui/goTopButton/goTopButton";
 import { StatusContent } from "@/shared/ui/status-content/StatusContent";
 import clsx from "clsx";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
-import SideBar from "../sidebar/ui/SideBar";
+import { SideBar } from "../sidebar/ui/SideBar";
 import { renderRow } from "../table-row/ui/renderRow";
 import Table from "../table/Table";
 import { tableVariants } from "./animations";
 
-import { GoTopButton } from "@/shared/ui/goTopButton/goTopButton";
 import styles from '@/styles/blocks/table.module.scss';
 
 const MotionLink = motion.create(Link);

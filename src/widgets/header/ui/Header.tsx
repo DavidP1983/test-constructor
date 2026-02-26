@@ -67,7 +67,10 @@ export default function Header() {
                 </div>
             </div>
             <div className={clsx(styles.header__bell, totalCompletedTests && styles.isNewTest)}>
-                <Link href={`/builder/completed?id=${userData?.id}`} className='icon-bell'></Link>
+                <Link
+                    href={`/builder/completed?id=${userData?.id}`}
+                    className='icon-bell'
+                    aria-label="received new passed test"></Link>
                 <span role="status">{totalCompletedTests}</span>
             </div>
             <div className={clsx(styles.menu, isOpenMenu && styles.active)}>

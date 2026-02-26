@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 'use client';
 
 import { useProfile } from '@/entities/profile-info/model/store';
@@ -9,12 +10,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { memo } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 import styles from '@/styles/blocks/sidebar.module.scss';
 
 
-export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) => void }>) {
+export const SideBar = memo(({ toggle }: Readonly<{ toggle: (val: boolean) => void }>) => {
     const { logout, userData } = useLoginForm(useShallow((state) => ({
         logout: state.logout,
         userData: state.userData,
@@ -128,4 +130,4 @@ export default function SideBar({ toggle }: Readonly<{ toggle: (val: boolean) =>
         </aside>
     );
 
-}
+});
