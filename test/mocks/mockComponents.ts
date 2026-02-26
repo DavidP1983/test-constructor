@@ -22,6 +22,15 @@ jest.mock('motion/react', () => ({
     },
 }));
 
+export const animateMockFn = jest.fn();
+jest.mock('motion/react', () => ({
+    ...jest.requireActual('motion/react'),
+    useAnimate: () => [
+        { current: null },
+        animateMockFn
+    ]
+}));
+
 
 // Mock Swal library
 jest.mock('@/shared/utils/notify', () => ({

@@ -19,7 +19,7 @@
 'use client';
 
 import { useModal } from "@/entities/modal/model/store";
-import { Test, TestError } from "@/shared/types/test-type";
+import { Test, TestAnswerFormValues } from "@/shared/types/test-type";
 import { useEffect, useRef, useState } from "react";
 import { type SingleValue } from "react-select";
 import Swal from 'sweetalert2';
@@ -29,7 +29,7 @@ import { useTest } from "../../model/store";
 
 
 export const useSaveQuestions = (testId?: string) => {
-    const [fields, setFields] = useState<TestError>({ select: null, input: '' });
+    const [fields, setFields] = useState<TestAnswerFormValues>({ select: null, input: '' });
     const [questions, setQuestions] = useState<Test>(
         {
             id: '',
