@@ -60,12 +60,12 @@ export const CompletedTestsPageClient = () => {
                         <div className={styles.test__header}>
                             <h1 className="title">Completed Tests</h1>
                         </div>
-                        <FilterTests
+                        {data.length > 1 && (<FilterTests
                             filterStatus={filter}
                             sortStatus={sort}
                             setFilter={handleFilterCompletedTest}
                             setSort={handleSortCompletedTest}
-                            status={status} />
+                            status={status} />)}
                         <StatusContent<CompletedTest>
                             data={filteredAndSortedData}
                             status={status}
