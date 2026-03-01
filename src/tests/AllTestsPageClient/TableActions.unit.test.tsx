@@ -20,7 +20,7 @@ describe('TableActions unit tests', () => {
 
     test('render TableActions component with 3 buttons', () => {
 
-        render(<TableActions testId='123' />);
+        render(<TableActions testId='123' authorId='mock-id' />);
 
         const buttons = document.querySelectorAll('button');
         const btnAttr = ['Link', 'Edit', 'Delete'];
@@ -32,7 +32,7 @@ describe('TableActions unit tests', () => {
     });
 
     test('Should call handleCreateLink with testId on click', async () => {
-        render(<TableActions testId='123' />);
+        render(<TableActions testId='123' authorId='mock-id' />);
 
 
         const btnCreateLink = screen.getByLabelText('link-icon');
@@ -44,7 +44,7 @@ describe('TableActions unit tests', () => {
 
 
     test('Should navigate via router.push on click', async () => {
-        render(<TableActions testId='123' />);
+        render(<TableActions testId='123' authorId='mock-id' />);
 
         const btnEdit = screen.getByLabelText('edit-icon');
         await userEvent.click(btnEdit);
@@ -55,7 +55,7 @@ describe('TableActions unit tests', () => {
 
 
     test('Should call handleDelete with testId on click', async () => {
-        render(<TableActions testId='123' />);
+        render(<TableActions testId='123' authorId='mock-id' />);
 
         const btnEdit = screen.getByLabelText('trash-icon');
         await userEvent.click(btnEdit);
