@@ -11,13 +11,15 @@ export interface ApiErrorResponse {
 }
 
 export async function handleResponse<T = unknown>(response: Response, defaultErrorMessage = 'Request failed'): Promise<T | null> {
-
     const contentType = response.headers.get('content-type');
     const data = contentType?.includes('application/json')
         ? (await response.json()) as T
         : null;
 
     if (!response.ok) {
+        if (response.status === 403) {
+            throw new Error('You are not allowed to perform this action');
+        }
         throw new Error((data as ApiErrorResponse)?.message || defaultErrorMessage);
     }
 

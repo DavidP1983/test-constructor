@@ -8,8 +8,10 @@ export const useCreateAccessesLink = () => {
             const { url } = await TableService.createLink(id);
             await navigator.clipboard.writeText(url);
             notify('success', 'Link was successfully copied');
-        } catch {
-            notify('error', 'Oops... try again');
+        } catch (e) {
+            if (e instanceof Error) {
+                notify('error', e.message || 'Something went wrong, try again');
+            }
         }
 
     }
