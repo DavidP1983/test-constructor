@@ -10,7 +10,7 @@ export const renderRow = (i: number, item: AllTests) => {
             {draftTestRow<AllTests>(i, item)}
             <td data-icon="Icon">
                 <div className={styles.table__icons}>
-                    <TableActions testId={item.id} />
+                    <TableActions testId={item.id} authorId={item.authorId} />
                 </div>
             </td>
         </>
