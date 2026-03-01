@@ -1,10 +1,11 @@
+import { apiFetch } from "@/shared/api/apiFetch";
 import { handleResponse } from "@/shared/api/handleResponse";
 
 export class TableService {
 
     static async createLink(id: string): Promise<{ url: string }> {
 
-        const response = await fetch(`/link/get-link/${id}`, {
+        const response = await apiFetch(`/link/get-link/${id}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         });
