@@ -5,16 +5,14 @@
 .main {
     min-height: 100vh;
 }
+.centre {
+    margin-top: 20px;
+    text-align: center;
+}
 
 .create {
     padding: 50px 20px;
-
-    .title_centre {
-        margin-top: 20px;
-        text-align: center;
-        color: var(--text--color);
-    }
-
+        
     .rules {
         position: relative;
         display: inline-block;
@@ -288,6 +286,26 @@
         @include cb.radio-checkmark;
         @include cb.radio-checked;
         @include cb.radio-checkmark-after;
+    }
+}
+
+// Section summary
+.summary {
+    padding: 20px 20px;
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-rows: minmax(100px, auto);
+        grid-auto-rows: minmax(100px, auto);
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .summary {
+        &__content {
+            grid-template-columns: 1fr;
+        }
     }
 }
 
