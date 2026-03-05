@@ -2,13 +2,13 @@
 
 import { CompletedTestResult } from '@/entities/completed-test/ui/CompletedTestResult';
 import { TestSummary } from '@/entities/completed-test/ui/TestSummary';
+import { EmailNotificationForm } from '@/features/email-notification/ui/EmailNotificationForm';
 import { CompletedTest } from '@/shared/types/completed-type';
 import { AllTests } from '@/shared/types/test-type';
 import { useCompletedTestsStore } from '@/widgets/test-pass/model/store';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useShallow } from 'zustand/shallow';
-
 
 import styles from '@/styles/blocks/create.module.scss';
 
@@ -31,7 +31,7 @@ export const TestPassResult = ({ originTest, completedTest }: TestPassResultProp
         <main className={styles.main}>
             <section aria-labelledby="result test section" className={styles.create}>
                 <div className="container">
-                    <h1 className={clsx("title", styles.title_centre)}>{completedTest.testName}</h1>
+                    <h1 className={clsx("title", styles.centre)}>{completedTest.testName}</h1>
                     <div className={styles.create__content}
                         style={{ background: 'white', padding: '20px', marginTop: '20px' }}>
 
@@ -51,7 +51,14 @@ export const TestPassResult = ({ originTest, completedTest }: TestPassResultProp
                     </div>
                 </div>
             </section>
-            <TestSummary completedTest={completedTest} />
+            <section aria-labelledby="test summary" className={styles.summary}>
+                <div className="container">
+                    <div className={styles.summary__content}>
+                        <TestSummary completedTest={completedTest} />
+                        <EmailNotificationForm completedTest={completedTest} />
+                    </div>
+                </div>
+            </section>
         </main>
     )
 }
