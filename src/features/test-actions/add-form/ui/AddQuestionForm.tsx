@@ -1,10 +1,10 @@
 'use client';
 
-import { useModal } from '@/entities/modal/model/store';
+import { useModal } from '@/shared/ui/modal/model/modal.store';
 import Select from 'react-select';
 import { useSaveQuestions } from '../../save-question/lib/hooks/useSaveQuestions';
 
-import styles from '@/styles/blocks/modal.module.scss';
+import styles from '@/styles/blocks/addquestionform.module.scss';
 
 
 const options = [
@@ -36,17 +36,20 @@ export const AddQuestionForm = () => {
                         required
                         placeholder="type your question..." />
                 </div>
-                <Select
-                    className={styles.form__select}
-                    key={isOpen ? "open" : "close"}
-                    options={options}
-                    instanceId={"create-test-select"}
-                    placeholder='--Please select answer options--'
-                    isSearchable={false}
-                    value={fields.select}
-                    required
-                    onChange={handleSelectData}
-                />
+                <div className={styles.form__control}>
+                    <label htmlFor="option">Option</label>
+                    <Select
+                        className={styles.form__select}
+                        key={isOpen ? "open" : "close"}
+                        options={options}
+                        instanceId={"create-test-select"}
+                        placeholder='--Please select answer options--'
+                        isSearchable={false}
+                        value={fields.select}
+                        required
+                        onChange={handleSelectData}
+                    />
+                </div>
                 <button
                     type="button"
                     className={styles.button}
