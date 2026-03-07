@@ -1,10 +1,9 @@
-import { useModal } from "../model/store";
 
-import styles from '@/styles/blocks/modal.module.scss';
+import { useModal } from '@/shared/ui/modal/model/modal.store';
+import styles from '@/styles/blocks/createtestbutton.module.scss';
 
-export const AddQuestionModalButton = () => {
+export const CreateTestButton = () => {
     const openModal = useModal(state => state.openModal);
-
     return (
         <button
             className={styles.create__btn}

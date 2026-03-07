@@ -14,8 +14,9 @@
     padding: 50px 20px;
         
     .rules {
+        text-align: right;
         position: relative;
-        display: inline-block;
+        display: block;
         cursor: help;
         color: rgb(160, 158, 158);
     }
@@ -25,8 +26,8 @@
         text-align: center;
         position: absolute;
         bottom: 125%;
-        left: 20%;
-        transform: translateX(-20%);
+        right: 0;
+        transform: translateX(0);
         width: 160px;
         background: #ffffff;
         color: #202122;

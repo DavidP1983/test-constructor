@@ -1,4 +1,5 @@
 'use client';
+import { CreateTestButton } from '@/features/create-test-button/ui/CreateTestButton';
 import { AddQuestion } from '@/features/test-actions/add-question/ui/AddQuestion';
 import { AllTests } from '@/shared/types/test-type';
 import { DragDropContext, Draggable, DraggableStyle, Droppable } from '@hello-pangea/dnd';
@@ -59,7 +60,6 @@ export const TestQuestion = ({ singleTest }: Props) => {
                                 !data?.length &&
                                 <div className={styles.create__question_message}>You have no created questions</div>
                             }
-
                             {data?.map((item, i) => (
                                 <Draggable
                                     isDragDisabled={mode === 'preview'}
@@ -109,6 +109,7 @@ export const TestQuestion = ({ singleTest }: Props) => {
                 </Droppable>
             </DragDropContext>
             {renderActions(mode)}
+            {mode !== 'preview' ? <CreateTestButton /> : null}
         </>
     )
 }

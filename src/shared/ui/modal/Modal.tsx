@@ -2,16 +2,13 @@
 
 import clsx from 'clsx';
 import { useShallow } from "zustand/shallow";
-import { useModal } from '../model/store';
-import { AddQuestionModalButton } from './AddQuestionModalButton';
+import { useModal } from './model/modal.store';
+
 
 import styles from '@/styles/blocks/modal.module.scss';
 
-interface Props {
-    children: React.ReactNode;
-}
 
-export const AddQuestionModal = ({ children }: Props) => {
+export const Modal = ({ children }: { children: React.ReactNode }) => {
     const { isOpen, closeModal } = useModal(useShallow((state) => ({
         isOpen: state.isOpen,
         closeModal: state.closeModal,
@@ -21,7 +18,7 @@ export const AddQuestionModal = ({ children }: Props) => {
         <>
             {
                 isOpen && (
-                    <section className={styles.modal} aria-labelledby="modal window">
+                    <div className={styles.modal} aria-modal="true" role='dialog'>
                         <div
                             className={clsx(styles.overlay, isOpen && styles.active)}
                             onClick={(e) => closeModal(e)}>
@@ -30,11 +27,10 @@ export const AddQuestionModal = ({ children }: Props) => {
                                 {children}
                             </div>
                         </div>
-                    </section>
+                    </div>
 
                 )
             }
-            <AddQuestionModalButton />
         </>
     );
 }

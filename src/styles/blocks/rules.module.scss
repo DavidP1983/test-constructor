@@ -1,0 +1,25 @@
+@use '../base/variables.scss' as *;
+
+.rules {
+    margin-top: 20px;
+    margin-right: 35px;
+    padding: 20px;
+    background-color: var(--bg--primary);
+    border-radius: 10px;
+
+    &__desc {
+        padding-inline-start: 30px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.6;
+        gap: 10px;
+    }
+    &__item {
+        user-select: none;
+        font-size: 14px;
+        text-align: left;
+    }
+}
