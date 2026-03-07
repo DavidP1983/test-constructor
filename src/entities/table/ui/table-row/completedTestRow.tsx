@@ -15,7 +15,7 @@ export const completedTestRow = <T extends CompletedTest>(i: number, item: T, is
         <>
             <td data-label="ID">
                 {i + 1}. {item.testName}
-                {isNew && <span role='status'>NEW</span>}
+                {isNew && <span role='status' className={styles.new}>NEW</span>}
             </td>
             <td data-label="Data">{formatDate(item?.completedAt)}</td>
             <td data-label="Qnt">{item.correctAnswers + "/" + item.totalQuestions}</td>
