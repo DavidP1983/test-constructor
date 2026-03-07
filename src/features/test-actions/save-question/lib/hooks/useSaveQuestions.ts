@@ -18,8 +18,8 @@
 
 'use client';
 
-import { useModal } from "@/entities/modal/model/store";
 import { Test, TestAnswerFormValues } from "@/shared/types/test-type";
+import { useModal } from "@/shared/ui/modal/model/modal.store";
 import { useEffect, useRef, useState } from "react";
 import { type SingleValue } from "react-select";
 import Swal from 'sweetalert2';

@@ -6,11 +6,14 @@ import { SearchTest } from "@/features/search-test/ui/SearchTest";
 import { useTableVirtualizer } from "@/shared/hooks/useTableVirtualizer";
 import { AllTests } from "@/shared/types/test-type";
 import { GoTopButton } from "@/shared/ui/goTopButton/goTopButton";
+import { Modal } from "@/shared/ui/modal/Modal";
+import { useModal } from "@/shared/ui/modal/model/modal.store";
 import { StatusContent } from "@/shared/ui/status-content/StatusContent";
 import clsx from "clsx";
 import { motion } from "motion/react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SideBar } from "../sidebar/ui/SideBar";
 import { renderRow } from "../table-row/ui/renderRow";
 import Table from "../table/Table";
@@ -18,17 +21,35 @@ import { tableVariants } from "./animations";
 
 import styles from '@/styles/blocks/table.module.scss';
 
+const OnboardingRulesLazy = dynamic(
+    () => import('@/entities/onboarding-rules/ui/OnboardingRules')
+        .then(m => m.OnboardingRules),
+    { ssr: false }
+);
 const MotionLink = motion.create(Link);
 
 export const AllTestsPageClient = () => {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
     const { data, contentHeader, status, error, isPlaceholderData } = useAllTests();
     const { parentRef, virtualizer, element } = useTableVirtualizer(data.length, 287, 57);
+    const openModal = useModal(state => state.openModal);
 
     const classNames = clsx({
         [styles.main]: true,
         [styles.active]: isSideBarOpen
     });
+
+    useEffect(() => {
+        const isModalShown = localStorage.getItem('onboarding_rules_shown');
+        if (!isModalShown) {
+            const timer = setTimeout(() => {
+                openModal(true);
+                localStorage.setItem('onboarding_rules_shown', 'true')
+            }, 1000);
+
+            return () => clearTimeout(timer)
+        }
+    }, []);
 
     return (
         <>
@@ -89,6 +110,9 @@ export const AllTestsPageClient = () => {
                         <GoTopButton ref={element} />
                     </div>
                 </section>
+                <Modal>
+                    <OnboardingRulesLazy />
+                </Modal>
             </main>
         </>
     )

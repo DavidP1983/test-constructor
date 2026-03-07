@@ -88,6 +88,7 @@ figure {
 /* Для sideBar */
 
 .title {
+    user-select: none;
     font-size: 35px;
     font-weight: 700;
     color: var(--text--color);
