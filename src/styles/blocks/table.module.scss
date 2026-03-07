@@ -86,7 +86,30 @@
                 position: relative;
                 z-index: 1;
                 padding: 10px;
-               } 
+                    span {
+                    position: relative;
+                    display: inline-block;
+                    transform-origin: right center;
+                    transition: color 0.15s ease;
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            display: block;
+                            background-color: #0516f2;
+                            width: 0;
+                            bottom: -5px;
+                            left: 0;
+                            height: 2px;
+                            transition: width 0.15s ease;
+                        }
+                    }
+                    &:hover span::after {
+                        width: 100%;
+                    }
+                    &:hover span {
+                        color: #0516f2;
+                    }
+                } 
             }
 
             tr+tr th,
@@ -129,7 +152,7 @@
                 background-color: #91b4c8;
             }
 
-            td:has(span) {
+            td:has(.new) {
                 position: relative;
                 span {
                     position: absolute;
