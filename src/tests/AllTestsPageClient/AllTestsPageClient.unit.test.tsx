@@ -121,9 +121,10 @@ describe('AllTestsPageClient test', () => {
 
         renderWithClient(<AllTestsPageClient />)
 
-        const emptyMessage = await screen.findByText((content, elem) =>
-            elem?.tagName === 'DIV' && content.includes('Create your first test')
-        );
+        // const emptyMessage = await screen.findByText((content, elem) =>
+        //     elem?.tagName === 'H3' && content.includes('No tests yet')
+        // );
+        const emptyMessage = await screen.findByRole('heading', { level: 3, name: /No tests yet/i })
         expect(emptyMessage).toBeInTheDocument();
 
     });
