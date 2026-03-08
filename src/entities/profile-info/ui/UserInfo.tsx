@@ -8,7 +8,7 @@ import { useProfile } from "../model/store";
 import styles from '@/styles/blocks/profile.module.scss';
 
 
-export const UserInfo = ({ actions }: { actions: React.ReactNode }) => {
+export const UserInfo = ({ actions, reviewRulesAction }: { actions: React.ReactNode, reviewRulesAction: React.ReactNode }) => {
     const userData = useLoginForm(state => state.userData);
     const avatar = useProfile(state => state.avatarUrl);
 
@@ -31,9 +31,12 @@ export const UserInfo = ({ actions }: { actions: React.ReactNode }) => {
                     <li className={styles.profile__info_item}>Role: {userData?.role}</li>
                     <li className={styles.profile__info_item}>Joined: {userData?.joined} </li>
                 </ul>
-
             </div>
             {actions}
+            <div className={styles.profile__rules}>
+                {reviewRulesAction}
+            </div>
+
         </>
     )
 }
