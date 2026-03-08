@@ -6,6 +6,7 @@ import { useFilterTests } from "@/features/sort-test/model/useFilterTests";
 import { FilterTests } from "@/features/sort-test/ui/FilterTests";
 import { useTableVirtualizer } from "@/shared/hooks/useTableVirtualizer";
 import { CompletedTest } from "@/shared/types/completed-type";
+import { EmptyState } from "@/shared/ui/emptyState/EmptyState";
 import { GoTopButton } from "@/shared/ui/goTopButton/goTopButton";
 import { StatusContent } from "@/shared/ui/status-content/StatusContent";
 import clsx from "clsx";
@@ -15,6 +16,7 @@ import { SideBar } from "../sidebar/ui/SideBar";
 import { renderRowCompleted } from "../table-row/ui/renderRowCompleted";
 import Table from "../table/Table";
 import { useCompletedTestsStore } from "../test-pass/model/store";
+
 
 import styles from '@/styles/blocks/table.module.scss';
 
@@ -65,13 +67,29 @@ export const CompletedTestsPageClient = () => {
                             sortStatus={sort}
                             setFilter={handleFilterCompletedTest}
                             setSort={handleSortCompletedTest}
-                            status={status} />)}
+                            status={status} />)
+                        }
                         <StatusContent<CompletedTest>
                             data={filteredAndSortedData}
                             status={status}
                             error={error}
                             renderEmpty={() => (
-                                <div className={styles.test__empty}>There are no test completed</div>
+                                <div className={styles.test__table}>
+                                    <table>
+                                        <thead>
+                                            <tr>{baseHeader(contentHeader)}</tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colSpan={contentHeader.length}>
+                                                    <EmptyState
+                                                        title="Completed Tests"
+                                                        description="There are no test completed yet" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             )}
                             renderData={(data) => (
                                 <div ref={scope}>
