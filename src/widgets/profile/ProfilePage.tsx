@@ -1,5 +1,6 @@
 'use client';
 
+import { OnboardingRules } from "@/entities/onboarding-rules/ui/OnboardingRules";
 import { UserInfo } from "@/entities/profile-info/ui/UserInfo";
 import { UserSecurity } from "@/entities/profile-info/ui/UserSecurity";
 import { UserSettings } from "@/entities/profile-info/ui/UserSettings";
@@ -8,8 +9,10 @@ import { ChangeAvatarButton } from "@/features/profile/change-avatar/ui/ChangeAv
 import { ChangeThemeButtons } from "@/features/profile/change-theme/ui/ChangeThemeButtons";
 import { ChangePasswordButton } from "@/features/profile/user-security/ui/ChangePasswordButton";
 import { DeleteAccountButton } from "@/features/profile/user-security/ui/DeleteAccountButton";
+import Accordion from "@/shared/ui/accordion/ui/Accordion";
 import { motion } from "motion/react";
 import { profileVariants } from "./animations";
+
 
 import styles from '@/styles/blocks/profile.module.scss';
 
@@ -35,6 +38,15 @@ export const ProfilePage = () => {
                             animate="readyInfo">
                             <UserInfo
                                 actions={<ChangeAvatarButton />}
+                                reviewRulesAction={
+                                    <Accordion>
+                                        <Accordion.Item
+                                            title="Rules"
+                                            index={0}>
+                                            <OnboardingRules />
+                                        </Accordion.Item>
+                                    </Accordion>
+                                }
                             />
                         </motion.div>
 
