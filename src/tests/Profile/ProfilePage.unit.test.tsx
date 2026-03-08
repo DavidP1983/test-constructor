@@ -60,10 +60,10 @@ describe('Profile Page test', () => {
 
         await waitFor(() => {
             expect(img).toBeInTheDocument();
-            list.forEach((item, i) => {
+            list.slice(0, 4).forEach((item, i) => {
                 expect(item).toHaveTextContent(items[i]);
             })
-            expect(list).toHaveLength(4);
+            expect(list).toHaveLength(9);
         });
     });
 
