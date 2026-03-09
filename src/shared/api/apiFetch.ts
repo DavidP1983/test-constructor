@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // server-only
 import { ApiError } from "./ApiError";
 
@@ -14,7 +15,7 @@ export const apiFetch = async (input: RequestInfo, init: RequestInit = {}) => {
     });
 
     // Если accessToken не умер возвращаем  результат
-    if (res.status !== 401) return res;
+    if (res.status !== 401 || (init as any)._retry) return res;
 
 
     // Если accessToken  умер  ${process.env.NEXT_PUBLIC_API_URL}
@@ -22,11 +23,10 @@ export const apiFetch = async (input: RequestInfo, init: RequestInit = {}) => {
         refreshPromise = fetch(`/user/refresh`, {
             method: 'POST',
             credentials: 'include',
-        })
-            .then((r) => {
-                if (!r.ok) throw new Error('Refresh failed');
-            })
-            .finally(() => refreshPromise = null);
+        }).then((r) => {
+            if (r.status === 401) throw new Error('Refresh expired');
+            if (!r.ok) throw new Error('Refresh failed');
+        }).finally(() => refreshPromise = null);
     }
 
 
@@ -40,8 +40,9 @@ export const apiFetch = async (input: RequestInfo, init: RequestInit = {}) => {
     return fetch(input, {
         ...init,
         credentials: 'include',
+        _retry: true,
         headers: {
             ...(init.headers || {}),
         },
-    });
+    } as any);
 }
