@@ -42,15 +42,14 @@ export const AllTestsPageClient = () => {
     });
 
     useEffect(() => {
-        const isModalShown = localStorage.getItem('onboarding_rules_shown');
-        if (!isModalShown) {
-            const timer = setTimeout(() => {
-                openModal(true);
-                localStorage.setItem('onboarding_rules_shown', 'true')
-            }, 1000);
+        if (localStorage.getItem('onboarding_rules_shown')) return;
+        const timer = setTimeout(() => {
+            openModal(true);
+            localStorage.setItem('onboarding_rules_shown', 'true')
+        }, 1000);
 
-            return () => clearTimeout(timer)
-        }
+        return () => clearTimeout(timer)
+
     }, []);
 
     return (

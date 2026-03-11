@@ -4,6 +4,7 @@ import { Rubik } from "next/font/google";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import { ThemeTransitionWrapper } from "./providers/ThemeTransitionWrapper";
 
+import NotificationListener from "@/widgets/notification-listener/ui/NotificationListener";
 import "./globals.scss";
 
 const rubikSans = Rubik({
@@ -38,6 +39,7 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
           >
+            <NotificationListener />
             <ThemeTransitionWrapper>
               {children}
             </ThemeTransitionWrapper>
