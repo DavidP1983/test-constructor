@@ -7,12 +7,12 @@ import { UserSettings } from "@/entities/profile-info/ui/UserSettings";
 import { UserStats } from "@/entities/profile-info/ui/UserStats";
 import { ChangeAvatarButton } from "@/features/profile/change-avatar/ui/ChangeAvatarButton";
 import { ChangeThemeButtons } from "@/features/profile/change-theme/ui/ChangeThemeButtons";
+import { ShowNotification } from "@/features/profile/show-notification/ui/ShowNotification";
 import { ChangePasswordButton } from "@/features/profile/user-security/ui/ChangePasswordButton";
 import { DeleteAccountButton } from "@/features/profile/user-security/ui/DeleteAccountButton";
 import Accordion from "@/shared/ui/accordion/ui/Accordion";
 import { motion } from "motion/react";
 import { profileVariants } from "./animations";
-
 
 import styles from '@/styles/blocks/profile.module.scss';
 
@@ -56,7 +56,8 @@ export const ProfilePage = () => {
                             initial="initialRight"
                             animate="readySettings">
                             <UserSettings
-                                actions={<ChangeThemeButtons />} />
+                                actions={<ChangeThemeButtons />}
+                                notification={<ShowNotification />} />
                         </motion.div>
 
                         <motion.div

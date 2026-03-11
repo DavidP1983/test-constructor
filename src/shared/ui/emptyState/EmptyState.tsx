@@ -7,6 +7,7 @@ interface EmptyStateProps {
     children?: React.ReactNode;
 }
 
+// Заглушка для отображения пустых данных как например в AllTestsPageClient
 export const EmptyState = ({ title, description, children }: EmptyStateProps) => {
 
     return (
