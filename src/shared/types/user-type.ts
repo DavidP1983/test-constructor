@@ -1,3 +1,4 @@
+import { NotificationWarningType } from "./notificationWarning-type";
 
 export interface User {
     id: string;
@@ -6,7 +7,7 @@ export interface User {
     hasAvatar: boolean;
     role: "Admin" | "User";
     joined: string;
-    notifications: boolean;
+    notifications: NotificationWarningType | null;
     lastActivity: string;
     lastLogin?: string | null;
 }

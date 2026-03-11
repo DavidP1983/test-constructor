@@ -5,6 +5,7 @@ export class CompletedTestService {
 
     static async crateAnswer(data: CompletedTest): Promise<{ success: boolean }> {
 
+        // Запрос идет через Proxy next.config.ts поэтому нет необходимости в указании http
         const response = await fetch(`/completed/create-completed-test`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

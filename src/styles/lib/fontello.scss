@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'fontello';
   src:
-    url('/fonts/fontello.woff2?14056145') format('woff2'),
-    url('/fonts/fontello.woff?14056145') format('woff');
+    url('/fonts/fontello.woff2?18775052') format('woff2'),
+    url('/fonts/fontello.woff?18775052') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -161,6 +161,11 @@
 }
 
 /* '' */
+.icon-chat-empty:before {
+  content: '\f0e6';
+}
+
+/* '' */
 .icon-moon:before {
   content: '\f186';
 }
