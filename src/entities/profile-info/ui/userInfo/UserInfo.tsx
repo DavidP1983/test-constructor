@@ -2,7 +2,7 @@
 
 import { useLoginForm } from "@/features/auth/login/model/store";
 import Image from "next/image";
-import { useProfile } from "../model/store";
+import { useProfile } from "../../model/store";
 
 
 import styles from '@/styles/blocks/profile.module.scss';
