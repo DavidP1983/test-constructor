@@ -23,7 +23,7 @@ export const useAdminNotification = () => {
         }
 
         try {
-            await api.patch<User, object>("/notifications/read-notification", {});
+            await api.patch<User, object>("/notifications/mark-read", {});
             queryClient.invalidateQueries({ queryKey: ['notifications'] });
         } catch (e) {
             console.error("Failed to mark notification as read", e);
