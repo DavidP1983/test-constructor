@@ -3,12 +3,12 @@
 import { useLoginForm } from '@/features/auth/login/model/store';
 import { useTest } from '@/features/test-actions/save-question/model/store';
 import { AdminsStatsType } from '@/widgets/profile/types/admins.stats.type';
+import clsx from 'clsx';
 import { daysSinceLastLogin } from '../../utils/daysSinceLastLogin';
 import { UserStatsSkeleton } from './UserStatsSkeleton';
 
 
 import styles from '@/styles/blocks/profile.module.scss';
-import clsx from 'clsx';
 
 interface UserStatsProps {
     adminStats: AdminsStatsType | null | undefined;

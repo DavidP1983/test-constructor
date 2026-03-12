@@ -5,7 +5,7 @@ export class SendNotificationService {
     static async sendWarningNotification(userId: string | undefined, message: string) {
 
         // Запрос идет через Proxy next.config.ts поэтому нет необходимости в указании http
-        const response = await fetch(`/notifications/admin-warning`, {
+        const response = await fetch(`/notifications/send-notification`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userId, message })
@@ -15,3 +15,4 @@ export class SendNotificationService {
         return data
     }
 }
+

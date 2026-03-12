@@ -5,7 +5,7 @@ import { UserService } from '@/features/profile/user-security/services/UserServi
 import { ChangePasswordButton } from '@/features/profile/user-security/ui/ChangePasswordButton';
 import { DeleteAccountButton } from '@/features/profile/user-security/ui/DeleteAccountButton';
 import { notify } from '@/shared/utils/notify';
-import { ProfilePage } from '@/widgets/profile/ProfilePage';
+import { ProfilePage } from '@/widgets/profile/ui/ProfilePage';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { clearAvatarMock, defaultUserProfileStore, handleChangeMock, setThemeMock } from '../../../test/mocks/mockComponents';

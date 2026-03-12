@@ -1,5 +1,5 @@
 import Header from "@/widgets/header/ui/Header";
-import { ProfilePage } from "@/widgets/profile/ProfilePage";
+import { ProfilePage } from "@/widgets/profile/ui/ProfilePage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
