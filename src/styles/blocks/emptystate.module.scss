@@ -1,0 +1,20 @@
+@use  '../base/variables.scss' as *;
+
+.emptystate {
+    padding: 10px;
+    color: var(--text--color);
+    &__desc {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .emptystate {
+        width: 100%;
+        font-size: 16px;
+    }
+}
