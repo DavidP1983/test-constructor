@@ -5,6 +5,7 @@ import { useAllTests } from "@/entities/test-operation/hooks/useAllTests";
 import { SearchTest } from "@/features/search-test/ui/SearchTest";
 import { useTableVirtualizer } from "@/shared/hooks/useTableVirtualizer";
 import { AllTests } from "@/shared/types/test-type";
+import { EmptyState } from "@/shared/ui/emptyState/EmptyState";
 import { GoTopButton } from "@/shared/ui/goTopButton/goTopButton";
 import { Modal } from "@/shared/ui/modal/Modal";
 import { useModal } from "@/shared/ui/modal/model/modal.store";
@@ -18,6 +19,7 @@ import { SideBar } from "../sidebar/ui/SideBar";
 import { renderRow } from "../table-row/ui/renderRow";
 import Table from "../table/Table";
 import { tableVariants } from "./animations";
+
 
 import styles from '@/styles/blocks/table.module.scss';
 
@@ -40,15 +42,14 @@ export const AllTestsPageClient = () => {
     });
 
     useEffect(() => {
-        const isModalShown = localStorage.getItem('onboarding_rules_shown');
-        if (!isModalShown) {
-            const timer = setTimeout(() => {
-                openModal(true);
-                localStorage.setItem('onboarding_rules_shown', 'true')
-            }, 1000);
+        if (localStorage.getItem('onboarding_rules_shown')) return;
+        const timer = setTimeout(() => {
+            openModal(true);
+            localStorage.setItem('onboarding_rules_shown', 'true')
+        }, 1000);
 
-            return () => clearTimeout(timer)
-        }
+        return () => clearTimeout(timer)
+
     }, []);
 
     return (
@@ -88,7 +89,22 @@ export const AllTestsPageClient = () => {
                             status={status}
                             error={error}
                             renderEmpty={() => (
-                                <div className={styles.test__empty}>Create your first test, click on the button <strong>Create</strong></div>
+                                <div className={styles.test__table}>
+                                    <table>
+                                        <thead>
+                                            <tr>{baseHeader(contentHeader)}</tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colSpan={contentHeader.length}>
+                                                    <EmptyState
+                                                        title="No tests yet"
+                                                        description="Create your first test, click on the button Create" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             )}
                             renderData={(data) => (
                                 <motion.div

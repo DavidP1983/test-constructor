@@ -94,9 +94,7 @@ describe('Test CompletedTestsPageClient', () => {
 
         renderWithClient(<CompletedTestsPageClient />);
 
-        const emptyMessage = await screen.findByText((content, elem) =>
-            elem?.tagName === 'DIV' && content.includes('There are no test completed')
-        );
+        const emptyMessage = await screen.findByRole('cell', { name: /There are no test completed yet/i })
 
         expect(emptyMessage).toBeInTheDocument();
         completeMock.mockRestore();  // Избегая переопределение в дальнейшем, очищаем

@@ -37,12 +37,6 @@
         color: var(--foreground, #000000);
     }
 
-    .test__empty {
-        margin-top: 30px;
-        text-align: center;
-        color: var(--text--color);
-    }
-
     .test__table {
         margin-top: 20px;
         height: calc(100vh - 250px);

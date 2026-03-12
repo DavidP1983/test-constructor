@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 // Config все пути из app.use в index.js 
-const API_PREFIXES = ['user', 'test', 'link', 'completed'];
+const API_PREFIXES = ['user', 'test', 'link', 'completed', 'notifications'];
 const API_TARGET = process.env.NEXT_PUBLIC_API_PROXY_TARGET;
 
 const nextConfig: NextConfig = {

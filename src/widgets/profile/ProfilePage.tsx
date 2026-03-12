@@ -9,6 +9,7 @@ import { api } from "@/entities/test-operation/api/apiService";
 import { useLoginForm } from "@/features/auth/login/model/store";
 import { ChangeAvatarButton } from "@/features/profile/change-avatar/ui/ChangeAvatarButton";
 import { ChangeThemeButtons } from "@/features/profile/change-theme/ui/ChangeThemeButtons";
+import { ShowNotification } from "@/features/profile/show-notification/ui/ShowNotification";
 import { ChangePasswordButton } from "@/features/profile/user-security/ui/ChangePasswordButton";
 import { DeleteAccountButton } from "@/features/profile/user-security/ui/DeleteAccountButton";
 import Accordion from "@/shared/ui/accordion/ui/Accordion";
@@ -16,7 +17,6 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { profileVariants } from "./animations";
 import { AdminsStatsType } from "./types/admins.stats.type";
-
 
 import styles from '@/styles/blocks/profile.module.scss';
 
@@ -69,7 +69,8 @@ export const ProfilePage = () => {
                             initial="initialRight"
                             animate="readySettings">
                             <UserSettings
-                                actions={<ChangeThemeButtons />} />
+                                actions={<ChangeThemeButtons />}
+                                notification={<ShowNotification />} />
                         </motion.div>
 
                         <motion.div

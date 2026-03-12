@@ -123,11 +123,11 @@ describe('Profile Page test', () => {
         renderWithClient(<ProfilePage />);
 
         const title = screen.getByRole('heading', { level: 2, name: /Settings/i });
-        const link = screen.getByRole('link');
+        const emptyNotification = screen.getByText('No notifications yet.');
 
         expect(title).toBeInTheDocument();
         expect(title).toHaveTextContent(/Settings/i);
-        expect(link).toHaveAttribute('href', '/builder/completed');
+        expect(emptyNotification).toBeInTheDocument();
     });
 
 
@@ -167,7 +167,7 @@ describe('Profile Page test', () => {
         renderWithClient(<ProfilePage />);
 
         const title1 = screen.getByRole('heading', { level: 2, name: /Security/i })
-        const title2 = screen.getByRole('heading', { level: 3 })
+        const title2 = screen.getByRole('heading', { level: 3, name: /Danger zone/i })
 
         expect(title1).toBeInTheDocument();
         expect(title2).toBeInTheDocument();
