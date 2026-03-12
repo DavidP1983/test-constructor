@@ -1,8 +1,8 @@
+import { User } from "@/shared/types/user-type";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useState } from "react";
 
-import { User } from "@/shared/types/user-type";
 import styles from '@/styles/blocks/profile.module.scss';
 
 
