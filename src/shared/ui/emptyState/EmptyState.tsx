@@ -12,8 +12,10 @@ export const EmptyState = ({ title, description, children }: EmptyStateProps) =>
 
     return (
         <div className={styles.emptystate}>
-            {title && <h3>{title}</h3>}
-            {description && <p>{description}</p>}
+            <div className={styles.emptystate__desc}>
+                {title && <h3>{title}</h3>}
+                {description && <p>{description}</p>}
+            </div>
             {children}
         </div>
     )

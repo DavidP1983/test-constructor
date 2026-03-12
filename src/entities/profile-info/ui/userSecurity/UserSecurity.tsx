@@ -1,7 +1,5 @@
-
-
 import styles from '@/styles/blocks/profile.module.scss';
-// { actions }: { actions: React.ReactNode }
+
 interface Props {
     changePassword: React.ReactNode;
     deleteAccount: React.ReactNode

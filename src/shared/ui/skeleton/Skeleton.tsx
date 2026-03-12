@@ -2,18 +2,12 @@
 import styles from '@/styles/blocks/skeleton.module.scss';
 import clsx from 'clsx';
 
-export const Skeleton = () => {
+export const Skeleton = ({ children, statistic }: { children: React.ReactNode, statistic?: string }) => {
     return (
-        <div className={styles.center}>
-            <div className={styles.loader}>
+        <div className={clsx(styles.center, statistic ? styles[statistic] : '')}>
+            <div className={clsx(styles.loader, statistic ? styles[statistic] : '')}>
                 <div className={styles.wrapper}>
-                    <div className={styles.circle}></div>
-                    <div className={clsx(styles.line, styles.line1)}></div>
-                    <div className={clsx(styles.line, styles.line2)}></div>
-                    <div className={clsx(styles.line, styles.line3)}></div>
-                    <div className={clsx(styles.line, styles.line4)}></div>
-                    <div className={clsx(styles.line, styles.line5)}></div>
-                    <div className={clsx(styles.line, styles.line6)}></div>
+                    {children}
                 </div>
             </div>
         </div>

@@ -19,7 +19,6 @@ export const ShowNotification = () => {
         ['icon-mail']: true,
         ['icon-envelope-open-o']: shown
     });
-    console.log(data)
     return (
         <>
             <div className={styles.profile__settings_desc}>
