@@ -1,5 +1,5 @@
-import { CompletedTest } from "@/shared/types/completed-type"
-import { SortStatus } from "../types/filter.types"
+import { CompletedTest } from "@/shared/types/completed-type";
+import { SortStatus } from "@/shared/types/select.types";
 
 export const sortData = (data: CompletedTest[], sort: SortStatus | null) => {
 

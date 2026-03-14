@@ -1,7 +1,7 @@
 import { CompletedTest } from "@/shared/types/completed-type";
+import { FilterStatus, SortStatus } from "@/shared/types/select.types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
-import { FilterStatus, SortStatus } from "../types/filter.types";
 import { filterData } from "../utils/filter";
 import { sortData } from "../utils/sort";
 

@@ -1,6 +1,7 @@
 import { useAvatar } from "@/entities/profile-info/model/useAvatar";
 import { useLoginForm } from "@/features/auth/login/model/store";
 import { useTest } from "@/features/test-actions/save-question/model/store";
+import { usePromptFeedback } from "@/shared/hooks/usePromptFeedback";
 import { notify } from "@/shared/utils/notify";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
@@ -17,11 +18,11 @@ export const useHeader = () => {
         logout: state.logout,
         userData: state.userData,
     })));
-
     const resetTotalCreatedTests = useTest(state => state.resetTotalCreatedTests);
     const router = useRouter();
     const queryClient = useQueryClient();
     const { clearAvatar } = useAvatar();
+    const { promptFeedback } = usePromptFeedback();
 
 
     const myRef = useRef<HTMLDivElement | null>(null);
@@ -45,7 +46,11 @@ export const useHeader = () => {
     }
 
     const handleLogout = async () => {
-        setIsOpenMenu(false)
+        setIsOpenMenu(false);
+
+        const feedbackShown = await promptFeedback();
+        if (feedbackShown) return;
+
         await logout();
         resetTotalCreatedTests();
         queryClient.cancelQueries();

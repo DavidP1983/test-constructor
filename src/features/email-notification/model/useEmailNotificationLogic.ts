@@ -44,7 +44,7 @@ export const useEmailNotificationLogic = (completedTest: CompletedTest) => {
         setFieldsValue(prev => (
             {
                 ...prev, [name]: e.target.type !== 'checkbox'
-                    ? value.trim() : (e.target as HTMLInputElement).checked
+                    ? value : (e.target as HTMLInputElement).checked
             }));
     }
 

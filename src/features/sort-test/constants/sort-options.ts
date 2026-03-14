@@ -1,4 +1,4 @@
-import { SelectOptions, SortStatus } from "../types/filter.types";
+import { SelectOptions, SortStatus } from "../../../shared/types/select.types";
 
 export const sortOptions: SelectOptions<SortStatus>[] = [
     { value: 'date_desc', label: 'Newest first' },
