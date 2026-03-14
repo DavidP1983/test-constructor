@@ -10,6 +10,7 @@ export interface User {
     notifications: NotificationWarningType | null;
     lastActivity: string;
     lastLogin?: string | null;
+    feedbackSubmitted?: boolean;
 }
 
 export interface DataArgs {

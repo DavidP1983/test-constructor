@@ -1,10 +1,7 @@
+/* FilterTests types*/
 export type FilterStatus = 'all' | 'passed' | 'failed' | 'new';
 export type SortStatus = 'date_desc' | 'date_asc' | 'score_desc' | 'speed_asc' | 'speed_desc';
 
-export type SelectOptions<T> = {
-    value: T;
-    label: string;
-}
 
 export type PropsType = {
     filterStatus: FilterStatus | null;
@@ -13,3 +10,15 @@ export type PropsType = {
     setSort: (selectedValue: SortStatus) => void;
     status: "loading" | "error" | "success";
 }
+
+/* FeedbackFrom types */
+export type WhoSelect = 'employer' | 'developer' | 'student' | 'other';
+export type UseSelect = 'very ease' | 'normal' | 'hard';
+export type SpeedSelect = 'fast' | 'acceptable' | 'slow';
+
+/*General Select types*/
+export type SelectOptions<T> = {
+    value: T;
+    label: string;
+}
+

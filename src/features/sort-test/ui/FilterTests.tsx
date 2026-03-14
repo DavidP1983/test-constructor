@@ -1,10 +1,10 @@
+import { FilterStatus, PropsType, SelectOptions, SortStatus } from '@/shared/types/select.types';
 import { motion } from 'motion/react';
 import { useId } from 'react';
 import Select from 'react-select';
-import { filterVariants } from '../config/animation';
 import { filterOptions } from '../constants/filter-options';
 import { sortOptions } from '../constants/sort-options';
-import { FilterStatus, PropsType, SelectOptions, SortStatus } from '../types/filter.types';
+import { filterVariants } from './filterAnimationVariants';
 
 import styles from '@/styles/blocks/table.module.scss';
 
