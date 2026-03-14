@@ -12,8 +12,8 @@ import { ChangePasswordButton } from "@/features/profile/user-security/ui/Change
 import { DeleteAccountButton } from "@/features/profile/user-security/ui/DeleteAccountButton";
 import Accordion from "@/shared/ui/accordion/ui/Accordion";
 import { motion } from "motion/react";
-import { profileVariants } from "../lib/profileAnimationVariants";
 import { useProfilePageModel } from "../model/useProfilePageModel";
+import { profileVariants } from "./profileAnimationVariants";
 
 import styles from '@/styles/blocks/profile.module.scss';
 

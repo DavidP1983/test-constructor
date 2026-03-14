@@ -1,5 +1,5 @@
 import { CompletedTest } from "@/shared/types/completed-type"
-import { FilterStatus } from "../types/filter.types"
+import { FilterStatus } from "@/shared/types/select.types"
 
 export const filterData = (data: CompletedTest[], filter: FilterStatus | null, completedTestsToken: string[],) => {
 

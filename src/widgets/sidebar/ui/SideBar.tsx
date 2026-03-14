@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 import { useShallow } from 'zustand/shallow';
 
+import { usePromptFeedback } from '@/shared/hooks/usePromptFeedback';
 import styles from '@/styles/blocks/sidebar.module.scss';
 
 
@@ -22,7 +23,7 @@ export const SideBar = memo(({ toggle }: Readonly<{ toggle: (val: boolean) => vo
         userData: state.userData,
     })));
     const avatar = useProfile(state => state.avatarUrl);
-
+    const { promptFeedback } = usePromptFeedback();
 
     // Очистка при Logout
     const resetTotalCreatedTests = useTest(state => state.resetTotalCreatedTests);
@@ -32,6 +33,9 @@ export const SideBar = memo(({ toggle }: Readonly<{ toggle: (val: boolean) => vo
 
 
     const handleLogout = async () => {
+        const feedbackShown = await promptFeedback();
+        if (feedbackShown) return;
+
         await logout();
         resetTotalCreatedTests();
         queryClient.cancelQueries();
@@ -111,6 +115,14 @@ export const SideBar = memo(({ toggle }: Readonly<{ toggle: (val: boolean) => vo
                                     <span className="icon-user"></span>
                                 </div>
                                 <p className={styles.text}>Profile</p>
+                            </Link>
+                        </li>
+                        <li className={styles.sidebar__item}>
+                            <Link className={styles.sidebar__link} href="/feedback" data-tooltip="Feedback">
+                                <div className={styles.icon}>
+                                    <span className="icon-commenting"></span>
+                                </div>
+                                <p className={styles.text}>Feedback</p>
                             </Link>
                         </li>
                         <li className={styles.sidebar__item}>
