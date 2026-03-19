@@ -10,7 +10,7 @@ export default function Error({
 }) {
     return (
         <ErrorPage
-            error={`Opps... something went wrong, we are sorry for inconvenience`}
+            error={`Opps... something went wrong, ${error.message}`}
             actions={<button onClick={() => reset()}>Try again</button>} />
     )
 }

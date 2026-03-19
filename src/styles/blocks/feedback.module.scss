@@ -84,13 +84,7 @@
     }
     &__fields {
         margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        padding: 20px;
-        color: var(--text--color);
+        @include form;
 
         &_item {
             width: 100%;
@@ -99,13 +93,7 @@
             }
             & .input,
             & .textarea {
-                height: 49px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                margin-top: 5px;
-                width: inherit;
-                padding: 10px;
-                transition: all 0.5s;
+                @include fields;
             }
             & .select {
                 margin-top: 5px;
@@ -116,9 +104,7 @@
             }
             .input:focus,
             .textarea:focus {
-                outline: none;
-                border-color: #3b82f6;
-                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+                @include outline;
             }
 
             & .radio {
