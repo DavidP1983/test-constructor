@@ -123,7 +123,7 @@
     }
 }
 
-// --- Button style --- //
+// --- Button style for Test --- //
 @mixin btn {
     display: block;
     margin: 0 auto;
@@ -140,6 +140,34 @@
     &:hover {
         box-shadow: 1px 2px 10px #c2c1c1;
     }
+}
+
+
+// --- Form fields --- // 
+@mixin form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    color: var(--text--color);
+}
+
+@mixin fields {
+    height: 49px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: inherit;
+    padding: 10px;
+    transition: all 0.5s;
+}
+
+@mixin outline {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
 }
 
 

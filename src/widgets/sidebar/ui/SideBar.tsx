@@ -118,6 +118,14 @@ export const SideBar = memo(({ toggle }: Readonly<{ toggle: (val: boolean) => vo
                             </Link>
                         </li>
                         <li className={styles.sidebar__item}>
+                            <Link className={styles.sidebar__link} href="/flashcard" data-tooltip="Flashcards">
+                                <div className={styles.icon}>
+                                    <span className="icon-folder-open"></span>
+                                </div>
+                                <p className={styles.text}>FlashCards</p>
+                            </Link>
+                        </li>
+                        <li className={styles.sidebar__item}>
                             <Link className={styles.sidebar__link} href="/feedback" data-tooltip="Feedback">
                                 <div className={styles.icon}>
                                     <span className="icon-commenting"></span>

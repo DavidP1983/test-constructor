@@ -1,0 +1,280 @@
+@use '../base/variables.scss' as *;
+@use '../base/mixins.scss' as *;
+
+.deck {
+    padding: 30px;
+
+    img {
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+        border-radius: 30px;
+    }
+
+    & .title {
+        text-align: center;
+    }
+
+    & .add, & .study {
+        @include btn;
+        background-color: #2472E1;
+        color: #ffffff;
+        font-size: 16px;
+        position: relative;       
+    }
+    & .add {
+        &::before {
+            content: '+';
+            display: block;
+            position: absolute;
+            font-size: 25px;
+            top: 50%;
+            left: 10%;
+            font-weight: 700;
+            transform: translate(-10%, -50%);
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: safe center;
+    }
+    & .subtitle {
+        margin-top: 30px;
+        text-align: center;
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 20px;
+    }
+
+    & .help {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        color: var(--text--color);
+        font-size: 15px;
+        font-weight: normal;
+    }
+    &__welcome, &__folders {
+       margin-top: 20px; 
+    }
+    & .divider {
+        margin-top: 20px;
+        width: 100%;
+        height: 1px;
+        background-color: rgba(121, 115, 115, 0.504);
+    }
+
+    &__folders {
+        width: 100%;
+
+        &_title {
+            text-align: center;
+            font-weight: normal;
+            font-size: 18px;
+            color: var(--text--color);
+        }
+        &_items {
+            display: grid;
+            place-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            grid-template-rows: repeat(3, minmax(100px, auto));
+            grid-auto-rows: minmax(100px, auto);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        &_item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            gap: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+            will-change: transform;
+            transform: translateZ(0);
+
+            &:hover{
+                transform: scale(1.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+                    0 10px 20px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        &_abr {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 85px;
+            height: 80px;
+            border-radius: 20px;
+            background-color: #FED650;
+            font-size: 25px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        &_desc, & .time {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            & .title {
+                font-size: 20px;
+                font-weight: 700;
+                color: var(--text--color);
+            }
+            & .time {
+                flex-direction: row;
+                gap: 10;
+                color: #808086;
+                font-size: 14px;
+            }
+        }
+        & .study {
+           min-width: 100px;
+           padding: 10px 15px;
+           margin: 0;
+        }
+
+        & .dot {
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+
+            & .current__link {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+                background-color: transparent;
+                border-radius: 20px;
+                transition: all 0.5s ease;
+                &:hover {
+                    background-color: #ddd;
+                }
+            }
+            & .submenu {
+                display: none;
+                position: absolute;
+                top: 40px;
+                left: -110px;
+                background-color: #bac2c5;
+                padding: 0;  
+                
+                & li {
+                    color: #000;
+                    font-size: 13px;
+                    font-weight: 400;
+                    padding: 10px 15px;
+                    border-radius: 10px;
+                    width: 100%;
+                }
+                & li:hover {
+                    background-color: #ddd;
+                }            
+            }
+
+            & li:hover > .submenu {
+                width: 150px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 10px 5px;
+                border-radius: 10px;
+            }
+        }
+
+    }
+
+    /* Folder Form */
+
+    &__form {
+        @include form;
+        width: 400px;
+        background-color: var(--background);
+        border: 1px solid #ad9d9d;
+        border-radius: 20px;
+
+        &_field {
+            width: 100%;
+
+            & .input {
+                @include fields;
+            }
+            & .input:focus {
+                @include outline;
+            }
+
+            label {
+                text-align: start;
+                display: block;
+            }
+        }
+
+        &_btn  {
+            @include btn;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        &_btn:disabled {
+            @include disabled;
+        }
+    }
+}
+
+@media screen and (max-width: 784px) {
+    .deck {
+        &__folders {
+            &_items {
+                grid-template-columns: repeat(1, minmax(200px, 1fr));
+            }
+            &_item {
+                flex-direction: row;
+                padding: 10px 10px;
+                &:hover {
+                    z-index: 20;
+                }
+            }
+            &_abr { 
+                height: 60px;
+            }
+            &_desc {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+
+                & .title {
+                    font-size: 17px;
+                }
+                & .time {
+                    justify-content: flex-start;
+                }
+            }
+            & .study {
+                margin-right: 60px;
+            }
+            & .dot {
+                top: 14px;
+            }
+            & .submenu {
+                z-index: 100;
+            }
+            
+        }
+    }
+}
