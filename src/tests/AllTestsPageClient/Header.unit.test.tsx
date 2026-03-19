@@ -76,12 +76,12 @@ describe('Header component', () => {
     test('test menu items corresponding', async () => {
         renderWithClient(<Header />);
 
-        const menuItems = ['My Tests', 'Completed', 'Profile', 'Feedback'];
+        const menuItems = ['My Tests', 'Completed', 'Profile', 'Feedback', 'Flashcards'];
         const menu = screen.getAllByRole('listitem');
         menuItems.forEach((item) => {
             expect(screen.getByText(item)).toBeInTheDocument()
         })
-        expect(menu.length).toBe(6);
+        expect(menu.length).toBe(7);
     });
 
 
