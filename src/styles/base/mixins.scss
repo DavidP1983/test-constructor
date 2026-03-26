@@ -170,6 +170,13 @@
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
 }
 
+@mixin textarea {
+    height: auto;
+    resize: none;
+    field-sizing: content;
+    width: inherit !important;
+}
+
 
 
 // --- Animation Appearing of items --- //

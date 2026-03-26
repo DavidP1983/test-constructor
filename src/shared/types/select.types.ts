@@ -16,6 +16,11 @@ export type WhoSelect = 'employer' | 'developer' | 'student' | 'other';
 export type UseSelect = 'very ease' | 'normal' | 'hard';
 export type SpeedSelect = 'fast' | 'acceptable' | 'slow';
 
+
+/* FlashCard Form types*/
+export type Difficulty = 1 | 2 | 3 | 4 | 5;
+export type Example = 'code' | 'text' | 'formula';
+
 /*General Select types*/
 export type SelectOptions<T> = {
     value: T;

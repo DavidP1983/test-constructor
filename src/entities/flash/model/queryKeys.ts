@@ -1,0 +1,1 @@
+export const FLASHCARDS_QUERY_KEY = ['flashCards'] as const;
