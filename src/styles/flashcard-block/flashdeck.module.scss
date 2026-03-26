@@ -95,13 +95,13 @@
             gap: 10px;
             width: 100%;
             border: 1px solid #ddd;
-            border-radius: 20px;
+            border-radius: 15px;
             transition: transform 0.5s ease;
             will-change: transform;
             transform: translateZ(0);
 
-            &:hover{
-                transform: scale(1.1);
+            &:hover {
+                transform: scale(1.05);
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
                     0 10px 20px rgba(0, 0, 0, 0.15);
             }
@@ -151,13 +151,14 @@
             right: 0;
             cursor: pointer;
 
-            & .current__link {
+            & .dot__btn {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 width: 30px;
                 height: 30px;
                 background-color: transparent;
+                border: none;
                 border-radius: 20px;
                 transition: all 0.5s ease;
                 &:hover {
@@ -169,17 +170,27 @@
                 position: absolute;
                 top: 40px;
                 left: -110px;
-                background-color: #bac2c5;
+                background-color: #a1b3bb;
                 padding: 0;  
                 
                 & li {
-                    color: #000;
-                    font-size: 13px;
+                    color: #ffffff;
+                    font-size: 15px;
                     font-weight: 400;
                     padding: 10px 15px;
                     border-radius: 10px;
                     width: 100%;
+
+                    & button {
+                        font-weight: 400;
+                        background-color: inherit;
+                        border: none;
+                        color: #000;
+                        cursor: pointer;
+                        padding: 0;
+                    }
                 }
+                
                 & li:hover {
                     background-color: #ddd;
                 }            
@@ -195,8 +206,41 @@
                 padding: 10px 5px;
                 border-radius: 10px;
             }
+            & li:hover > .submenu button {
+                color: #6e0505;
+            }
         }
 
+        &_search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & .field {
+                @include form;
+                padding: 0;
+                gap: 0;
+                width: 300px;
+
+                & .input {
+                    @include fields;
+                    height: 40px;
+                    margin: 0;
+                }
+                & .input:focus {
+                    @include outline;
+                }
+                label {
+                    margin-bottom: 5px;
+                    align-self: flex-start;
+                    display: block;
+                }
+                & .select {
+                    width: 100%;
+                    color: rgb(36, 36, 122);
+                }
+            }
+        }
     }
 
     /* Folder Form */
@@ -234,6 +278,11 @@
         &_btn:disabled {
             @include disabled;
         }
+        & .helper {
+            margin-top: 5px;
+            font-size: 13px;
+            color: rgb(159, 19, 19);
+        }
     }
 }
 
@@ -246,12 +295,14 @@
             &_item {
                 flex-direction: row;
                 padding: 10px 10px;
+                height: 100%;
                 &:hover {
                     z-index: 20;
                 }
             }
             &_abr { 
-                height: 60px;
+                height: 55px;
+                font-size: 20px;
             }
             &_desc {
                 flex-direction: column;
@@ -274,7 +325,40 @@
             & .submenu {
                 z-index: 100;
             }
-            
+            &_search {
+                margin-top: 20px;
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 640px) {
+    .deck {
+        &__folders {
+            &_abr {
+                height: 38px;
+                font-size: 16px;
+                border-radius: 10px;
+                font-weight: 400;
+            }
+            &_desc {
+                
+                & .time {
+                    font-size: 13px;
+                    gap: 5px;
+                }
+            }
+            & .study {
+                min-width: 70px;
+                padding: 10px 10px;
+                margin-right: 40px;
+            }
+            & .dot {
+                top: 20px;
+            }
         }
     }
 }

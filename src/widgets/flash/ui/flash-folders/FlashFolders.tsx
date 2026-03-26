@@ -1,22 +1,33 @@
 'use client';
 
 import { useGetFolders } from "@/entities/flash/model/useGetFolders";
-import { DeckFolders } from "@/entities/flash/ui/flash-desk/DeckFolders";
-import { FolderMenu } from "@/features/flash/ui/folder-menu/FolderMenu";
+import { DeckFolders } from "@/entities/flash/ui/deck/flash-desk/DeckFolders";
+import { useFilterSortSelection } from "@/features/flash/model/deck/useFilterSortSelection";
+import { FilterSortFolders } from "@/features/flash/ui/deck/filter-sort-folders/FilterSortFolders";
+import { FolderMenu } from "@/features/flash/ui/deck/folder-menu/FolderMenu";
 import { StatusContent } from "@/shared/ui/status-content/StatusContent";
+import { AnimatePresence } from "motion/react";
 import Image from "next/image";
+import { useState } from "react";
 
 import styles from '@/styles/flashcard-block/flashdeck.module.scss';
 
 
 export const FlashFolders = () => {
-
+    const [searchData, setSearchData] = useState({ search: '', select: '' });
     const { data, error, status } = useGetFolders();
+    const filteredAndSortedData = useFilterSortSelection(data, searchData);
 
     return (
         <div className={styles.deck__folders}>
-            <StatusContent
+            <h2 className={styles.deck__folders_title}>Your Desk</h2>
+            <FilterSortFolders
                 data={data}
+                searchData={searchData}
+                setSearchData={setSearchData} />
+
+            <StatusContent
+                data={filteredAndSortedData}
                 status={status}
                 error={error}
                 renderEmpty={() => (
@@ -32,14 +43,18 @@ export const FlashFolders = () => {
                 )}
                 renderData={(data) => (
                     <>
-                        <h2 className={styles.deck__folders_title}>Your Desk</h2>
-                        <ul className={styles.deck__folders_items}>
-                            {data.map(card => (
-                                <DeckFolders
-                                    folderData={card} key={card._id}
-                                    actions={<FolderMenu />} />
-                            ))}
-                        </ul>
+                        <AnimatePresence>
+                            <ul
+                                className={styles.deck__folders_items}>
+                                {data.map(folder => (
+                                    <DeckFolders
+                                        folderData={folder}
+                                        motionKey={searchData}
+                                        key={folder._id}
+                                        actions={<FolderMenu folderId={folder._id} />} />
+                                ))}
+                            </ul>
+                        </AnimatePresence>
                     </>
                 )} />
         </div>

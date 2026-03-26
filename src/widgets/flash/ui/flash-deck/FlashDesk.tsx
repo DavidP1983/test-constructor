@@ -1,5 +1,5 @@
-import { CreateFolder } from "@/features/flash/ui/create-folder/CreateFolder";
-import { CreateFolderForm } from "@/features/flash/ui/create-folder/CreateFolderForm";
+import { CreateFolder } from "@/features/flash/ui/deck/create-folder/CreateFolder";
+import { CreateFolderForm } from "@/features/flash/ui/deck/create-folder/CreateFolderForm";
 import { Modal } from "@/shared/ui/modal/Modal";
 import clsx from "clsx";
 import Image from "next/image";

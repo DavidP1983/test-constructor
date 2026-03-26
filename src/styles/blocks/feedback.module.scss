@@ -188,10 +188,7 @@
                 }
             }
             & .textarea {
-                height: auto;
-                resize: none;
-                field-sizing: content;
-                width: inherit !important;
+                @include textarea;
             }
         }
     }

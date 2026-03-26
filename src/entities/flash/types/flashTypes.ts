@@ -1,6 +1,6 @@
 
 export type FlashCardsType = {
-    id: string;
+    _id: string;
     tag: string | null;
     question: string;
     answer: string;
@@ -16,6 +16,7 @@ export type FlashCardsType = {
 export type GeneralFlashType = {
     _id: string;
     authorId: string;
+    tag: string | null;
     title: string;
     abb: string;
     color?: string;
