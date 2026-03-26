@@ -7,7 +7,7 @@
 import { useCreateTest } from '@/entities/test-operation/hooks/useCreateTest';
 import { useEditTest } from '@/entities/test-operation/hooks/useEditTest';
 import { SpinnerForBtn } from '@/shared/ui/spinner/SpinnerForBtn';
-import clsx from 'clsx';
+import { UnsavedIndicator } from '@/shared/ui/unsavedIndicator/UnsavedIndicator';
 import { useShallow } from 'zustand/shallow';
 import { useTest } from '../model/store';
 
@@ -30,10 +30,7 @@ export const CreateOperation = ({ mode }: { mode: string | null }) => {
                 onClick={handleDecline}>
                 Decline</button>
 
-            <div className={clsx(styles.create__indicator, indicator && styles.changes)}>
-                <div className={styles.create__indicator_circle}></div>
-                <div className={styles.create__indicator_title}>Unsaved changes</div>
-            </div>
+            <UnsavedIndicator indicator={indicator} />
 
             <button
                 className={styles.create__save}

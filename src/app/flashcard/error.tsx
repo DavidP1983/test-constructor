@@ -2,7 +2,6 @@
 import { ErrorPage } from "@/shared/ui/error/ErrorPage"
 
 export default function Error({
-    error,
     reset,
 }: {
     error: Error & { digest?: string }
@@ -10,7 +9,7 @@ export default function Error({
 }) {
     return (
         <ErrorPage
-            error={`Opps... something went wrong, ${error.message}`}
+            error={`Opps... something went wrong, we are sorry for inconvenience, let us know about this error`}
             actions={<button onClick={() => reset()}>Try again</button>} />
     )
 }

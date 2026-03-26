@@ -1,8 +1,6 @@
 import { SelectOptions, SpeedSelect, UseSelect, WhoSelect } from '@/shared/types/select.types';
 import Select from 'react-select';
-import { speedSelect } from '../constants/speed-options';
-import { useSelect } from '../constants/use-options';
-import { whoOptions } from '../constants/who-options';
+import { speedSelect, useSelect, whoOptions } from '../constants';
 import { SelectType } from '../types/feedback-types';
 
 
