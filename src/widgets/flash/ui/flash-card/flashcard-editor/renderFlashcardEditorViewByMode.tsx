@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 interface Props {
     mode: string;
-    handleNext: () => void;
+    handleNext: (length: number) => void;
     handlePrev: () => void;
     currentCardIndex: number;
     length: number;
@@ -23,7 +23,7 @@ export const renderFlashcardEditorViewByMode = (
                     aria-label="button down"
                     title='next'
                     disabled={currentCardIndex === length - 1}
-                    onClick={handleNext}>
+                    onClick={() => handleNext(length)}>
                 </button>
                 <button
                     className={clsx("icon-up-open", styles.btn_up)}

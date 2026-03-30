@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'fontello';
   src:
-    url('/fonts/fontello.woff2?69719661') format('woff2'),
-    url('/fonts/fontello.woff?69719661') format('woff');
+    url('/fonts/fontello.woff2?72161051') format('woff2'),
+    url('/fonts/fontello.woff?72161051') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -54,8 +54,6 @@
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
-
-
 
 .icon-trash-empty:before {
   content: '\e800';
@@ -162,6 +160,21 @@
 }
 
 /* '' */
+.icon-left-open-big:before {
+  content: '\e815';
+}
+
+/* '' */
+.icon-ok:before {
+  content: '\e816';
+}
+
+/* '' */
+.icon-arrows-cw:before {
+  content: '\e817';
+}
+
+/* '' */
 .icon-down-open:before {
   content: '\f004';
 }
@@ -222,6 +235,11 @@
 }
 
 /* '' */
+.icon-clone:before {
+  content: '\f24d';
+}
+
+/* '' */
 .icon-commenting:before {
   content: '\f27a';
 }

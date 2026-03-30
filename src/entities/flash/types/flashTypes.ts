@@ -11,6 +11,7 @@ export type FlashCardsType = {
     createdAt: string;
     updatedAt: string;
     difficulty: 1 | 2 | 3 | 4 | 5;
+    lang: 'ru' | 'en' | 'fr';
 }
 
 export type GeneralFlashType = {

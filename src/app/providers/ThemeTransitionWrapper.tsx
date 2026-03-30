@@ -14,6 +14,7 @@ export const ThemeTransitionWrapper = ({ children }: Props) => {
         const root = document.documentElement;
         root.style.setProperty("--background", theme === 'dark' ? '#242434ff' : '#e3dede42')
         root.style.setProperty("--background--flash", theme === 'dark' ? '#242434ff' : '#F0F1F3')
+        root.style.setProperty("--background--flash--item", theme === 'dark' ? '#1E293B' : '#EAEFF6')
         root.style.setProperty("--text--color", theme === 'dark' ? '#ffffff' : '#242434ff')
         root.style.setProperty("--text--flash", theme === 'dark' ? '#ffffff' : '#2C3649')
         root.style.setProperty("--text--color-sideBar", theme === 'dark' ? '#ffffff' : 'hsl(200, 14%, 30%)')

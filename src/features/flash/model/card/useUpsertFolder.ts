@@ -6,6 +6,7 @@ import { notifyDuringOperation } from "@/shared/utils/notifyDuringOperation";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { FlashSelectType } from "../../types/flash-types";
+import { useCardNavigation } from "../cardNavigation/useCardNavigation";
 import useCreateMutation from "./useCreateMutation";
 import useDeleteCardMutation from "./useDeleteCardMutation";
 import useUpdateCardMutation from "./useUpdateCardMutation";
@@ -25,13 +26,15 @@ export const useUpsertFolder = (folderData: GeneralFlashType, mode: 'create' | '
         question: '',
         answer: '',
         difficulty: undefined,
+        lang: undefined,
         type: undefined,
         example: null,
         img: null,
     });
 
-    /* Для пагинации между вопросами карточек в FlashCardsEditor и CardList */
-    const [currentCardIndex, setCurrentCardIndex] = useState(0);
+    /* Для пагинации между вопросами карточек в FlashCardsEditor и CardList. Повторно используемый Хукк */
+    const navigationActions = useCardNavigation();
+
     const [cardId, setCardId] = useState('');
 
     /* Для фильтрации карточек в SearchCards / useSearchCard*/
@@ -88,6 +91,7 @@ export const useUpsertFolder = (folderData: GeneralFlashType, mode: 'create' | '
             question: cardData.question,
             answer: cardData.answer,
             difficulty: cardData.difficulty,
+            lang: cardData.lang,
             type: cardData.type,
             example: cardData.example,
             img: cardData.img
@@ -113,6 +117,7 @@ export const useUpsertFolder = (folderData: GeneralFlashType, mode: 'create' | '
                 question: '',
                 answer: '',
                 difficulty: undefined,
+                lang: undefined,
                 type: undefined,
                 example: null,
                 img: null,
@@ -122,6 +127,7 @@ export const useUpsertFolder = (folderData: GeneralFlashType, mode: 'create' | '
                 question: originCardData?.question,
                 answer: originCardData?.answer,
                 difficulty: originCardData?.difficulty,
+                lang: originCardData?.lang,
                 type: originCardData?.type,
                 example: originCardData?.example,
                 img: originCardData?.img
@@ -142,6 +148,7 @@ export const useUpsertFolder = (folderData: GeneralFlashType, mode: 'create' | '
             question: '',
             answer: '',
             difficulty: undefined,
+            lang: undefined,
             type: undefined,
             example: null,
             img: null,
@@ -197,6 +204,7 @@ export const useUpsertFolder = (folderData: GeneralFlashType, mode: 'create' | '
                 question: '',
                 answer: '',
                 difficulty: undefined,
+                lang: undefined,
                 type: undefined,
                 example: null,
                 img: null,
@@ -247,9 +255,8 @@ export const useUpsertFolder = (folderData: GeneralFlashType, mode: 'create' | '
         formFieldsData,
         setFormFieldsData,
         cardId,
-        currentCardIndex,
+        navigationActions,
         searchQuestion,
-        setCurrentCardIndex,
         setSearchQuestion,
         handleCardFormInputData,
         handleCardFormSelectData,

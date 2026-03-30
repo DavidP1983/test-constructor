@@ -3,6 +3,7 @@ import { GeneralFlashType } from '../../../types/flashTypes';
 import { getTimeAgo } from '../../../utils/getTimeAgo';
 
 import styles from '@/styles/flashcard-block/flashdeck.module.scss';
+import Link from 'next/link';
 
 
 export const DeckFolders = (
@@ -38,7 +39,11 @@ export const DeckFolders = (
                         <time dateTime={folderData.createdAt}>{date}</time>
                     </div>
                 </div>
-                <button className={styles.study}>Study</button>
+                <Link
+                    href={`flashcard/study/${folderData._id}`}
+                    className={styles.study}
+                >Study
+                </Link>
                 <ul className={styles.dot}>
                     {actions}
                 </ul>

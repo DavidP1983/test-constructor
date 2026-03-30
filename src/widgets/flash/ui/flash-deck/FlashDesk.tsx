@@ -10,7 +10,7 @@ import styles from '@/styles/flashcard-block/flashdeck.module.scss';
 export const FlashDesk = ({ children }: { children: React.ReactNode }) => {
 
     return (
-        <section className={styles.deck} ria-labelledby="flash desk" >
+        <section className={styles.deck} aria-labelledby="flash desk" >
             <div className="container">
                 <h1 className={clsx('title', styles.title)}>Flashcards</h1>
                 <div className={styles.deck__content}>

@@ -20,6 +20,12 @@ export type SpeedSelect = 'fast' | 'acceptable' | 'slow';
 /* FlashCard Form types*/
 export type Difficulty = 1 | 2 | 3 | 4 | 5;
 export type Example = 'code' | 'text' | 'formula';
+export type Language = 'ru' | 'en' | 'fr';
+
+/* FlashStudy types */
+export type Filter = 'all' | 'repeat' | 'known';
+export type Limit = 'all' | 10 | 20;
+export type Sort = 'shuffle' | 'default';
 
 /*General Select types*/
 export type SelectOptions<T> = {
