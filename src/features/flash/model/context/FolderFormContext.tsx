@@ -2,6 +2,7 @@
 import { FlashCardsType, GeneralFlashType } from '@/entities/flash/types/flashTypes';
 import { createContext, type Dispatch, type FormEvent, type SetStateAction, useContext } from 'react';
 import { FlashSelectType } from '../../types/flash-types';
+import { NavigationCard } from '../../types/navigation-types';
 
 type FolderFormContextType = {
     folderData: GeneralFlashType;
@@ -13,9 +14,8 @@ type FolderFormContextType = {
     formFieldsData: Partial<FlashCardsType>;
     folderEditData: { title: string, description: string };
     cardId: string;
-    currentCardIndex: number;
+    navigationActions: NavigationCard,
     searchQuestion: string;
-    setCurrentCardIndex: Dispatch<SetStateAction<number>>;
     setFormFieldsData: Dispatch<SetStateAction<Partial<FlashCardsType>>>;
     setSearchQuestion: Dispatch<SetStateAction<Partial<string>>>;
     handleEditFolderData: (e: React.ChangeEvent<HTMLInputElement>) => void;

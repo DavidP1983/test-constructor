@@ -3,6 +3,9 @@
 import JoditEditor from 'jodit-react';
 import { useCallback, useMemo, useRef } from 'react';
 
+import styles from '@/styles/flashcard-block/flashcard.module.scss';
+
+
 type Props = {
     value?: string;
     onChange: (value: string) => void
@@ -29,6 +32,7 @@ export const TextEditor = ({ value = '', onChange }: Props) => {
 
     return (
         <JoditEditor
+            className={styles.editor}
             ref={editor}
             value={value}
             config={config}

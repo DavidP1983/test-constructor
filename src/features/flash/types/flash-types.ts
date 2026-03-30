@@ -1,2 +1,2 @@
 
-export type FlashSelectType = 'difficulty' | 'type';
+export type FlashSelectType = 'difficulty' | 'type' | 'lang';
