@@ -11,30 +11,30 @@
 */
 import { FlashCardsType } from '@/entities/flash/types/flashTypes';
 import { useFolderFormContext } from '@/features/flash/model/context/FolderFormContext';
+import { CardsActions } from '@/features/flash/ui/card/edit-delete-card/CardsActions';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
-import sanitizeHtml from 'sanitize-html';
-import { containerVariants, itemVariants } from './containerVariants';
+import { CardListItem } from '../card-list-item/CardListItem';
+import { containerVariants } from './containerVariants';
 
 import styles from '@/styles/flashcard-block/flashcard.module.scss';
 
 interface Props {
-    renderAction: (id: FlashCardsType) => React.ReactNode;
     cards: FlashCardsType[];
 }
 
-export const CardList = ({ renderAction, cards }: Props) => {
+export const CardList = ({ cards }: Props) => {
 
     const {
         isPendingCreate,
         mode,
         handleEditCard,
-        setCurrentCardIndex,
-        currentCardIndex
+        navigationActions,
     } = useFolderFormContext();
 
     const myRef = useRef<HTMLUListElement | null>(null);
+    const { currentCardIndex, setCurrentCardIndex } = navigationActions;
 
 
     useEffect(() => {
@@ -46,7 +46,7 @@ export const CardList = ({ renderAction, cards }: Props) => {
 
 
     const classNames = clsx({
-        [styles.card__edit]: mode === 'edit'
+        [styles.card__edit]: mode === 'edit',
     });
 
     return (
@@ -59,35 +59,18 @@ export const CardList = ({ renderAction, cards }: Props) => {
             animate='show'>
 
             <AnimatePresence>
-                {
-                    cards.map((item, i) => (
-                        <motion.li
-                            layout
-                            variants={itemVariants}
-                            initial='hidden'
-                            animate='show'
-                            exit='exit'
-                            className={clsx(classNames, i === currentCardIndex && mode !== 'create' ? styles.card__active : '')}
-                            key={item._id ?? `temp-${i}`}
-                            title={item.question ?? 'card'}
-                            onClick={() => {
-                                if (mode === 'create') return;
-                                handleEditCard(item)
-                                setCurrentCardIndex(i)
-                            }}>
-                            <div className={styles.question}>
-                                <span>{i + 1}.</span>
-                                {item.question}
-                            </div>
-                            <div
-                                className={styles.answer}
-                                dangerouslySetInnerHTML={{
-                                    __html: sanitizeHtml(item.answer).replace(/&nbsp;/g, ' ')
-                                }} />
-                            {renderAction(item)}
-                        </motion.li>
-                    ))
-                }
+                <CardListItem
+                    cards={cards}
+                    classNames={classNames}
+                    currentCardIndex={currentCardIndex}
+                    mode={mode}
+                    onSelectCard={(item: FlashCardsType, i: number) => {
+                        if (mode === 'create') return;
+                        handleEditCard(item)
+                        setCurrentCardIndex(i)
+                    }}
+                    renderAction={(card: FlashCardsType) => < CardsActions card={card} />}
+                />
             </AnimatePresence>
         </motion.ul>
     );

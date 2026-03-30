@@ -1,7 +1,7 @@
 'use client';
-import { difficultyOptions, exampleOptions } from '@/features/flash/constants';
+import { difficultyOptions, exampleOptions, languageOptions } from '@/features/flash/constants/card';
 import { useFolderFormContext } from '@/features/flash/model/context/FolderFormContext';
-import { Difficulty, Example, SelectOptions } from '@/shared/types/select.types';
+import { Difficulty, Example, Language, SelectOptions } from '@/shared/types/select.types';
 import { SpinnerForBtn } from '@/shared/ui/spinner/SpinnerForBtn';
 import { useEffect, useRef } from 'react';
 import Select from 'react-select';
@@ -82,6 +82,26 @@ export const CardForm = () => {
                 />
             </div>
             <div className={styles.fields_item}>
+                <label htmlFor="language">Text Language</label>
+                <Select <SelectOptions<Language>, false>
+                    options={languageOptions}
+                    className={styles.select}
+                    isSearchable={false}
+                    name='lang'
+                    required
+                    placeholder="--Choice Text language--"
+                    instanceId={'difficulty'}
+                    value={
+                        formFieldsData.lang ?
+                            languageOptions.find(o => o.value === formFieldsData.lang)
+                            : null
+                    }
+                    onChange={(option) => {
+                        if (option) handleCardFormSelectData('lang', option.value)
+                    }}
+                />
+            </div>
+            <div className={styles.fields_item}>
                 <label htmlFor="type">Example Type</label>
                 <Select <SelectOptions<Example>, false>
                     options={exampleOptions}
@@ -126,7 +146,7 @@ export const CardForm = () => {
                     className={styles.save}
                     disabled={isPendingCreate}
                     type='submit'>
-                    {isPendingCreate || isPendingUpdate ? <>Saving... <SpinnerForBtn /></> : 'Save card'}
+                    {isPendingCreate || isPendingUpdate ? <>Saving... <SpinnerForBtn color={'hsl(220, 13%, 96%)'} /></> : 'Save card'}
                 </button>
                 <button
                     className={styles.discard}

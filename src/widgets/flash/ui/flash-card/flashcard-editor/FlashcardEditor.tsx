@@ -13,19 +13,13 @@ export const FlashCardsEditor = () => {
         folderData,
         searchQuestion,
         handleEditCard,
-        currentCardIndex,
-        setCurrentCardIndex } = useFolderFormContext();
+        navigationActions,
+    } = useFolderFormContext();
 
     const { cards } = useSearchCard(searchQuestion, folderData);
+    const { handleNext, handlePrev, currentCardIndex, setCurrentCardIndex } = navigationActions;
+
     const currentCard = cards[currentCardIndex];
-
-    const handleNext = () => {
-        setCurrentCardIndex(prev => Math.min(prev + 1, cards.length - 1));
-    };
-
-    const handlePrev = () => {
-        setCurrentCardIndex(prev => Math.max(prev - 1, 0));
-    };
 
     /* Благодаря useEffect подставляется нужная карточка с данными */
     useEffect(() => {
