@@ -6,7 +6,7 @@ export const useFilterSortSelection = (receivingData: GeneralFlashType[], { sear
 
     const sortByTag = useMemo(() => {
         if (!select || select === 'all') return receivingData;
-        return receivingData.filter(item => item.tag?.toLowerCase().includes(select.toLowerCase()))
+        return receivingData.filter(item => item.tag?.toLowerCase() === select.toLowerCase())
     }, [receivingData, select])
 
     const filteredAndSortedData = useMemo(() => {

@@ -165,7 +165,7 @@
         margin-top: 30px;
         display: flex;
         align-items: flex-start;
-        transition: all 0.5s;
+        transition: all 0.4s;
 
         & .block__cards_wrapper,
         & .block__editor_wrapper {
@@ -180,7 +180,7 @@
         & .block__cards_wrapper {
             position: relative;
             width: 100%;
-            transition: all 0.5s;
+            transition: all 0.4s ease;
 
             &.open {
                 width: 50%;
@@ -203,15 +203,14 @@
 
         & .block__editor_wrapper {
             width: 0;
-            height: 0;
+            height: 100%;
             opacity: 0;
             overflow: hidden;
-            transition: all 0.5s ease-in-out;
+            transition: all 0.4s ease-in-out;
 
             &.open {
-                opacity: 1;
                 margin-left: 16px;
-                height: 100%;
+                opacity: 1;
                 width: 50%;
             }
         }
@@ -733,7 +732,7 @@
             align-items: center;
             gap: 10px;
             justify-content: center;
-            width: 23%;
+            width: fit-content;
             margin: 0;
             border: 1px dotted var(--text--flash);
             color: #1C6AE5;

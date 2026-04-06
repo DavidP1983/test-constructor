@@ -4,7 +4,7 @@ import { GeneralFlashType } from '@/entities/flash/types/flashTypes';
 import { useGetSelectOptions } from '@/features/flash/model/deck/useGetSelectOptions';
 import { SelectOptions } from '@/shared/types/select.types';
 import styles from '@/styles/flashcard-block/flashdeck.module.scss';
-import { Dispatch, SetStateAction, useId } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
     data: GeneralFlashType[];
@@ -14,7 +14,6 @@ interface Props {
 
 export const FilterSortFolders = ({ data, setSearchData, searchData }: Props) => {
     const options = useGetSelectOptions(data);
-    const filterIds = useId();
 
 
     return (
@@ -28,7 +27,6 @@ export const FilterSortFolders = ({ data, setSearchData, searchData }: Props) =>
                     type="search"
                     id="search"
                     name="search"
-                    required
                     placeholder="Type a folder name..." />
             </div>
             <div className={styles.field}>
@@ -39,7 +37,7 @@ export const FilterSortFolders = ({ data, setSearchData, searchData }: Props) =>
                     isSearchable={false}
                     name='select'
                     placeholder="--Select tag--"
-                    instanceId={filterIds}
+                    instanceId='tag'
                     value={
                         searchData.select ?
                             options.find(o => o.value === searchData.select)

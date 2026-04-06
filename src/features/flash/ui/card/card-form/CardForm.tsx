@@ -70,7 +70,8 @@ export const CardForm = () => {
                     name='difficulty'
                     required
                     placeholder="--Choice question difficulty--"
-                    instanceId={'difficulty'}
+                    instanceId='difficulty'
+                    id='difficulty'
                     value={
                         formFieldsData.difficulty ?
                             difficultyOptions.find(o => o.value === formFieldsData.difficulty)
@@ -90,7 +91,8 @@ export const CardForm = () => {
                     name='lang'
                     required
                     placeholder="--Choice Text language--"
-                    instanceId={'difficulty'}
+                    instanceId='language'
+                    id='language'
                     value={
                         formFieldsData.lang ?
                             languageOptions.find(o => o.value === formFieldsData.lang)
@@ -109,7 +111,8 @@ export const CardForm = () => {
                     isSearchable={false}
                     name='type'
                     placeholder="--Choice example type (optional)--"
-                    instanceId={'type'}
+                    instanceId='type'
+                    id='type'
                     value={
                         formFieldsData.type ?
                             exampleOptions.find(o => o.value === formFieldsData.type)

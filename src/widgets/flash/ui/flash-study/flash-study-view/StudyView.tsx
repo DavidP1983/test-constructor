@@ -2,7 +2,7 @@ import { FlashCardsType } from '@/entities/flash/types/flashTypes';
 import { StudyList } from '@/entities/flash/ui/study/study-list/StudyList';
 import { ResetAllFilters } from '@/features/flash/ui/study/reset-filters/ResetAllFilters';
 import { StudyFilters } from '@/features/flash/ui/study/study-filters/StudyFilters';
-import { ProgressCircle } from '@/shared/ui/progress/ProgressCircle';
+import ProgressCircle from '@/shared/ui/progress/ProgressCircle';
 import { useStudyViewLogic } from '@/widgets/flash/model/useStudyViewLogic';
 import clsx from 'clsx';
 import { type Dispatch, type SetStateAction } from 'react';
@@ -25,6 +25,7 @@ export const StudyView = ({ cards, filters, setFilters, filterResult }: StudySte
         [styles.progress]: true,
         [styles.visible]: isVisible
     });
+
 
     return (
         <div className={styles.flashcard__actions}>
