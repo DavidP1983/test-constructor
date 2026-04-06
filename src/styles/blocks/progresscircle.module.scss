@@ -1,0 +1,53 @@
+@use '../base/variables.scss' as *;
+
+.progress {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 10px;
+
+    &__outer {
+        width: 150px;
+        height:150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
+
+    &__inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        box-shadow:
+            inset -2px -2px 6px rgba(0, 0, 0, 0.15),
+            inset 2px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    &__number {
+        color: var(--text--flash);
+        font-size: 25px;
+        font-weight: 900;
+    }
+
+    &__text {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    svg {
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    circle {
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+    }
+}
+

@@ -2,18 +2,16 @@
 
 import { useGetFolders } from "@/entities/flash/model/useGetFolders";
 import { GeneralFlashType } from "@/entities/flash/types/flashTypes";
-import { StudyList } from "@/entities/flash/ui/study/study-list/StudyList";
 import { useFilterCards } from "@/features/flash/model/study/useFilterCards";
-import { useUpdateStatusCardsMutation } from "@/features/flash/model/study/useUpdateStatusCardsMutation";
-import { ResetAllFilters } from "@/features/flash/ui/study/reset-filters/ResetAllFilters";
 import { StudyButton } from "@/features/flash/ui/study/study-button/StudyButton";
-import { StudyFilters } from "@/features/flash/ui/study/study-filters/StudyFilters";
 import { Difficulty } from "@/shared/types/select.types";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { useStudyStep } from "../../model/useStudyStep";
 import { FlashStudyHeader } from "./flash-study-header/FlashStudyHeader";
 import { FlashCardSlider } from "./flash-study-slider/FlashCardSlider";
+import { StudyView } from "./flash-study-view/StudyView";
 
 import styles from '@/styles/flashcard-block/flashcard.module.scss';
 
@@ -25,12 +23,15 @@ export type StateStudyFilterType = {
 }
 
 export const FlashCardStudy = ({ folderData }: { folderData: GeneralFlashType }) => {
-
     const { data } = useGetFolders();
     const folder = data.find(folder => folder._id === folderData._id) ?? folderData;
-    const { updateCardStatusMutation, pending } = useUpdateStatusCardsMutation(folder._id);
-
-    const [studyStep, setStudyStep] = useState(false);
+    const {
+        studyStep,
+        pending,
+        handleStudyButtonActions,
+        collectStatus,
+        setCollectStatus
+    } = useStudyStep(folder._id);
     const [filters, setFilters] = useState<StateStudyFilterType>(
         {
             status: '',
@@ -39,22 +40,11 @@ export const FlashCardStudy = ({ folderData }: { folderData: GeneralFlashType })
             sort: undefined
         }
     );
-    const [collectStatus, setCollectStatus] = useState<Record<string, "known" | "repeat">>({});
-    const cards = folder.cards ?? [];
 
+    const cards = folder.cards ?? [];
     const { filterResult } = useFilterCards(cards, filters);
     const isEmpty = filterResult.length === 0;
 
-
-    /* Отправка измененных данных(status) на сервер при переходе к фильтрам  */
-    const handleStudyButtonActions = async () => {
-        const isDirty = Object.keys(collectStatus).length;
-        if (isDirty) {
-            await updateCardStatusMutation(collectStatus)
-        }
-        setStudyStep(prev => !prev)
-        setCollectStatus({})
-    }
 
     return (
         <section className={styles.flashcard} aria-labelledby="section-study">
@@ -84,17 +74,12 @@ export const FlashCardStudy = ({ folderData }: { folderData: GeneralFlashType })
                                 animate={{ rotateY: 0, opacity: 1 }}
                                 exit={{ rotateY: -90, opacity: 0 }}
                                 transition={{ duration: 0.4 }}>
-                                <div className={styles.flashcard__actions}>
-                                    <div className={clsx(styles.block__cards_wrapper, true && styles.open)}>
-                                        <StudyList cards={filterResult} />
-                                    </div>
-                                    <div className={clsx(styles.block__editor_wrapper, true && styles.open)}>
-                                        <div className={styles.block__filters}>
-                                            <StudyFilters setFilters={setFilters} filters={filters} />
-                                            <ResetAllFilters setFilters={setFilters} />
-                                        </div>
-                                    </div>
-                                </div>
+                                <StudyView
+                                    cards={cards}
+                                    filters={filters}
+                                    setFilters={setFilters}
+                                    filterResult={filterResult}
+                                />
                             </motion.div>
                         )}
                     {

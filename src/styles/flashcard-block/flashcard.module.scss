@@ -185,6 +185,20 @@
             &.open {
                 width: 50%;
             }
+
+            & .progress {
+                color: var(--text--flash);
+                text-align: center;
+                padding: 20px;
+                font-size: 20px;
+                font-weight: 400;
+                opacity: 0;
+                transition: opacity 0.5s;
+
+                &.visible {
+                    opacity: 1;
+                }
+            }
         }
 
         & .block__editor_wrapper {

@@ -3,19 +3,14 @@
 import { difficultyOptions } from '@/features/flash/constants/card';
 import { filterOptions, limitOptions, sortOptions } from '@/features/flash/constants/study';
 import { Difficulty, Filter, Limit, SelectOptions, Sort } from '@/shared/types/select.types';
-import { StateStudyFilterType } from '@/widgets/flash/ui/flash-study/FlashCardStudy';
-import type { Dispatch, SetStateAction } from 'react';
+import { StudyStepProps } from '@/widgets/flash/ui/flash-study/flash-study-view/StudyView';
 import Select from 'react-select';
 
 import styles from '@/styles/flashcard-block/flashcard.module.scss';
 
 
-interface Props {
-    setFilters: Dispatch<SetStateAction<StateStudyFilterType>>
-    filters: StateStudyFilterType;
-}
 
-export const StudyFilters = ({ setFilters, filters }: Props) => {
+export const StudyFilters = ({ setFilters, filters }: Omit<StudyStepProps, 'cards' | 'filterResult'>) => {
 
     return (
         <>
