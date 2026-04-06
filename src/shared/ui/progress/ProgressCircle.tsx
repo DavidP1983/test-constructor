@@ -1,6 +1,6 @@
-import styles from '@/styles/blocks/progresscircle.module.scss';
-import type { RefObject } from 'react';
+import { memo, type RefObject } from 'react';
 
+import styles from '@/styles/blocks/progresscircle.module.scss';
 
 interface PropsProgressCircle {
     width: number;
@@ -12,7 +12,7 @@ interface PropsProgressCircle {
     myRef: RefObject<HTMLDivElement | null>
 }
 
-export const ProgressCircle = (
+const ProgressCircle = (
     { width, height, radius, strokeWidth, progressCount, color, myRef }: PropsProgressCircle) => {
 
     const count = Math.floor(progressCount)
@@ -44,4 +44,6 @@ export const ProgressCircle = (
         </div>
     );
 }
+
+export default memo(ProgressCircle)
 

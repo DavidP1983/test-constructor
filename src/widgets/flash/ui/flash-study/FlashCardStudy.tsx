@@ -64,15 +64,15 @@ export const FlashCardStudy = ({ folderData }: { folderData: GeneralFlashType })
                     {isEmpty && <p className={styles.empty}>No cards to study</p>}
                 </div>
 
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode='wait'>
                     {
                         !studyStep
                         && (
                             <motion.div
                                 key="list"
-                                initial={{ rotateY: 90, opacity: 0 }}
-                                animate={{ rotateY: 0, opacity: 1 }}
-                                exit={{ rotateY: -90, opacity: 0 }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
                                 transition={{ duration: 0.4 }}>
                                 <StudyView
                                     cards={cards}
@@ -87,9 +87,9 @@ export const FlashCardStudy = ({ folderData }: { folderData: GeneralFlashType })
                         && (
                             <motion.div
                                 key="slider"
-                                initial={{ rotateY: 90, opacity: 0 }}
-                                animate={{ rotateY: 0, opacity: 1 }}
-                                exit={{ rotateY: -90, opacity: 0 }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
                                 transition={{ duration: 0.4 }}>
                                 <FlashCardSlider
                                     cards={filterResult}
