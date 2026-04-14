@@ -12,21 +12,19 @@ export const useLogin = () => {
     const [type, setType] = useState<string>('password');
     const [fieldValue, setFieldValue] = useState({ name: '', email: '', password: '' })
     const [fieldErrors, setFieldErrors] = useState({ name: '', email: '', password: '' })
-    const { isLoading, isLoginLoading, registration, login, errorMessage, clearErrorMessage, isAuth } = useLoginForm(useShallow((state) => ({
-        isLoading: state.isLoading,
-        isLoginLoading: state.isLoginLoading,
+    const { registration, login, errorMessage, clearErrorMessage, authStep } = useLoginForm(useShallow((state) => ({
         registration: state.registration,
         login: state.login,
         errorMessage: state.errorMessage,
         clearErrorMessage: state.clearErrorMessage,
-        isAuth: state.isAuth
+        authStep: state.authStep
     })));
 
     useEffect(() => {
-        if (searchParams.get('auth') === 'required' && !isAuth) {
+        if (searchParams.get('auth') === 'required' && authStep !== 'authenticated') {
             notify("error", 'Need to be Authorize')
         }
-    }, [searchParams, isAuth]);
+    }, [searchParams, authStep]);
 
 
     const handleToggle = () => {
@@ -86,11 +84,8 @@ export const useLogin = () => {
                 setFieldErrors(errors)
             });
         } else {
-            const success = await login(formDataValidation.data);
-            if (success) {
-                router.push('/builder');
-                setFieldValue({ name: '', email: '', password: '' });
-            }
+            await login(formDataValidation.data);
+            setFieldValue({ name: '', email: '', password: '' });
         }
     }
 
@@ -102,8 +97,7 @@ export const useLogin = () => {
         type,
         fieldValue,
         fieldErrors,
-        isLoading,
-        isLoginLoading,
+        authStep,
         errorMessage
     }
 

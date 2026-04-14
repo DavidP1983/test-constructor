@@ -1,0 +1,190 @@
+@use '../base/variables.scss' as *;
+@use '../base/mixins.scss' as *;
+
+.verification {
+    border-radius: 10px;
+    padding: 20px;
+    width: 350px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-auto-rows: minmax(100px, auto);
+    row-gap: 20px;
+    background-color: #dcd9d9fe;
+    box-shadow: var(--shadow--color);
+
+    &__access {
+        grid-column: 1 / 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        & .icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--background--flash);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 30px;
+            font-weight: 500;
+            color: var(--text--flash);
+            transition: color 0.11s, background-color 0.11s;
+
+            &.confirmed {
+                background-color: #04b204;
+                color: #ffffff;
+            }
+        }
+
+
+
+        & .title {
+            font-size: 20px;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            color: var(--text--flash);
+        }
+    }
+
+    &__dots {
+        grid-column: 1/5;
+        grid-row-start: 2;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        & .dot {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            transition: background-color 0.11s;
+
+            &.enter {
+                background-color: #38bdf8;
+            }
+
+            &.error {
+                background-color: #ca0d0d;
+            }
+
+            &.success {
+                background-color: #1bde2b;
+            }
+        }
+    }
+
+    &__btns {
+        display: grid;
+        place-content: center;
+        grid-template-columns: repeat(3, 70);
+        grid-template-rows: repeat(4, 50);
+        gap: 10px;
+
+        & .btn {
+            background-color: var(--background--flash);
+            border: none;
+            font-weight: 500;
+            border-radius: 20px;
+            color: var(--text--flash);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.11s, transform 0.11s;
+
+            &:hover {
+                background-color: #7ebff1a8;
+            }
+
+            &:focus {
+                @include outline;
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.655);
+                background-color: #7ebff1a8;
+                transform: translateY(2px);
+            }
+
+            &:active {
+                transform: translateY(2px);
+            }
+
+            &:disabled {
+                @include disabled;
+                background-color: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+        }
+
+        & .go {
+            color: #0b2a4a;
+            font-weight: 600;
+        }
+    }
+
+
+    &__status {
+        font-size: 16px;
+        font-weight: 400;
+        grid-column: 1 / 5;
+        grid-row-start: 4;
+        color: var(--text--flash);
+
+        &_verify {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        &_confirmed {
+            color: #04b204;
+        }
+
+        &_error {
+            color: rgb(161, 21, 21);
+        }
+
+        &_resend {
+            @include btn;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            &:disabled {
+                @include disabled;
+            }
+        }
+    }
+
+
+    &.shake {
+        animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+        0% {
+            transform: translateX(0);
+        }
+
+        20% {
+            transform: translateX(-8px);
+        }
+
+        40% {
+            transform: translateX(8px);
+        }
+
+        60% {
+            transform: translateX(-6px);
+        }
+
+        80% {
+            transform: translateX(6px);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+}
