@@ -1,4 +1,4 @@
-import { LoginForm } from "@/features/auth/login/ui/LoginForm";
+import { AuthContainer } from "@/features/auth/login/ui/AuthContainer";
 import { Spinner } from "@/shared/ui/spinner/Spinner";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -22,7 +22,7 @@ export default function Home() {
             Build interactive tests, track progress, and share with friends or students instantly.
           </p>
           <div className="container">
-            <LoginForm />
+            <AuthContainer />
           </div>
         </main>
       </Suspense>

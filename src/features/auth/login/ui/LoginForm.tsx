@@ -2,9 +2,9 @@
 'use client';
 import { SpinnerForBtn } from '@/shared/ui/spinner/SpinnerForBtn';
 import clsx from 'clsx';
+import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useLogin } from '../model/useLogin';
-
 
 import styles from '@/styles/blocks/form.module.scss';
 
@@ -18,8 +18,7 @@ export const LoginForm = () => {
         type,
         fieldValue,
         fieldErrors,
-        isLoading,
-        isLoginLoading,
+        authStep,
         errorMessage
     } = useLogin();
 
@@ -30,7 +29,12 @@ export const LoginForm = () => {
 
     return (
 
-        <div className={styles.auth__form}>
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+            transition={{ duration: 0.5, ease: 'linear' }}
+            className={styles.auth__form}>
             <form className={styles.form} onSubmit={handleRegistration} aria-label="Registration Form">
                 <fieldset>
                     <div className={styles.form__field}>
@@ -86,13 +90,17 @@ export const LoginForm = () => {
                 <button
                     type="submit"
                     className={styles.form__registration}
-                    disabled={isLoading || isLoginLoading}>Registration {isLoading && <SpinnerForBtn />}</button>
+                    disabled={authStep === 'loadingReg' || authStep === 'loadingLog'}>
+                    Registration {authStep === 'loadingReg' && <SpinnerForBtn />}
+                </button>
             </form>
             <div className={styles.form__alternative}>or</div>
             <button
                 className={styles.form__login}
-                disabled={isLoginLoading || isLoading}
-                onClick={handleLogin}>Login {isLoginLoading && <SpinnerForBtn />}</button>
-        </div>
+                disabled={authStep === 'loadingReg' || authStep === 'loadingLog'}
+                onClick={handleLogin}>
+                Login {authStep === 'loadingLog' && <SpinnerForBtn />}
+            </button>
+        </motion.div>
     )
 }

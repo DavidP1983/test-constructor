@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'fontello';
   src:
-    url('/fonts/fontello.woff2?72161051') format('woff2'),
-    url('/fonts/fontello.woff?72161051') format('woff');
+    url('/fonts/fontello.woff2?8113952') format('woff2'),
+    url('/fonts/fontello.woff?8113952') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -175,6 +175,11 @@
 }
 
 /* '' */
+.icon-cancel-alt:before {
+  content: '\e818';
+}
+
+/* '' */
 .icon-down-open:before {
   content: '\f004';
 }

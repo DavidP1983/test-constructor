@@ -24,5 +24,4 @@ export async function handleResponse<T = unknown>(response: Response, defaultErr
     }
 
     return data as T | null
-
 }
