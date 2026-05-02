@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetFolders } from "@/entities/flash/model/useGetFolders";
+import { useGetFolders } from "@/entities/flash/flash-folders/api/useGetFolders";
 import { GeneralFlashType } from "@/entities/flash/types/flashTypes";
 import { useFilterCards } from "@/features/flash/model/study/useFilterCards";
 import { StudyButton } from "@/features/flash/ui/study/study-button/StudyButton";

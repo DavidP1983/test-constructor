@@ -8,7 +8,7 @@ import { useTableVirtualizer } from "@/shared/hooks/useTableVirtualizer";
 import { CompletedTest } from "@/shared/types/completed-type";
 import { EmptyState } from "@/shared/ui/emptyState/EmptyState";
 import { GoTopButton } from "@/shared/ui/goTopButton/goTopButton";
-import { StatusContent } from "@/shared/ui/status-content/StatusContent";
+import { StatusContent } from "@/shared/ui/status-content/ui/StatusContent";
 import clsx from "clsx";
 import { useAnimate } from "motion/react";
 import { useEffect, useState } from "react";

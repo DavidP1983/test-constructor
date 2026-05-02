@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as completedTestRowVal from '@/entities/table/ui/table-row/completedTestRow';
-import { StatusContent } from '@/shared/ui/status-content/StatusContent';
+import { StatusContent } from '@/shared/ui/status-content/ui/StatusContent';
 import { CompletedTestsPageClient } from '@/widgets/completedTest-page/CompletedTestsPageClient';
 import * as renderRowCompletedVal from '@/widgets/table-row/ui/renderRowCompleted';
 import Table from '@/widgets/table/Table';

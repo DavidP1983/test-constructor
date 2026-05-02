@@ -1,5 +1,4 @@
-import { FlashDesk } from '@/widgets/flash/ui/flash-deck/FlashDesk';
-import { FlashFolders } from '@/widgets/flash/ui/flash-folders/FlashFolders';
+import { FlashDeck } from '@/widgets/flash-deck';
 import Header from '@/widgets/header/ui/Header';
 import { Metadata } from 'next';
 
@@ -16,9 +15,7 @@ export default function FlashFolderPage() {
         <>
             <Header />
             <main>
-                <FlashDesk>
-                    <FlashFolders />
-                </FlashDesk>
+                <FlashDeck />
             </main>
         </>
     )
