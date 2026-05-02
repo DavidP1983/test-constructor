@@ -4,6 +4,7 @@
 .flashcard {
     padding: 20px;
     height: 100%;
+    overflow: hidden;
 
     .icon {
         margin-left: 10px;
@@ -164,6 +165,7 @@
     &__actions {
         margin-top: 30px;
         display: flex;
+        gap: 16px;
         align-items: flex-start;
         transition: all 0.4s;
 
@@ -171,20 +173,15 @@
         & .block__editor_wrapper {
             margin-top: 30px;
             border-radius: 10px;
-            box-shadow:
-                0 4px 8px rgba(0, 0, 0, 0.05),
-                0 10px 20px rgba(0, 0, 0, 0.08),
-                0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px dashed #e4c2c2;
+            box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
         }
 
         & .block__cards_wrapper {
             position: relative;
             width: 100%;
-            transition: all 0.4s ease;
-
-            &.open {
-                width: 50%;
-            }
+            transition: width 0.2s ease;
+            will-change: width;
 
             & .progress {
                 color: var(--text--flash);
@@ -199,19 +196,24 @@
                     opacity: 1;
                 }
             }
+
+            &.open {
+                width: 50%;
+            }
         }
 
         & .block__editor_wrapper {
             width: 0;
-            height: 100%;
+            height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: all 0.4s ease-in-out;
+            transition: all 0.2s ease;
+            will-change: width, height, opacity;
 
             &.open {
-                margin-left: 16px;
                 opacity: 1;
                 width: 50%;
+                height: 100%;
             }
         }
 
@@ -268,6 +270,18 @@
             }
 
             &_items {
+                -webkit-mask-image: linear-gradient(to bottom,
+                        transparent 0%,
+                        black 5%,
+                        black 85%,
+                        transparent 100%);
+
+                mask-image: linear-gradient(to bottom,
+                        transparent 0%,
+                        black 5%,
+                        black 85%,
+                        transparent 100%);
+
                 height: 350px;
                 margin-top: 10px;
                 padding: 10px;
@@ -346,6 +360,7 @@
                 color: #1C6AE5;
             }
         }
+
 
         /* Editor Block */
         & .block__editor {
@@ -607,6 +622,7 @@
 
             &_answer {
                 width: 100%;
+
                 & .answer__content {
                     user-select: none;
                     display: block;

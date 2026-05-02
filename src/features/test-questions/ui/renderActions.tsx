@@ -1,7 +1,7 @@
 import { BackButton } from "@/features/navigation/ui/BackButton";
 import { AddQuestionFormLazy } from "@/features/test-actions/add-form/ui/AddQuestionFormLazy";
 import { CreateOperation } from "@/features/test-actions/save-question/ui/CreateOperation";
-import { Modal } from "@/shared/ui/modal/Modal";
+import { Modal } from "@/shared/ui/modal/ui/Modal";
 
 export type Mode = "create" | "preview" | "edit" | 'pass';
 export const renderActions = (mode: Mode) => {

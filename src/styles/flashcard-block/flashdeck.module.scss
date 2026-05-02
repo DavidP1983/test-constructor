@@ -15,7 +15,7 @@
         text-align: center;
     }
 
-    & .add, & .study {
+    & .study {
         @include btn;
         background-color: #2472E1;
         color: #ffffff;
@@ -255,7 +255,9 @@
     &__form {
         @include form;
         width: 450px;
-        background-color: var(--background);
+        background-color: #dee3e7;
+        box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+        pointer-events: auto;
         border: 1px solid #ad9d9d;
         border-radius: 20px;
 
@@ -273,17 +275,6 @@
                 text-align: start;
                 display: block;
             }
-        }
-
-        &_btn  {
-            @include btn;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-        }
-        &_btn:disabled {
-            @include disabled;
         }
         & .helper {
             margin-top: 5px;

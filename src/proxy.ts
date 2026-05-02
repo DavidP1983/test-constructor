@@ -5,8 +5,8 @@ const PRIVATE_PATHS = [
     '/builder/completed',
     '/profile',
     '/create',
-    'flashcard',
-    'flashcard/study'
+    '/flashcard',
+    '/flashcard/study'
 ];
 
 export function proxy(req: NextRequest) {
@@ -34,7 +34,7 @@ export const config = {
         '/builder/completed',
         '/profile',
         '/create',
-        '/flashcard',
+        '/flashcard/:path*',
         '/flashcard/study'
     ],
 }

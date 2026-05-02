@@ -11,6 +11,12 @@ export type PropsType = {
     status: "loading" | "error" | "success";
 }
 
+/*General Select types*/
+export type SelectOptions<T> = {
+    value: T;
+    label: string;
+}
+
 /* FeedbackFrom types */
 export type WhoSelect = 'employer' | 'developer' | 'student' | 'other';
 export type UseSelect = 'very ease' | 'normal' | 'hard';
@@ -27,9 +33,4 @@ export type Filter = 'all' | 'repeat' | 'known';
 export type Limit = 'all' | 10 | 20;
 export type Sort = 'shuffle' | 'default';
 
-/*General Select types*/
-export type SelectOptions<T> = {
-    value: T;
-    label: string;
-}
 

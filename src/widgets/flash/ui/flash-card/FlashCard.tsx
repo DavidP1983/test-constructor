@@ -11,7 +11,7 @@
    - сначала ищем папку в кеше (data)
    - если её ещё нет (например, первый рендер) — используем folderData как fallback
   */
-import { useGetFolders } from "@/entities/flash/model/useGetFolders";
+import { useGetFolders } from "@/entities/flash/flash-folders/api/useGetFolders";
 import { GeneralFlashType } from "@/entities/flash/types/flashTypes";
 import { FolderFormProvider } from "@/features/flash/model/context/FolderFormProvider";
 import { FlashCardContent } from "./FlashCardContent";
