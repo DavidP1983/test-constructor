@@ -1,4 +1,4 @@
-import { FLASHCARDS_QUERY_KEY } from "@/entities/flash/model/queryKeys";
+import { FLASHCARDS_QUERY_KEY } from "@/entities/flash/flash-folders/api/queryKeys";
 import { FlashCardsType } from "@/entities/flash/types/flashTypes";
 import { api } from "@/entities/test-operation/api/apiService";
 import { notify } from "@/shared/utils/notify";

@@ -34,7 +34,8 @@ export const AddQuestionForm = () => {
                         id="name"
                         name="title"
                         required
-                        placeholder="type your question..." />
+                        placeholder="type your question..."
+                        autoFocus />
                 </div>
                 <div className={styles.form__control}>
                     <label htmlFor="option">Option</label>

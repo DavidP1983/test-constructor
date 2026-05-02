@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchTest } from '@/features/search-test/ui/SearchTest';
-import { StatusContent } from '@/shared/ui/status-content/StatusContent';
+import { StatusContent } from '@/shared/ui/status-content/ui/StatusContent';
 import { AllTestsPageClient } from '@/widgets/allTests-page/AllTestsPageClient';
 import * as renderRowVal from '@/widgets/table-row/ui/renderRow';
 import Table from '@/widgets/table/Table';
