@@ -1,4 +1,4 @@
-import { GeneralFlashType } from "@/entities/flash/types/flashTypes";
+import { GeneralFlashType } from "@/entities/flash-folder/model/types/folder.types";
 import { SelectOptions } from "@/shared/types/select.types";
 import { useMemo } from "react";
 

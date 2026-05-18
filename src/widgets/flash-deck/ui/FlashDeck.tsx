@@ -1,4 +1,4 @@
-import { CreateFolderButton, CreateFolderForm } from "@/features/flash/create-folder";
+import { CreateFolderButton, CreateFolderForm } from "@/features/flash-folder";
 import { Modal } from "@/shared/ui/modal";
 import { FlashFolders } from "@/widgets/flash-folders";
 import clsx from "clsx";

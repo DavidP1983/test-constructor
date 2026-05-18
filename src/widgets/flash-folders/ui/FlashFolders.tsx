@@ -1,9 +1,8 @@
 'use client';
 
-import { FlashFolderItem, useGetFolders } from "@/entities/flash/flash-folders";
-import { GeneralFlashType } from "@/entities/flash/types/flashTypes";
-import { FilterSortFolders, useFilterSortSelection } from "@/features/flash/filter-sort-folders";
-import { FolderMenu } from "@/features/flash/folder-menu";
+import { FlashFolderItem, useGetFolders } from "@/entities/flash-folder";
+import { GeneralFlashType } from "@/entities/flash-folder/model/types/folder.types";
+import { FilterSortFolders, FolderMenu, useFilterSortSelection } from "@/features/flash-folder";
 import { StatusContent } from "@/shared/ui/status-content";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";

@@ -1,7 +1,15 @@
-import clsx from "clsx";
-import { ButtonTypes } from "./Button.types";
-
 import styles from '@/styles/blocks/button.module.scss';
+import clsx from "clsx";
+
+export type ButtonTypes = {
+    children: React.ReactNode;
+    onClick?: () => void;
+    type: 'button' | 'submit' | 'reset';
+    disabled?: boolean;
+    variant?: 'primary' | 'secondary';
+    size?: 'sm' | 'md' | 'lg';
+    className?: string;
+}
 
 export const Button = ({ children, onClick, variant, size, className, type, disabled }: ButtonTypes) => {
 
