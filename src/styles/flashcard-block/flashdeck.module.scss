@@ -109,8 +109,7 @@
 
             &:hover {
                 transform: scale(1.05);
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
-                    0 10px 20px rgba(0, 0, 0, 0.15);
+                box-shadow: var(--card-hover-shadow);
             }
         }
 
@@ -233,6 +232,8 @@
                     @include fields;
                     height: 40px;
                     margin: 0;
+                    background-color: #ffffff;
+                    color: #000;
                 }
                 & .input:focus {
                     @include outline;
@@ -266,6 +267,7 @@
 
             & .input {
                 @include fields;
+                background-color: #ffffff;
             }
             & .input:focus {
                 @include outline;
@@ -274,6 +276,7 @@
             label {
                 text-align: start;
                 display: block;
+                color: #000;
             }
         }
         & .helper {
