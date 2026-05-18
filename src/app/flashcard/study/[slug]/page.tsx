@@ -1,8 +1,8 @@
 import NotFound from "@/app/not-found";
-import { GeneralFlashType } from "@/entities/flash/types/flashTypes";
+import { GeneralFlashType } from "@/entities/flash-folder/model/types/folder.types";
 import { api } from "@/entities/test-operation/api/apiService";
 import { Spinner } from "@/shared/ui/spinner/Spinner";
-import { FlashCardStudy } from "@/widgets/flash/ui/flash-study/FlashCardStudy";
+import { FlashStudy } from "@/widgets/flash-study";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -12,7 +12,7 @@ type Params = Promise<{ slug: string }>
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
     try {
         const { slug } = await params;
-        const folder = await api.get<GeneralFlashType>(`/flashcards/study/${slug}`);
+        const folder = await api.get<GeneralFlashType>(`/flashcards/get-folder/${slug}`);
         return {
             title: folder?.title ?? 'Not Found page',
             description: folder?.description || 'Not Found'
@@ -30,7 +30,7 @@ export default async function FlashCardsStudyPage(
     { params }: { params: Params }) {
     const { slug } = await params;
 
-    const folderData = await api.get<GeneralFlashType>(`/flashcards/study/${slug}`);
+    const folderData = await api.get<GeneralFlashType>(`/flashcards/get-folder/${slug}`);
 
     if (!folderData) {
         return <NotFound />
@@ -39,7 +39,7 @@ export default async function FlashCardsStudyPage(
     return (
         <Suspense fallback={<Spinner isFallback={true} />}>
             <main>
-                <FlashCardStudy folderData={folderData} />
+                <FlashStudy serverFolderData={folderData} slug={slug} />
             </main>
         </Suspense>
     )

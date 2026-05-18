@@ -1,4 +1,4 @@
-
+'use client';
 import clsx from 'clsx';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { ContextApi } from '../model/context.api';

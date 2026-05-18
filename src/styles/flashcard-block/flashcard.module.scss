@@ -165,7 +165,6 @@
     &__actions {
         margin-top: 30px;
         display: flex;
-        gap: 16px;
         align-items: flex-start;
         transition: all 0.4s;
 
@@ -179,9 +178,9 @@
 
         & .block__cards_wrapper {
             position: relative;
-            width: 100%;
-            transition: width 0.2s ease;
-            will-change: width;
+            flex-basis: 100%;
+            transition: flex-basis 0.3s ease;
+            will-change: flex-basis;
 
             & .progress {
                 color: var(--text--flash);
@@ -198,22 +197,29 @@
             }
 
             &.open {
-                width: 50%;
+                flex-basis: 50%;
             }
         }
 
         & .block__editor_wrapper {
-            width: 0;
-            height: 0;
+            flex-basis: 0;
             opacity: 0;
+            height: 0;
+            transform: translateX(20px);
+            pointer-events: none;
+            transition: 
+                transform 0.12s ease, 
+                opacity 0.12s ease;
+            will-change: transform, opacity, height;
             overflow: hidden;
-            transition: all 0.2s ease;
-            will-change: width, height, opacity;
 
             &.open {
-                opacity: 1;
-                width: 50%;
+                flex-basis: 50%;
                 height: 100%;
+                margin-left: 16px;
+                transform: translateX(0);
+                opacity: 1;
+                pointer-events: auto;
             }
         }
 
@@ -348,7 +354,7 @@
                     }
 
                     &.card__active {
-                        background-color: #a7d7fa;
+                        background-color: var(--background--item--active);
                     }
                 }
             }
@@ -357,7 +363,6 @@
                 @include btn;
                 width: 50%;
                 border: 1px dotted var(--text--flash);
-                color: #1C6AE5;
             }
         }
 
@@ -480,25 +485,14 @@
 
                     & .save,
                     & .discard {
-                        @include btn;
                         font-weight: 400;
                         min-width: 100px;
                         padding: 12px 12px;
-                        font-size: 15px;
                         margin: 0;
                     }
 
                     & .save {
-                        background-color: #1D6CE6;
-                        color: #ffffff;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
                         gap: 20px;
-
-                        &:disabled {
-                            @include disabled;
-                        }
                     }
 
                     & .discard {

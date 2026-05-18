@@ -1,8 +1,8 @@
 import NotFound from "@/app/not-found";
-import { GeneralFlashType } from "@/entities/flash/types/flashTypes";
+import { GeneralFlashType } from "@/entities/flash-folder/model/types/folder.types";
 import { api } from "@/entities/test-operation/api/apiService";
 import { Spinner } from "@/shared/ui/spinner/Spinner";
-import { FlashCard } from "@/widgets/flash/ui/flash-card/FlashCard";
+import { FlashCard } from "@/widgets/flash-card";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -41,7 +41,7 @@ export default async function FlashCardsEditorPage(
     return (
         <Suspense fallback={<Spinner isFallback={true} />}>
             <main>
-                <FlashCard folderData={folderData} mode={mode} />
+                <FlashCard serverFolderData={folderData} mode={mode} slug={slug} />
             </main>
         </Suspense>
     )
